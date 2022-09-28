@@ -90,11 +90,11 @@ void GameWindow::SetWindowPosition(int x, int y)
 	glfwSetWindowPos(pWindow, x, y);
 }
 
-std::tuple<int,int> GameWindow :: GetWindowPosition()
+glm::vec2 GameWindow::GetWindowPosition()
 {
 	int xpos, ypos;
 	glfwGetWindowPos(pWindow, &xpos, &ypos);
-	return std::make_tuple(xpos, ypos);
+	return glm::vec2 (xpos, ypos);
 }
 
 // Callbacks

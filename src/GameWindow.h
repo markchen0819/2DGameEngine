@@ -1,8 +1,8 @@
 #pragma once
 #include <glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include <string>
-#include <tuple>
 #include <iostream>;
 
 struct GLFWwindow;
@@ -39,7 +39,7 @@ public:
 	bool ShouldClose();
 
 	void SetWindowPosition(int xpos, int ypos);
-	std::tuple<int, int> GetWindowPosition();
+	glm::vec2 GetWindowPosition();
 
 private:
 

@@ -1,5 +1,5 @@
 #include "GameWindow.h"
-#include <tuple>
+#include <glm/glm.hpp>
 // Experience code to move window like a screen Saver
 
 static int xDir = 1;
@@ -41,8 +41,8 @@ void ExecuteScreenSaverMovement(GameWindow* gw, float deltaTime)
 {
 	calculateDir(gw);
 
-	std::tuple<int, int> tp;
-	tp = gw->GetWindowPosition();
-	gw->SetWindowPosition(std::get<0>(tp) + xDir * deltaTime * speed, std::get<1>(tp) + yDir * deltaTime * speed);
+    glm::vec2 v;
+	v = gw->GetWindowPosition();
+	gw->SetWindowPosition(v[0] + xDir * deltaTime * speed, v[1] + yDir * deltaTime * speed);
 
 }

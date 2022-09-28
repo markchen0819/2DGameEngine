@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 	//GameWindow* secondWindow = new GameWindow();
 	//secondWindow->Props.Title = "2ndWindow";
 	//secondWindow->Init();
-
+	
 
 	// Lock FPS
 	float FPS = 60;
