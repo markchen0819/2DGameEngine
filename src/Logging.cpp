@@ -8,6 +8,7 @@
 static const char* traceFileName = "Trace.log";
 static FILE* traceFile;
 
+bool IsFileStatusGood();
 
 void TraceInit()
 {
@@ -17,31 +18,21 @@ void TraceInit()
 	{
 		char buff[256];
 		strerror_s(buff, 100, err);
-		std::cout<<("Cannot open traceFile!: %s \n", buff);
+		std::cout << ("Cannot open traceFile!: %s \n", buff);
+		return;
 	}
-
+	TraceMessage("TraceInit()");
 }
 
 void TraceMessage(const char* formatString, ...)
 {
-	if (traceFile == NULL)
-	{
-		std::cout << ("TraceFile is NULL!\n");
-		return;
-	}
-	if (ferror(traceFile))
-	{
-		char buff[256];
-		strerror_s(buff, 100, ferror(traceFile));
-		std::cout << ("TraceFile error!: %s \n", buff);
-		return;
-	}
+	if (!IsFileStatusGood()) return;
 
 	const char* endofline = "\n";
 	va_list args;
 	va_start(args, formatString);
 	vfprintf(traceFile, formatString, args);
-
+	std::cout << formatString << std::endl;
 	va_start(args, endofline);
 	vfprintf(traceFile, endofline, args);
 
@@ -49,21 +40,26 @@ void TraceMessage(const char* formatString, ...)
 
 void TraceShutdown()
 {
+	if (!IsFileStatusGood()) return;
 
+	TraceMessage("TraceShutdown()");
+	fclose(traceFile);
+}
+
+bool IsFileStatusGood()
+{
 	if (traceFile == NULL)
 	{
 		std::cout << ("TraceFile is NULL!\n");
-		return;
+		return false;
 	}
 	if (ferror(traceFile))
 	{
 		char buff[256];
 		strerror_s(buff, 100, ferror(traceFile));
 		std::cout << ("TraceFile error!: %s \n", buff);
-		return;
+		return false;
 	}
 
-	fclose(traceFile);
+	return true;
 }
-
-

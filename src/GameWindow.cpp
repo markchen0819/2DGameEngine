@@ -1,8 +1,7 @@
 #include "GameWindow.h"
 #include <iostream>
 
-
-GameWindow::GameWindow() : glfwSuccess(false), pWindow(nullptr), pMonitor(nullptr), shouldClose(false)
+GameWindow::GameWindow() : pWindow(nullptr), pMonitor(nullptr), shouldClose(false)
 {
 }
 
@@ -13,31 +12,14 @@ GameWindow::~GameWindow()
 
 void GameWindow::Init()
 {
-	// set default props if not initialized
-	if (Props.Title.empty())
-		Props.Title = "Untitled";
-
-	if (Props.Heigth == 0)
-		Props.Heigth = 600;
-
-	if (Props.Width == 0)
-		Props.Width = 600;
-
-	// initialize glfw
-	if (glfwSuccess)
-	{
-		std::cout << "GLFW is already initialized!";
-		exit(EXIT_FAILURE);
-	}
-
+	// Error Callbacks
 	glfwSetErrorCallback(this->GLFWErrorCallback);
-	//if (!glfwInit())
-	//	exit(EXIT_FAILURE);
-	glfwSuccess = true;
+
 
 	// Initialize OpenGL Context
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
 	// Create window
 	pWindow = glfwCreateWindow(Props.Width, Props.Heigth, Props.Title.c_str(), NULL, NULL);
@@ -47,6 +29,7 @@ void GameWindow::Init()
 		exit(EXIT_FAILURE);
 	}
 	glfwMakeContextCurrent(pWindow);
+	
 
 	// Initialize glew (or other gl functions loader)
 	GLenum glewError = glewInit();
@@ -57,8 +40,11 @@ void GameWindow::Init()
 		exit(EXIT_FAILURE);
 	}
 
+	// Callbacks
 	glfwSetWindowSizeCallback(pWindow, this->GLFWWindowSizeCallback);
 	glfwSetKeyCallback(pWindow, this->GLFWWindowKeyCallback);
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(MessageCallback, 0);
 }
 
 void GameWindow::Update()
@@ -91,20 +77,27 @@ void GameWindow::ShutDown()
 		std::cout << "Window can't shutdown because it has not been initialized yet. Closing program..." << std::endl;
 		exit(EXIT_FAILURE);
 	}
-	if (!glfwSuccess)
-	{
-		std::cout << "GLFW  can't shutdown because it has not been initialized yet. Closing program..." << std::endl;
-		exit(EXIT_FAILURE);
-	}
-
 	glfwDestroyWindow(pWindow);
-	//glfwTerminate();
 }
 
 bool GameWindow::ShouldClose()
 {
 	return shouldClose;
 }
+
+void GameWindow::SetWindowPosition(int x, int y)
+{
+	glfwSetWindowPos(pWindow, x, y);
+}
+
+std::tuple<int,int> GameWindow :: GetWindowPosition()
+{
+	int xpos, ypos;
+	glfwGetWindowPos(pWindow, &xpos, &ypos);
+	return std::make_tuple(xpos, ypos);
+}
+
+// Callbacks
 
 void GameWindow::GLFWErrorCallback(int error, const char* description)
 {
@@ -121,17 +114,5 @@ void GameWindow::GLFWWindowKeyCallback(GLFWwindow* window, int key, int scancode
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
-	if (key == GLFW_KEY_R && action == GLFW_PRESS)
-	{
-		int xpos, ypos;
-		glfwGetWindowPos(window, &xpos, &ypos);
-		glfwSetWindowPos(window, xpos+10, ypos+10);
-	}
-
 }
 
-
-void GameWindow::SetWindowPosition(GLFWwindow* window, int x, int y)
-{
-	glfwSetWindowPos(window, x, y);
-}

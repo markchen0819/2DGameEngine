@@ -1,0 +1,3 @@
+TraceInit()
+GLFWInit() success
+TraceShutdown()

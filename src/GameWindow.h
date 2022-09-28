@@ -1,19 +1,18 @@
 #pragma once
-
-
 #include <glew.h>
 #include <GLFW/glfw3.h>
 #include <string>
-
+#include <tuple>
+#include <iostream>;
 
 struct GLFWwindow;
 struct GLFWMonitor;
 
 struct WindowProps
 {
-	int Width = 0;
-	int Heigth = 0;
-	std::string Title;
+	int Width = 600;
+	int Heigth = 600;
+	std::string Title = "Untitled";
 };
 
 struct FrameBufferProps
@@ -25,10 +24,13 @@ struct FrameBufferProps
 class GameWindow
 {
 public:
+
 	GameWindow();
 	~GameWindow();
+
 	WindowProps Props;
 	FrameBufferProps FrameBuffer;
+
 	GLFWwindow* pWindow;
 
 	void Init();
@@ -36,17 +38,12 @@ public:
 	void ShutDown();
 	bool ShouldClose();
 
-	void SetWindowPosition(GLFWwindow* window, int xpos, int ypos);
+	void SetWindowPosition(int xpos, int ypos);
+	std::tuple<int, int> GetWindowPosition();
 
 private:
 
-
-	// GameWindow pointers
-	//GLFWwindow* pWindow;
 	GLFWMonitor* pMonitor;
-
-	// glfw setup
-	bool glfwSuccess;
 
 	// properties
 	bool shouldClose;
@@ -55,4 +52,7 @@ private:
 	static void GLFWErrorCallback(int error, const char* description);
 	static void GLFWWindowSizeCallback(GLFWwindow* window, int width, int height);
 	static void GLFWWindowKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	static void GLAPIENTRY MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
+		std::cout << "OpenGL Debug: " << message << std::endl;
+	}
 };
