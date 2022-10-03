@@ -54,17 +54,11 @@ void GameWindow::Update()
 		std::cout << "Window has not been initialized yet. Closing program..." << std::endl;
 		exit(EXIT_FAILURE);
 	}
+
 	glfwMakeContextCurrent(pWindow);
-	// this should not be responsibility of Window. Maybe something like a BufferDraw
 	glfwGetFramebufferSize(pWindow, &FrameBuffer.Width, &FrameBuffer.Height);
 	glViewport(0, 0, FrameBuffer.Width, FrameBuffer.Height);
 	glClear(GL_COLOR_BUFFER_BIT);
-	// mkae condition to change color
-
-	glClearColor(1.0, 0.0, 0.0, 1.0);
-
-	glfwPollEvents();
-	glfwSwapBuffers(pWindow);
 
 	if (glfwWindowShouldClose(pWindow))
 		shouldClose = true;
@@ -85,6 +79,20 @@ bool GameWindow::ShouldClose()
 	return shouldClose;
 }
 
+void GameWindow::SwapBuffers()
+{
+	glfwSwapBuffers(pWindow);
+}
+
+void GameWindow::PollEvents()
+{
+	glfwPollEvents();
+}
+
+GLFWwindow* GameWindow::GetCurrentContext()
+{
+	return glfwGetCurrentContext();
+}
 void GameWindow::SetWindowPosition(int x, int y)
 {
 	glfwSetWindowPos(pWindow, x, y);

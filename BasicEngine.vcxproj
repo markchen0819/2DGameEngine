@@ -152,10 +152,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dependencies\glm\detail\glm.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\ScreenSaverMovement.cpp" />
     <ClCompile Include="src\Logging.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\GameWindow.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\glm\common.hpp" />
@@ -440,9 +445,15 @@
     <ClInclude Include="dependencies\glm\vec3.hpp" />
     <ClInclude Include="dependencies\glm\vec4.hpp" />
     <ClInclude Include="dependencies\glm\vector_relational.hpp" />
+    <ClInclude Include="dependencies\stb_image.h" />
+    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Logging.h" />
     <ClInclude Include="src\GameWindow.h" />
     <ClInclude Include="src\ScreenSaverMovement.h" />
+    <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dependencies\glm\detail\func_common.inl" />

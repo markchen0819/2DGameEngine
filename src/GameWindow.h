@@ -38,6 +38,12 @@ public:
 	void ShutDown();
 	bool ShouldClose();
 
+	// Render
+	void SwapBuffers();
+	void PollEvents();
+	GLFWwindow* GetCurrentContext();
+
+	// Window Pos on monitor
 	void SetWindowPosition(int xpos, int ypos);
 	glm::vec2 GetWindowPosition();
 
