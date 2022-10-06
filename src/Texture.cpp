@@ -10,7 +10,7 @@ Texture::Texture(const char* path, const char* type)
 
 Texture::~Texture()
 {
-	//glDeleteTextures(1, &id); // this turns black, why?
+	//glDeleteTextures(1, &id); // this turns black, why? we passed in the refernce of texture!
 }
 void Texture::setupTexture(std::string path)
 {
@@ -43,7 +43,7 @@ void Texture::activeTextureUnit(unsigned int i)
 {
 	glActiveTexture(GL_TEXTURE0 + i);
 }
-void Texture::bind()
+void Texture::bindTexture()
 {
 	glBindTexture(GL_TEXTURE_2D, id);
 }

@@ -151,6 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Node.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="dependencies\glm\detail\glm.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
@@ -163,6 +166,9 @@
     <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Node.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="dependencies\glm\common.hpp" />
     <ClInclude Include="dependencies\glm\detail\compute_common.hpp" />
     <ClInclude Include="dependencies\glm\detail\compute_vector_relational.hpp" />

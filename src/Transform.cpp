@@ -1,52 +1,56 @@
 #include "Transform.h"
+#include <glm/gtx/euler_angles.hpp>
 
-Transform::Transform()
+Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
+	model = glm::mat4(1.0f);
+	modelRot = getRotationMatrix(rotation.x, rotation.y, rotation.z);
+	modelScale = getScaleMatrix(scale.x, scale.y, scale.z);
+	modelTrans = getTranslateMatrix(position.x, position.y, position.z);
 }
 
 Transform::~Transform()
 {
 }
 
-void Transform::Rotate(float angle, glm::vec3 const& axis_v)
+void Transform::SetRotation(const float x, const float y, const float z)
 {
-	rotation = glm::rotate(rotation, glm::radians(angle), axis_v);
+	modelRot = getRotationMatrix(x, y, z);
+}
+void Transform::SetScale(const float x, const float y, const float z)
+{
+	modelScale = getScaleMatrix(x, y, z);
+}
+void Transform::SetTranslation(const float x, const float y, const float z)
+{
+	modelTrans = getTranslateMatrix(x, y, z);
 }
 
-void Transform::Scale(glm::vec3 const& v)
+glm::mat4 Transform::getRotationMatrix(const float x, const float y, const float z)
 {
-	scale = glm::scale(scale, v);
+	return glm::eulerAngleYXZ(y, x, z); 	// https://glm.g-truc.net/0.9.3/api/a00164.html
+}
+glm::mat4 Transform::getScaleMatrix(const float x, const float y, const float z)
+{
+	return glm::mat4{ x,0,0,0,
+					  0,y,0,0,
+					  0,0,z,0,
+					  0,0,0,1 };
+}
+glm::mat4 Transform::getTranslateMatrix(const float x, const float y, const float z)
+{
+	return glm::mat4 { 1,0,0,0,
+					   0,1,0,0,
+		               0,0,1,0,
+		               x,y,z,1 };
 }
 
-void Transform::Translate(glm::vec3 const& v)
+void Transform::Update()
 {
-	position = glm::translate(position, v);
-}
+	model = glm::mat4(1.0f);
+	model = modelTrans * modelRot * modelScale * model;
 
-void Transform::SetPosition(glm::vec3 const& v)
-{
-	position = glm::mat4
-	(v.x, 0.0f, 0.0f, 0.0f,
-	 0.0f, v.y, 0.0f, 0.0f,
-	 0.0f, 0.0f, v.z, 0.0f,
-	 0.0f, 0.0f, 0.0f, 1.0f);
-}
-void Transform::SetRotation(glm::vec3 const& angles)
-{
-	int x = glm::radians(angles.x);
-	int y = glm::radians(angles.y);
-	int z = glm::radians(angles.z);
-	rotation = glm::mat4
-	(x, 0.0f, 0.0f, 0.0f,
-	0.0f, y, 0.0f, 0.0f,
-	0.0f, 0.0f, z, 0.0f,
-	0.0f, 0.0f, 0.0f, 1.0f);
-}
-void Transform::SetScale(glm::vec3 const& v)
-{
-	scale = glm::mat4
-	(v.x, 0.0f, 0.0f, 0.0f,
-		0.0f, v.y, 0.0f, 0.0f,
-		0.0f, 0.0f, v.z, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f);
+	//model = modelScale * model;
+	//model = modelRot *  model;
+	//model = modelTrans * model;
 }

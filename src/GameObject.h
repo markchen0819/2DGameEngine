@@ -1,17 +1,18 @@
 #pragma once
 #include "Transform.h"
-
-class GameObject
+#include "Mesh.h"
+class GameObject // Inherit from Node
 {
 
 public:
 
-	GameObject();
+	GameObject(Transform t, Mesh m);
 	~GameObject();
 
 	Transform transform;
+	Mesh mesh;
 
-
+    void Draw(glm::mat4 model, Shader& shader);
 
 private:
 

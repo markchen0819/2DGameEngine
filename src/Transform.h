@@ -6,22 +6,21 @@ class Transform
 {
 public:
 
-	Transform();
+	Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 	~Transform();
 
-	glm::mat4 position;
-	glm::mat4 rotation;
-	glm::mat4 scale;
+	glm::mat4 model;
+	glm::mat4 modelRot, modelScale, modelTrans;
 
+	void SetRotation(const float x, const float y, const float z);
+	void SetScale(const float x, const float y, const float z);
+	void SetTranslation(const float x, const float y, const float z);
 
-	void Rotate(float angle, glm::vec3 const& axis_v);
-	void Scale(glm::vec3 const& v);
-	void Translate(glm::vec3 const& v);
+	glm::mat4 getRotationMatrix(const float x, const float y, const float z);
+	glm::mat4 getScaleMatrix(const float x, const float y, const float z);
+	glm::mat4 getTranslateMatrix(const float x, const float y, const float z);
 
-	void SetPosition(glm::vec3 const& v);
-	void SetRotation(glm::vec3 const& angles);
-	void SetScale(glm::vec3 const& v);
-
+	void Update();
 
 private:
 

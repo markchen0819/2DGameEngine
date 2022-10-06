@@ -16,7 +16,7 @@ public:
     Texture(const char* path, const char* type);
     ~Texture();
     void activeTextureUnit(unsigned int i);
-    void bind();
+    void bindTexture();
 
 private:
 
