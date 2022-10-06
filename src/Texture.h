@@ -10,16 +10,16 @@ class Texture
 public:
     
     unsigned int id;
-    std::string path;
-    std::string type;
 
     Texture(const char* path, const char* type);
+    Texture(const Texture& t);
     ~Texture();
     void activeTextureUnit(unsigned int i);
     void bindTexture();
 
 private:
-
+    std::string path;
+    std::string type;
     void setupTexture(std::string path);
 };
 

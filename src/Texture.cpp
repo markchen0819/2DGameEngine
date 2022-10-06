@@ -1,5 +1,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Texture.h"
+#include "Logging.h"
 
 Texture::Texture(const char* path, const char* type)
 {
@@ -10,7 +11,13 @@ Texture::Texture(const char* path, const char* type)
 
 Texture::~Texture()
 {
-	//glDeleteTextures(1, &id); // this turns black, why? we passed in the refernce of texture!
+	glDeleteTextures(1, &id);
+}
+Texture::Texture(const Texture& t) // Copy ctor
+{
+	this->path = t.path;
+	this->type = t.type;
+	setupTexture(path); // when passed as a copy we need a new id
 }
 void Texture::setupTexture(std::string path)
 {
@@ -33,10 +40,9 @@ void Texture::setupTexture(std::string path)
 	}
 	else
 	{
-		std::cout << "Failed to load texture" << std::endl;
+		TraceMessage("Failed to load texture");
 	}
 	stbi_image_free(data);
-
 }
 
 void Texture::activeTextureUnit(unsigned int i)

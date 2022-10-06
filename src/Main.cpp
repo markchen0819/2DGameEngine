@@ -1,15 +1,14 @@
 #include <iostream>
 #include "GameWindow.h"
-#include "Logging.h"
 #include "ScreenSaverMovement.h"
+#include "Logging.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "Mesh.h";
-#include <glm/ext/matrix_transform.hpp>
 #include "Camera.h"
 #include "Node.h"
-#include <glm/gtx/euler_angles.hpp>
-#include <glm/gtx/string_cast.hpp>
+
+
 int main(int argc, char* argv[])
 {
 	TraceInit();
@@ -32,44 +31,49 @@ int main(int argc, char* argv[])
 	//secondWindow->Props.Title = "2ndWindow";
 	//secondWindow->Init();
 
-
 	// Lock FPS
 	float FPS = 60;
 	float expectedTimePerFrame = 1.0 / FPS;
 	float lastFrameTime = glfwGetTime();
 	float deltaTime = 0;
 
-	////////////////////Experimenting///////////////////
+	/////////////// User logic starts from here ///////////////////
 
-
-	// build and compile our shader program
+	// Create Shader
 	Shader sampleShader("src/SampleShader.vert", "src/SampleShader.frag");
+
+	//Create Texture
 	Texture sampleTexture("src/Assets/SampleTexture.jpg", "texture_diffuse");
 
-	// Create Mesh
+	//Create Mesh
 	std::vector<Vertex> vertices;
+	std::vector<Texture> textures;
+	std::vector<unsigned int> indices = { 0, 1, 2 };
 	Vertex v0(glm::vec3(0.0f, 36.60f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 1.0f));
 	Vertex v1(glm::vec3(50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f));
 	Vertex v2(glm::vec3(-50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f));
 	vertices.push_back(v0);
 	vertices.push_back(v1);
 	vertices.push_back(v2);
-	std::vector<Texture> textures;
 	textures.push_back(sampleTexture);
-	std::vector<unsigned int> indices = { 0, 1, 2 };
 	Mesh m(vertices, indices, textures);
-	Mesh m2(vertices, indices, textures);
 
+	//Create Transform
 	Transform t(glm::vec3(-50, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
-	Node n(t, m, sampleShader);
+
+	//Create Node
+	glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
+	Node n(t, m, sampleShader, color);
+
 	// Use this shader
 	sampleShader.useProgram();
 
 	// Create camera
 	Camera camera(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), mainWindow->Props.Heigth, mainWindow->Props.Width);
-	camera.SetupVP(sampleShader); // fix it later
+	camera.SetupVP(sampleShader);
 
+	// Test vars to Scale, Rotate, Translate
 	float val = 0;
 	float timeToChangeDir = 1.0f;
 	int dir = 1;
@@ -84,12 +88,10 @@ int main(int argc, char* argv[])
 
 			mainWindow->Update();
 
-			//////////////////////////////////////////////////////////////
-
-			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			// Some math to change rotate, translate, scale
+			// Test math to change rotate, translate, scale
 			timeToChangeDir = timeToChangeDir - deltaTime;
 			if (timeToChangeDir < 0)
 			{
@@ -100,30 +102,23 @@ int main(int argc, char* argv[])
 
 
 			n.shader.useProgram();
-
 			n.transform.SetRotation(0, 0, val );
 			n.transform.SetTranslation(-100+ val * 40, -100 + val * 40, 0.0f);
 			n.transform.SetScale(1 + val / 10, 1 + val / 10, 1 + val / 10);
-
 			n.Draw();
 
 
 			// swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 			mainWindow->SwapBuffers();
 			mainWindow->PollEvents();
+
 			// Experimenting 2nd window
 			//ExecuteScreenSaverMovement(mainWindow, deltaTime);
 			//secondWindow->Update();
-
 		}
 	}
 
-	// optional: de-allocate all resources once they've outlived their purpose
-	//glDeleteVertexArrays(1, &VAO);
-	//glDeleteBuffers(1, &VBO);
-	//glDeleteBuffers(1, &EBO);
 	glActiveTexture(GL_TEXTURE0);
-	//////////////////////////////////////////////////////////////
 
 	//secondWindow->ShutDown();
 	mainWindow->ShutDown();

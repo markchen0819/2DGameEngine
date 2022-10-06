@@ -5,35 +5,39 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
-
-	// now that we have all the required data, set the vertex buffers and its attribute pointers.
 	setupMesh();
 }
-
+Mesh::Mesh(Mesh& m) // Copy ctor
+{
+    this->vertices = m.vertices;
+    this->indices = m.indices;
+    this->textures = m.textures;
+    setupMesh(); // when passed as a copy we need a new id
+}
 Mesh::~Mesh()
 {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
 }
-void Mesh::Draw() // dont need to pass in shader
+
+void Mesh::Draw()
 {
-    for (unsigned int i = 0; i < textures.size(); i++) // currently assume one texture
+    for (unsigned int i = 0; i < textures.size(); i++) 
     {
+        // currently assume one texture only
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
 
-    // draw mesh
+    // Draw mesh
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 
-    // always good practice to set everything back to defaults once configured.
+    //Set everything back to default
     glActiveTexture(GL_TEXTURE0);
 }
-
-
 
 void Mesh::setupMesh()
 {

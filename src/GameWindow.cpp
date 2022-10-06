@@ -1,4 +1,5 @@
 #include "GameWindow.h"
+#include "Logging.h"
 #include <iostream>
 
 GameWindow::GameWindow() : pWindow(nullptr), pMonitor(nullptr), shouldClose(false)
@@ -35,8 +36,8 @@ void GameWindow::Init()
 	GLenum glewError = glewInit();
 	if (GLEW_OK != glewError)
 	{
-		std::cout << "Terminating program. Reason:" << std::endl;
-		std::cout << "Error in GLEW: " << glewGetErrorString(glewError) << std::endl;
+		TraceMessage("Terminating program. Reason:");
+		TraceMessage("Error in GLEW: {}", glewGetErrorString(glewError));
 		exit(EXIT_FAILURE);
 	}
 
@@ -51,7 +52,7 @@ void GameWindow::Update()
 {
 	if (!pWindow)
 	{
-		std::cout << "Window has not been initialized yet. Closing program..." << std::endl;
+		TraceMessage("Window has not been initialized yet. Closing program...");
 		exit(EXIT_FAILURE);
 	}
 
@@ -68,7 +69,7 @@ void GameWindow::ShutDown()
 {
 	if (!pWindow)
 	{
-		std::cout << "Window can't shutdown because it has not been initialized yet. Closing program..." << std::endl;
+		TraceMessage("Window can't shutdown because it has not been initialized yet. Closing program...");
 		exit(EXIT_FAILURE);
 	}
 	glfwDestroyWindow(pWindow);
@@ -109,13 +110,14 @@ glm::vec2 GameWindow::GetWindowPosition()
 
 void GameWindow::GLFWErrorCallback(int error, const char* description)
 {
-	std::cout << "Error in GLFW: " << description << std::endl;
+	TraceMessage("Error in GLFW: {}", description);
 }
 
 void GameWindow::GLFWWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
-	std::cout << "Window being resized... ";
-	std::cout << "Width: " << width << " | Height: " << height << std::endl;
+	TraceMessage("Window being resized... ");
+	std::string s = "Width: " + std::to_string(width) + " Height: " + std::to_string(height);
+	TraceMessage(s.c_str());
 }
 
 void GameWindow::GLFWWindowKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)

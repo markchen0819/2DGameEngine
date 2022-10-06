@@ -10,7 +10,9 @@ public:
 	~Transform();
 
 	glm::mat4 model;
-	glm::mat4 modelRot, modelScale, modelTrans;
+	glm::vec3 Position;
+	glm::vec3 Rotation;
+	glm::vec3 Scale;
 
 	void SetRotation(const float x, const float y, const float z);
 	void SetScale(const float x, const float y, const float z);
@@ -24,4 +26,6 @@ public:
 
 private:
 
+	glm::mat4 modelRot, modelScale, modelTrans;
+	void PrintTransform();
 };

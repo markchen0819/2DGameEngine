@@ -11,8 +11,9 @@
 class Shader
 {
 public:
-    unsigned int ID;
+
     Shader(const char* vertexPath, const char* fragmentPath);
+    ~Shader();
 
     void useProgram();
 
@@ -31,5 +32,6 @@ public:
 
 private:
 
+    unsigned int ID;
     void checkCompileErrors(unsigned int shader, std::string type);
 };
