@@ -1,17 +1,15 @@
 #include "Mesh.h"
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
 {
 	this->vertices = vertices;
 	this->indices = indices;
-	this->textures = textures;
 	setupMesh();
 }
 Mesh::Mesh(Mesh& m) // Copy ctor
 {
     this->vertices = m.vertices;
     this->indices = m.indices;
-    this->textures = m.textures;
     setupMesh(); // when passed as a copy we need a new id
 }
 Mesh::~Mesh()
@@ -23,20 +21,11 @@ Mesh::~Mesh()
 
 void Mesh::Draw()
 {
-    for (unsigned int i = 0; i < textures.size(); i++) 
-    {
-        // currently assume one texture only
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textures[i].id);
-    }
-
     // Draw mesh
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 
-    //Set everything back to default
-    glActiveTexture(GL_TEXTURE0);
 }
 
 void Mesh::setupMesh()
@@ -65,5 +54,4 @@ void Mesh::setupMesh()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
 
     glBindVertexArray(0);
-    glActiveTexture(GL_TEXTURE0);
 }

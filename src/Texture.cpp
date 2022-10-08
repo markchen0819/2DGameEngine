@@ -43,6 +43,7 @@ void Texture::setupTexture(std::string path)
 		TraceMessage("Failed to load texture");
 	}
 	stbi_image_free(data);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Texture::activeTextureUnit(unsigned int i)

@@ -151,8 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Color.cpp" />
+    <ClCompile Include="src\Material.cpp" />
     <ClCompile Include="src\Node.cpp" />
-    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="dependencies\glm\detail\glm.cpp" />
     <ClCompile Include="src\Shader.cpp" />
@@ -164,10 +166,13 @@
     <ClCompile Include="src\GameWindow.cpp" />
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\UserDefined\TriangleObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Color.h" />
+    <ClInclude Include="src\Material.h" />
     <ClInclude Include="src\Node.h" />
-    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="dependencies\glm\common.hpp" />
     <ClInclude Include="dependencies\glm\detail\compute_common.hpp" />
@@ -460,6 +465,7 @@
     <ClInclude Include="src\ScreenSaverMovement.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\UserDefined\TriangleObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dependencies\glm\detail\func_common.inl" />

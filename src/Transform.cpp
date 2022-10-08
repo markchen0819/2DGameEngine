@@ -3,6 +3,13 @@
 #include <glm/gtx/string_cast.hpp>
 #include <iostream>
 
+Transform::Transform()
+{
+	model = glm::mat4(1.0f);
+	modelRot = glm::mat4(1.0f);
+	modelScale = glm::mat4(1.0f);
+	modelTrans = glm::mat4(1.0f);
+}
 Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
 	model = glm::mat4(1.0f);
@@ -10,7 +17,16 @@ Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 	modelScale = getScaleMatrix(scale.x, scale.y, scale.z);
 	modelTrans = getTranslateMatrix(position.x, position.y, position.z);
 }
-
+Transform::Transform(Transform& t)
+{
+	model = t.model;
+	modelRot = t.modelRot;
+	modelScale = t.modelScale;
+	modelTrans = t.modelTrans;
+	Position = t.Position;
+	Rotation = t.Rotation;
+	Scale = t.Scale;
+}
 Transform::~Transform()
 {
 }

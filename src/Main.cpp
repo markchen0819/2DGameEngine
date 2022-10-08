@@ -2,30 +2,27 @@
 #include "GameWindow.h"
 #include "ScreenSaverMovement.h"
 #include "Logging.h"
+#include "Renderer.h"
+#include "Camera.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Material.h"
 #include "Mesh.h";
-#include "Camera.h"
 #include "Node.h"
 
+#include "UserDefined/TriangleObject.h"
 
 int main(int argc, char* argv[])
 {
 	TraceInit();
 
-	// Init GLFW here for multiple windows (prevent multi inits)
-	if (!glfwInit())
-	{
-		std::cout << "GLFWInit() failed" << std::endl;
-		exit(EXIT_FAILURE);
-	}
-	TraceMessage("GLFWInit() success");
+	Renderer renderer;
+	renderer.InitGLFW();
 
 	GameWindow* mainWindow = new GameWindow();
 	mainWindow->Props.Title = "1stWindow";
 	mainWindow->Init();
 	mainWindow->SetWindowPosition(50, 50);
-
 	// Experimenting 2nd window
 	//GameWindow* secondWindow = new GameWindow();
 	//secondWindow->Props.Title = "2ndWindow";
@@ -37,38 +34,40 @@ int main(int argc, char* argv[])
 	float lastFrameTime = glfwGetTime();
 	float deltaTime = 0;
 
-	/////////////// User logic starts from here ///////////////////
+	/////////////// User logic ///////////////////
 
 	// Create Shader
 	Shader sampleShader("src/SampleShader.vert", "src/SampleShader.frag");
-
-	//Create Texture
+	// Create Texture
 	Texture sampleTexture("src/Assets/SampleTexture.jpg", "texture_diffuse");
+	// Create Material
+	Material sampleMaterial;
+	sampleMaterial.AttachShader(&sampleShader);
+	sampleMaterial.AttachTexture(&sampleTexture);
+	//// Create Mesh
+	//std::vector<Vertex> vertices;
+	//std::vector<Texture> textures;
+	//std::vector<unsigned int> indices = { 0, 1, 2 };
+	//Vertex v0(glm::vec3(0.0f, 36.60f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 1.0f));
+	//Vertex v1(glm::vec3(50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f));
+	//Vertex v2(glm::vec3(-50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+	//vertices.push_back(v0);
+	//vertices.push_back(v1);
+	//vertices.push_back(v2);
+	//textures.push_back(sampleTexture);
+	//Mesh sampleMesh(vertices, indices);
+	////Create Transform
+	//Transform sampleTransform(glm::vec3(-50, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	////Create Node
+	//Node sampleNode(sampleTransform, sampleMesh, &sampleMaterial);
 
-	//Create Mesh
-	std::vector<Vertex> vertices;
-	std::vector<Texture> textures;
-	std::vector<unsigned int> indices = { 0, 1, 2 };
-	Vertex v0(glm::vec3(0.0f, 36.60f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 1.0f));
-	Vertex v1(glm::vec3(50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f));
-	Vertex v2(glm::vec3(-50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f));
-	vertices.push_back(v0);
-	vertices.push_back(v1);
-	vertices.push_back(v2);
-	textures.push_back(sampleTexture);
-	Mesh m(vertices, indices, textures);
 
-	//Create Transform
-	Transform t(glm::vec3(-50, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-
-
-	//Create Node
-	glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
-	Node n(t, m, sampleShader, color);
+	//Create Triangle
+	TriangleObject mytriangle;
+	mytriangle.AttachMaterial(&sampleMaterial);
 
 	// Use this shader
 	sampleShader.useProgram();
-
 	// Create camera
 	Camera camera(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), mainWindow->Props.Heigth, mainWindow->Props.Width);
 	camera.SetupVP(sampleShader);
@@ -81,17 +80,13 @@ int main(int argc, char* argv[])
 	while (!mainWindow->ShouldClose())// && !secondWindow->ShouldClose()
 	{
 		deltaTime = glfwGetTime() - lastFrameTime;
-
 		if (deltaTime > expectedTimePerFrame)
 		{
 			lastFrameTime = glfwGetTime();
-
 			mainWindow->Update();
+			renderer.ClearScreen();
 
-			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-
-			// Test math to change rotate, translate, scale
+			// Test math to rotate, translate, scale
 			timeToChangeDir = timeToChangeDir - deltaTime;
 			if (timeToChangeDir < 0)
 			{
@@ -100,33 +95,37 @@ int main(int argc, char* argv[])
 			}
 			val = val + dir * deltaTime * 5;
 
+			//sampleNode.material->shader->useProgram();
+			//sampleNode.transform->SetRotation(0, 0, val);
+			//sampleNode.transform->SetTranslation(-100 + val * 40, -100 + val * 40, 0.0f);
+			//sampleNode.transform->SetScale(1 + val / 10, 1 + val / 10, 1 + val / 10);
+			//sampleNode.Draw();
 
-			n.shader.useProgram();
-			n.transform.SetRotation(0, 0, val );
-			n.transform.SetTranslation(-100+ val * 40, -100 + val * 40, 0.0f);
-			n.transform.SetScale(1 + val / 10, 1 + val / 10, 1 + val / 10);
-			n.Draw();
-
+			mytriangle.material->shader->useProgram();
+			mytriangle.transform->SetRotation(0, 0, val);
+			mytriangle.transform->SetTranslation(-100 + val * 40, -100 + val * 40, 0.0f);
+			mytriangle.transform->SetScale(1 + val / 10, 1 + val / 10, 1 + val / 10);
+			mytriangle.Draw();
 
 			// swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 			mainWindow->SwapBuffers();
 			mainWindow->PollEvents();
 
-			// Experimenting 2nd window
 			//ExecuteScreenSaverMovement(mainWindow, deltaTime);
+			// Experimenting 2nd window
 			//secondWindow->Update();
 		}
 	}
-
-	glActiveTexture(GL_TEXTURE0);
+	/////////////// User logic ///////////////////
 
 	//secondWindow->ShutDown();
 	mainWindow->ShutDown();
-
-	// Terminate GLFW here for multiple windows
-	glfwTerminate();
-
+	renderer.TerminateGLFW();
 	TraceShutdown();
+
 	return 0;
 }
+
+
+
 

@@ -59,7 +59,6 @@ void GameWindow::Update()
 	glfwMakeContextCurrent(pWindow);
 	glfwGetFramebufferSize(pWindow, &FrameBuffer.Width, &FrameBuffer.Height);
 	glViewport(0, 0, FrameBuffer.Width, FrameBuffer.Height);
-	glClear(GL_COLOR_BUFFER_BIT);
 
 	if (glfwWindowShouldClose(pWindow))
 		shouldClose = true;
