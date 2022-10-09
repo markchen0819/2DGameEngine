@@ -9,6 +9,9 @@ Transform::Transform()
 	modelRot = glm::mat4(1.0f);
 	modelScale = glm::mat4(1.0f);
 	modelTrans = glm::mat4(1.0f);
+	Position = glm::vec3(0.0f, 0.0f, 0.0f);
+	Rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	Scale = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
@@ -49,7 +52,7 @@ void Transform::SetTranslation(const float x, const float y, const float z)
 
 glm::mat4 Transform::getRotationMatrix(const float x, const float y, const float z)
 {
-	return glm::eulerAngleYXZ(y, x, z); 	// https://glm.g-truc.net/0.9.3/api/a00164.html
+	return glm::eulerAngleYXZ(glm::radians(y), glm::radians(x), glm::radians(z)); 	// https://glm.g-truc.net/0.9.3/api/a00164.html
 }
 glm::mat4 Transform::getScaleMatrix(const float x, const float y, const float z)
 {
@@ -65,6 +68,12 @@ glm::mat4 Transform::getTranslateMatrix(const float x, const float y, const floa
 		               0,0,1,0,
 		               x,y,z,1 };
 }
+glm::mat4 Transform::getLocalModelMatrix()
+{
+	model = glm::mat4(1.0f);
+	return modelTrans * modelRot * modelScale * model;
+}
+
 void Transform::PrintTransform()
 {
 	std::cout << "Position: " << glm::to_string(Position) << std::endl;
@@ -72,10 +81,12 @@ void Transform::PrintTransform()
 	std::cout << "Scale: " << glm::to_string(Scale) << std::endl;
 }
 
-void Transform::Update()
+void Transform::Update() // Maybe can take this out after Scene graph
 {
 	model = glm::mat4(1.0f);
-	model = modelTrans * modelRot * modelScale * model;
+
+	model = getLocalModelMatrix();
+
 
 	//PrintTransform();
 	//model = modelScale * model;

@@ -16,8 +16,12 @@ public:
 	Material* material = nullptr;
 
 	void Draw();
+	void Update();
+	void AddChildNode(Node* node);
+
+	Node* parent = nullptr;
 
 private:
-
+	std::vector<Node*> childNodes;
 };
 

@@ -23,11 +23,12 @@ public:
 	glm::mat4 getRotationMatrix(const float x, const float y, const float z);
 	glm::mat4 getScaleMatrix(const float x, const float y, const float z);
 	glm::mat4 getTranslateMatrix(const float x, const float y, const float z);
+	glm::mat4 getLocalModelMatrix();
 
-	void Update();
+	void Update();// Maybe can take this out after Scene graph
+	void PrintTransform(); //Debug
 
 private:
-
 	glm::mat4 modelRot, modelScale, modelTrans;
-	void PrintTransform();
+
 };
