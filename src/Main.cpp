@@ -11,6 +11,7 @@
 #include "Node.h"
 
 #include "UserDefined/TriangleObject.h"
+#include "InputManager.h"
 
 int main(int argc, char* argv[])
 {
@@ -35,7 +36,9 @@ int main(int argc, char* argv[])
 	float deltaTime = 0;
 
 	/////////////// User logic ///////////////////
-
+	// Input
+	InputManager inputmanager = InputManager::GetInstance();
+	inputmanager.Init(mainWindow);
 	// Create Shader
 	Shader sampleShader("src/SampleShader.vert", "src/SampleShader.frag");
 
@@ -72,8 +75,9 @@ int main(int argc, char* argv[])
 
 	// Test vars to Scale, Rotate, Translate
 	float val = 0;
-	float timeToChangeDir = 1.0f;
-	int dir = 1;
+	int dir = 0;
+	float x = 0.0f;
+	float y = 0.0f;
 
 	while (!mainWindow->ShouldClose())// && !secondWindow->ShouldClose()
 	{
@@ -84,31 +88,62 @@ int main(int argc, char* argv[])
 			mainWindow->Update();
 			renderer.ClearScreen();
 
-			// Test math to rotate, translate, scale
-			timeToChangeDir = timeToChangeDir - deltaTime;
-			if (timeToChangeDir < 0)
-			{
-				dir *= -1;
-				timeToChangeDir = 1.0f;
-			}
-			val = val + dir * deltaTime * 5;
-
-
 			//sampleNode.material->shader->useProgram();
 			//sampleNode.transform->SetRotation(0, 0, val);
 			//sampleNode.transform->SetTranslation(-100 + val * 40, -100 + val * 40, 0.0f);
 			//sampleNode.transform->SetScale(1 + val / 10, 1 + val / 10, 1 + val / 10);
 			//sampleNode.Draw();
+
+			if (inputmanager.IsKeyDown(RIGHT))
+			{
+				x += 5.0f;
+				dir = 270;
+			}
+			if (inputmanager.IsKeyDown(LEFT))
+			{
+				x -= 5.0f;
+				dir = 90;
+			}
+			if (inputmanager.IsKeyDown(UP))
+			{
+				y += 5.0f;
+				dir = 0;
+			}
+			if (inputmanager.IsKeyDown(DOWN))
+			{
+				y -= 5.0f;
+				dir = 180;
+			}
+			if (inputmanager.IsKeyDown(RIGHT) && inputmanager.IsKeyDown(UP))
+			{
+				dir = 315;
+			}
+			else if (inputmanager.IsKeyDown(RIGHT) && inputmanager.IsKeyDown(DOWN))
+			{
+				dir = 225;
+			}
+			else if (inputmanager.IsKeyDown(LEFT) && inputmanager.IsKeyDown(UP))
+			{
+				dir = 45;
+			}
+			else if (inputmanager.IsKeyDown(LEFT) && inputmanager.IsKeyDown(DOWN))
+			{
+				dir = 135;
+			}
+
+
 			mytriangle.material->shader->useProgram();
-			mytriangle.transform->SetRotation(0, 0, val*50);
-			mytriangle.transform->SetTranslation(-100 + val * 40, -100 + val * 40, 0.0f);
-			mytriangle.transform->SetScale(1 + val / 10, 1 + val / 10, 1 + val / 10);
+			mytriangle.transform->SetRotation(0, 0, dir);
+			mytriangle.transform->SetTranslation(x, y, 0.0f);
+			mytriangle.transform->SetScale(0.5+y/500, 0.5 + y / 500, 0.5 + y / 500);
 			mytriangle.Draw();
 
 
 			// swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 			mainWindow->SwapBuffers();
-			mainWindow->PollEvents();
+			mainWindow->PollEvents(); // Window events
+			inputmanager.PollEvents();// Input events
+
 
 			//ExecuteScreenSaverMovement(mainWindow, deltaTime);
 			// Experimenting 2nd window

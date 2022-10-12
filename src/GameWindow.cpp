@@ -43,7 +43,6 @@ void GameWindow::Init()
 
 	// Callbacks
 	glfwSetWindowSizeCallback(pWindow, this->GLFWWindowSizeCallback);
-	glfwSetKeyCallback(pWindow, this->GLFWWindowKeyCallback);
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(MessageCallback, 0);
 }
@@ -107,6 +106,11 @@ glm::vec2 GameWindow::GetWindowPosition()
 
 // Callbacks
 
+void GameWindow::RegisterInputCallback(void(*fptr)(GLFWwindow* window, int key, int scancode, int action, int mods))
+{
+	glfwSetKeyCallback(pWindow, fptr);
+}
+
 void GameWindow::GLFWErrorCallback(int error, const char* description)
 {
 	TraceMessage("Error in GLFW: {}", description);
@@ -119,9 +123,4 @@ void GameWindow::GLFWWindowSizeCallback(GLFWwindow* window, int width, int heigh
 	TraceMessage(s.c_str());
 }
 
-void GameWindow::GLFWWindowKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
-}
 
