@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 
 	// Create Texture
 	Texture sampleTexture("src/Assets/SampleTexture.jpg", "texture_diffuse");
-
+	Texture sampleTexture2("src/Assets/DefaultTexture.jpg", "texture_diffuse");
 	// Create Material
 	Material sampleMaterial;
 	sampleMaterial.AttachShader(&sampleShader);
@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 	Material sampleMaterial2;
 	sampleMaterial2.SetColor(1.0f, 0.0f, 0.0f, 1.0f);
 	sampleMaterial2.AttachShader(&sampleShader);
-	sampleMaterial2.AttachTexture(&sampleTexture);
+	sampleMaterial2.AttachTexture(&sampleTexture2);
 
 	//Create Node
 	//Node sampleNode(sampleTransform, sampleMesh, &sampleMaterial);
@@ -63,9 +63,15 @@ int main(int argc, char* argv[])
 	TriangleObject mytriangle2;
 	mytriangle2.AttachMaterial(&sampleMaterial2);
 	mytriangle.AddChildNode(&mytriangle2); // Scene graph
-	mytriangle2.transform->SetScale(0.5f, 0.5f, 0.5f);
-	mytriangle2.transform->SetTranslation(0.0f, -50.0f, 0.0f);
+	mytriangle2.transform->SetScale(0.3f, 0.3f, 0.3f);
+	mytriangle2.transform->SetTranslation(50.0f, -70.0f, 0.0f);
 	mytriangle2.transform->SetRotation(0, 0, 180.0f);
+	TriangleObject mytriangle3;
+	mytriangle3.AttachMaterial(&sampleMaterial2);
+	mytriangle.AddChildNode(&mytriangle3); // Scene graph
+	mytriangle3.transform->SetScale(0.3f, 0.3f, 0.3f);
+	mytriangle3.transform->SetTranslation(-50.0f, -70.0f, 0.0f);
+	mytriangle3.transform->SetRotation(0, 0, 180.0f);
 
 	// Use this shader
 	sampleShader.useProgram();
@@ -132,7 +138,7 @@ int main(int argc, char* argv[])
 			}
 
 
-			mytriangle.material->shader->useProgram();
+			//mytriangle.material->shader->useProgram();
 			mytriangle.transform->SetRotation(0, 0, dir);
 			mytriangle.transform->SetTranslation(x, y, 0.0f);
 			mytriangle.transform->SetScale(0.5+y/500, 0.5 + y / 500, 0.5 + y / 500);

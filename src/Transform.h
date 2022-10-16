@@ -11,7 +11,7 @@ public:
 	Transform(Transform& t);
 	~Transform();
 
-	glm::mat4 model;
+	glm::mat4 model; // final model matrix to print on the screen
 	glm::vec3 Position;
 	glm::vec3 Rotation;
 	glm::vec3 Scale;

@@ -26,7 +26,7 @@ Node::~Node()
 	childNodes.clear();
 }
 
-void Node::Update()
+void Node::UpdateTransform()
 {
 	if (parent)
 	{
@@ -45,7 +45,8 @@ void Node::Update()
 void Node::Draw()
 {
 	//transform->Update();
-	Update();
+	UpdateTransform();
+	material->shader->useProgram();
 	material->texture->activeTextureUnit(0);
 	material->texture->bindTexture();
 	material->shader->setVec4("color", material->color.color);
