@@ -1,6 +1,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Texture.h"
-#include "Logging.h"
+#include "../Logging.h"
 
 Texture::Texture(const char* path, const char* type)
 {

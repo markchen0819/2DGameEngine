@@ -8,13 +8,14 @@ public:
 
 	Transform();
 	Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
-	Transform(Transform& t);
+	Transform(const Transform& t);
 	~Transform();
 
 	glm::mat4 model; // final model matrix to print on the screen
-	glm::vec3 Position;
-	glm::vec3 Rotation;
-	glm::vec3 Scale;
+
+	glm::vec3 GetPosition();
+	glm::vec3 GetScale();
+	glm::vec3 GetRotation();
 
 	void SetRotation(const float x, const float y, const float z);
 	void SetScale(const float x, const float y, const float z);
@@ -30,5 +31,8 @@ public:
 
 private:
 	glm::mat4 modelRot, modelScale, modelTrans;
+	glm::vec3 Position;
+	glm::vec3 Rotation;
+	glm::vec3 Scale;
 
 };

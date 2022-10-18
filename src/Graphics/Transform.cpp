@@ -20,7 +20,7 @@ Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 	modelScale = getScaleMatrix(scale.x, scale.y, scale.z);
 	modelTrans = getTranslateMatrix(position.x, position.y, position.z);
 }
-Transform::Transform(Transform& t)
+Transform::Transform(const Transform& t)
 {
 	model = t.model;
 	modelRot = t.modelRot;
@@ -32,6 +32,21 @@ Transform::Transform(Transform& t)
 }
 Transform::~Transform()
 {
+}
+
+glm::vec3 Transform::GetPosition()
+{
+	return Position;
+}
+
+glm::vec3 Transform::GetScale()
+{
+	return Scale;
+}
+
+glm::vec3 Transform::GetRotation()
+{
+	return Rotation;
 }
 
 void Transform::SetRotation(const float x, const float y, const float z)

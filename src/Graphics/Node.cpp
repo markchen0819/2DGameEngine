@@ -30,14 +30,14 @@ void Node::UpdateTransform()
 {
 	if (parent)
 	{
-		transform->model = (*parent).transform->getLocalModelMatrix() * transform->getLocalModelMatrix();
 		//std::cout << "Child" << std::endl;
+		transform->model = (*parent).transform->getLocalModelMatrix() * transform->getLocalModelMatrix();
 		//transform->PrintTransform();
 	}
 	else
 	{
-		transform->model = transform->getLocalModelMatrix();
 		//std::cout << "Parent" << std::endl;
+		transform->model = transform->getLocalModelMatrix();
 		//transform->PrintTransform();
 	}
 
@@ -58,6 +58,7 @@ void Node::Draw()
 		i->Draw();
 	}
 	material->texture->activeTextureUnit(0);
+	glUseProgram(0);
 }
 
 void Node::AddChildNode(Node* node)

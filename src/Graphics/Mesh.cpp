@@ -23,9 +23,14 @@ void Mesh::Draw()
 {
     // Draw mesh
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
+    glDrawElements(drawMode, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 
+}
+
+void Mesh::SetDrawMode(GLenum glenum)
+{
+    drawMode = glenum;
 }
 
 void Mesh::setupMesh()

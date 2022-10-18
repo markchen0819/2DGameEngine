@@ -31,6 +31,8 @@ public:
     ~Mesh();
 
     void Draw();
+    void SetDrawMode(GLenum glenum);
+
 
 private:
 
@@ -38,6 +40,9 @@ private:
     unsigned int VAO;
     unsigned int VBO;
     unsigned int EBO;
+
+    //
+    GLenum drawMode = GL_TRIANGLES;
 
     // initializes all the buffer objects/arrays
     void setupMesh();
