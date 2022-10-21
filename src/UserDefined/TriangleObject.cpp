@@ -18,6 +18,10 @@ void TriangleObject::Draw()
 void TriangleObject::SetupTransform()
 {
 	//Create Transform
+	if (transform)
+	{
+		delete transform;
+	}
 	transform = new Transform(glm::vec3(-50, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 }
 
@@ -32,6 +36,10 @@ void TriangleObject::SetupMesh()
 	vertices.push_back(v0);
 	vertices.push_back(v1);
 	vertices.push_back(v2);
+	if (mesh)
+	{
+		delete mesh;
+	}
 	mesh = new Mesh(vertices, indices);
 }
 

@@ -1,18 +1,24 @@
 #pragma once
-#include "Transform.h"
-#include "Mesh.h"
+#include "Graphics/Node.h"
+#include "Physics/Body.h"
+
 class GameObject // Inherit from Node
 {
 
 public:
 
-	GameObject(Transform t, Mesh m);
+	GameObject();
 	~GameObject();
 
-	Transform transform;
-	Mesh mesh;
+	std::string Name = ""; // Just for identifying purpose
+	Node* node = nullptr;
+	Body* body = nullptr;
 
-    void Draw(glm::mat4 model, Shader& shader);
+    void Draw();
+	void AttachNode(Node* n);
+	void AttachBody(Body* b);
+	void SetBodyCollisionShape(CollisionShape* cs);
+
 
 private:
 

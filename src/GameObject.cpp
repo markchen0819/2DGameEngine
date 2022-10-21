@@ -1,7 +1,7 @@
 #include "GameObject.h"
-#include "Shader.h"
+#include "Graphics/Shader.h"
 
-GameObject::GameObject(Transform t, Mesh m) :transform(t), mesh(m)
+GameObject::GameObject()
 {
 
 }
@@ -10,8 +10,23 @@ GameObject::~GameObject()
 
 }
 
-void GameObject::Draw(glm::mat4 model, Shader& shader)
+void GameObject::Draw()
 {
-	//shader.setMat4("model", model);
-	mesh.Draw();
+	node->Draw();
+}
+
+void GameObject::AttachNode(Node* n)
+{
+	node = n;
+}
+
+void GameObject::AttachBody(Body* b)
+{
+	body = b;
+	body->transform = node->transform;
+}
+
+void GameObject::SetBodyCollisionShape(CollisionShape * cs)
+{
+	body->collisionShape = cs;
 }

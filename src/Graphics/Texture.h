@@ -11,7 +11,7 @@ public:
     
     unsigned int id;
 
-    Texture(const char* path, const char* type);
+    Texture(std::string path, std::string type);
     Texture(const Texture& t);
     ~Texture();
     void activeTextureUnit(unsigned int i);

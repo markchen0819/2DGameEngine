@@ -8,6 +8,7 @@ GameWindow::GameWindow() : pWindow(nullptr), pMonitor(nullptr), shouldClose(fals
 
 GameWindow::~GameWindow()
 {
+	if (pMonitor != nullptr) delete pMonitor;
 }
 
 

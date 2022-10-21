@@ -3,90 +3,55 @@
 #include <glm/gtx/string_cast.hpp>
 #include <iostream>
 
-Transform::Transform()
-{
-	model = glm::mat4(1.0f);
-	modelRot = glm::mat4(1.0f);
-	modelScale = glm::mat4(1.0f);
-	modelTrans = glm::mat4(1.0f);
-	Position = glm::vec3(0.0f, 0.0f, 0.0f);
-	Rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	Scale = glm::vec3(1.0f, 1.0f, 1.0f);
-}
+Transform::Transform():
+	model(glm::mat4(1.0f)), localModel(glm::mat4(1.0f)),
+	modelRot(glm::mat4(1.0f)), modelScale(glm::mat4(1.0f)), modelTrans(glm::mat4(1.0f)),
+	Position(glm::vec3(0.0f, 0.0f, 0.0f)),
+	Rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
+	Scale(glm::vec3(1.0f, 1.0f, 1.0f))
+{ }
 Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-	model = glm::mat4(1.0f);
-	modelRot = getRotationMatrix(rotation.x, rotation.y, rotation.z);
-	modelScale = getScaleMatrix(scale.x, scale.y, scale.z);
-	modelTrans = getTranslateMatrix(position.x, position.y, position.z);
+	SetRotation(rotation.x, rotation.y, rotation.z);
+	SetScale(scale.x, scale.y, scale.z);
+	SetTranslation(position.x, position.y, position.z);
+	model = modelTrans * modelRot * modelScale * glm::mat4(1.0f);
+	localModel = model;
 }
-Transform::Transform(const Transform& t)
-{
-	model = t.model;
-	modelRot = t.modelRot;
-	modelScale = t.modelScale;
-	modelTrans = t.modelTrans;
-	Position = t.Position;
-	Rotation = t.Rotation;
-	Scale = t.Scale;
-}
-Transform::~Transform()
-{
-}
-
-glm::vec3 Transform::GetPosition()
-{
-	return Position;
-}
-
-glm::vec3 Transform::GetScale()
-{
-	return Scale;
-}
-
-glm::vec3 Transform::GetRotation()
-{
-	return Rotation;
-}
+Transform::Transform(const Transform& t) :
+	model(t.model), localModel(t.localModel),
+	modelRot(t.modelRot), modelScale(t.modelScale), modelTrans(t.modelTrans),
+	Position(t.Position), Rotation(t.Rotation), Scale(t.Scale) 
+{ }
+Transform::~Transform(){}
 
 void Transform::SetRotation(const float x, const float y, const float z)
 {
-	modelRot = getRotationMatrix(x, y, z);
+	modelRot = createRotationMatrix(x, y, z);
 	Rotation = glm::vec3(x, y, z);
 }
 void Transform::SetScale(const float x, const float y, const float z)
 {
-	modelScale = getScaleMatrix(x, y, z);
+	modelScale = createScaleMatrix(x, y, z);
 	Scale = glm::vec3(x, y, z);
 }
 void Transform::SetTranslation(const float x, const float y, const float z)
 {
-	modelTrans = getTranslateMatrix(x, y, z);
+	modelTrans = createTranslateMatrix(x, y, z);
 	Position = glm::vec3(x, y, z);
 }
 
-glm::mat4 Transform::getRotationMatrix(const float x, const float y, const float z)
-{
-	return glm::eulerAngleYXZ(glm::radians(y), glm::radians(x), glm::radians(z)); 	// https://glm.g-truc.net/0.9.3/api/a00164.html
-}
-glm::mat4 Transform::getScaleMatrix(const float x, const float y, const float z)
-{
-	return glm::mat4{ x,0,0,0,
-					  0,y,0,0,
-					  0,0,z,0,
-					  0,0,0,1 };
-}
-glm::mat4 Transform::getTranslateMatrix(const float x, const float y, const float z)
-{
-	return glm::mat4 { 1,0,0,0,
-					   0,1,0,0,
-		               0,0,1,0,
-		               x,y,z,1 };
-}
+glm::vec3 Transform::GetPosition() { return Position;}
+glm::vec3 Transform::GetScale() { return Scale; }
+glm::vec3 Transform::GetRotation() { return Rotation; }
+glm::mat4 Transform::GetRotationMatrix() { return modelRot; }
+glm::mat4 Transform::GetScaleMatrix() { return modelScale; }
+glm::mat4 Transform::GetTranlateMatrix() { return modelTrans; }
+
 glm::mat4 Transform::getLocalModelMatrix()
 {
-	model = glm::mat4(1.0f);
-	return modelTrans * modelRot * modelScale * model;
+	localModel = modelTrans * modelRot * modelScale * glm::mat4(1.0f);
+	return localModel;
 }
 
 void Transform::PrintTransform()
@@ -96,15 +61,26 @@ void Transform::PrintTransform()
 	std::cout << "Scale: " << glm::to_string(Scale) << std::endl;
 }
 
-void Transform::Update() // Maybe can take this out after Scene graph
+glm::mat4 Transform::createRotationMatrix(const float x, const float y, const float z)
 {
-	model = glm::mat4(1.0f);
-
-	model = getLocalModelMatrix();
-
-
-	//PrintTransform();
-	//model = modelScale * model;
-	//model = modelRot *  model;
-	//model = modelTrans * model;
+	return glm::eulerAngleYXZ(glm::radians(y), glm::radians(x), glm::radians(z)); 	// https://glm.g-truc.net/0.9.3/api/a00164.html
 }
+glm::mat4 Transform::createScaleMatrix(const float x, const float y, const float z)
+{
+	return glm::mat4{ x,0,0,0,
+					  0,y,0,0,
+					  0,0,z,0,
+					  0,0,0,1 };
+}
+glm::mat4 Transform::createTranslateMatrix(const float x, const float y, const float z)
+{
+	return glm::mat4 { 1,0,0,0,
+					   0,1,0,0,
+		               0,0,1,0,
+		               x,y,z,1 };
+}
+
+
+
+
+

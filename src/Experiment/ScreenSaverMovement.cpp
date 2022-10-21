@@ -1,4 +1,4 @@
-#include "GameWindow.h"
+#include "../GameWindow.h"
 #include <glm/glm.hpp>
 // Experience code to move window like a screen Saver
 

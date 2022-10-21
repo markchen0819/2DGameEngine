@@ -14,6 +14,8 @@ Mesh::Mesh(Mesh& m) // Copy ctor
 }
 Mesh::~Mesh()
 {
+    vertices.clear();
+    indices.clear();
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);

@@ -2,7 +2,7 @@
 #include "Texture.h"
 #include "../Logging.h"
 
-Texture::Texture(const char* path, const char* type)
+Texture::Texture(std::string path, std::string type)
 {
 	this->path = path;
 	this->type = type;
