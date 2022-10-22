@@ -20,7 +20,9 @@
 #include "GameObject.h"
 #include "Physics/CollisionCircle.h"
 #include "Physics/CollisionAABB.h"
+#include "Physics/CollisionOBB.h"
 #include "EventSystem.h"
+
 
 void execute();
 int main(int argc, char* argv[]) // Entry Point
@@ -105,22 +107,44 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 
 	Body playerBody;
 	playerBody.AttachTransform(mytriangle.transform);
+	playerBody.GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
 	Body targetBody;
 	targetBody.AttachTransform(targetT.transform);
+	targetBody.GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
 
-	CollisionAABB ab1(100, -100, 100, -100);
-	//CollisionCircle ab1(100);
-	ab1.collisionAreaObject->AttachMaterial(&collisionMaterial);
-	playerBody.collisionShape = &ab1;
+	// AABB
+	//CollisionAABB c1(100, -100, 100, -100);
+	//CollisionAABB c2(100, -100, 100, -100);
+	//playerBody.GetCollisionAreaObject().SetMesh(100, -100, 100, -100);
+	//targetBody.GetCollisionAreaObject().SetMesh(100, -100, 100, -100);
 
+	// Circle
+	//CollisionCircle c1(100);
+	//CollisionCircle c2(100);
+	//playerBody.GetCollisionAreaObject().SetMesh(100);
+	//targetBody.GetCollisionAreaObject().SetMesh(100);
 
-	CollisionAABB ab2(100, -100, 100, -100);
-	//CollisionCircle ab2(100);
-	ab2.collisionAreaObject->AttachMaterial(&collisionMaterial);
-	targetBody.collisionShape = &ab2;
+	// OBB
+	std::vector<glm::vec4> obbVerticies;
+	// Box vertices
+	obbVerticies.push_back(glm::vec4(100.0f, 100.0f, 0.0f, 1.0f));
+	obbVerticies.push_back(glm::vec4(100.0f, -100.0f, 0.0f, 1.0f));
+	obbVerticies.push_back(glm::vec4(-100.0f, -100.0f, 0.0f, 1.0f));
+	obbVerticies.push_back(glm::vec4(-100.0f, 100.0f, 0.0f, 1.0f));
+	// Polygon vertices (SAT supports polygons)
+	//obbVerticies.push_back(glm::vec4(120.0f, 100.0f, 0.0f, 1.0f));
+	//obbVerticies.push_back(glm::vec4(80.0f, -100.0f, 0.0f, 1.0f));
+	//obbVerticies.push_back(glm::vec4(-120.0f, -100.0f, 0.0f, 1.0f));
+	//obbVerticies.push_back(glm::vec4(-80.0f, 100.0f, 0.0f, 1.0f));
+	CollisionOBB c1(obbVerticies);
+	CollisionOBB c2(obbVerticies);
+	playerBody.GetCollisionAreaObject().SetMesh(obbVerticies);
+	targetBody.GetCollisionAreaObject().SetMesh(obbVerticies);
 
-	//// Attach graphic and physic body to gameobj
+	playerBody.collisionShape = &c1;
+	targetBody.collisionShape = &c2;
 
+	////// Attach graphic and physic body to gameobj //////
 	GameObject player;
 	player.Name = "Player";
 	player.AttachNode(&mytriangle);
@@ -131,15 +155,11 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	targetObj.AttachNode(&targetT);
 	targetObj.AttachBody(&targetBody);
 
-
 	//test eventsystem
-//EventSystem eventSystem = EventSystem::GetInstance();
+	//EventSystem eventSystem = EventSystem::GetInstance();
 	using namespace std::placeholders;
 	//CollisionEventListener c;
 	//eventSystem.RegisterEvent(EventType::Collision, std::bind(&CollisionEventListener::HandleEvent, c, _1));
-
-
-
 
 	// Create camera
 	sampleShader.useProgram();
@@ -225,31 +245,35 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 				player.body->Velocity =
 					glm::vec3(playerRotationMatrix * glm::vec4(0.0f, -5.0f, 0.0f, 1.0f));
 			}
+			
+			// Check if collision scale working properly
+			player.body->Scale = glm::vec3(0.5 + player.body->Position.y/500, 0.5 + player.body->Position.y / 500, 0.5 + player.body->Position.y / 500);
 
 			player.node->transform->SetRotation(0, 0, player.body->Rotation.z);
 			player.node->transform->SetTranslation(player.body->Position.x, player.body->Position.y, 0.0f);
-			player.body->UpdateTransform();
-			targetObj.body->UpdateTransform();
+			player.node->transform->SetScale(player.body->Scale.x, player.body->Scale.y, player.body->Scale.z);
 
+			//player.node->transform->PrintTransform();
 
 			player.Draw();
 			targetObj.Draw();
+
 			// Debug, draw collision area
-			player.body->collisionShape->collisionAreaObject->Draw();
-			targetObj.body->collisionShape->collisionAreaObject->Draw();
-
-			//if (collisionManager.CheckCollision(player.body->collisionShape, x, y, targetObj.body->collisionShape, targetObj.body->transform->GetPosition().x, targetObj.body->transform->GetPosition().y))
-			//{
-			//	std::cout << glfwGetTime() << "_Collide!" << std::endl;
-			//	CollisionEvent c = CollisionEvent();
-			//	c.gobj1 = &player;
-			//	c.gobj2 = &targetObj;
-			//	//eventSystem.BroadcastEvent(&c);
-			//}
-			
-
+			player.body->GetCollisionAreaObject().Draw(); 
+			targetObj.body->GetCollisionAreaObject().Draw();
 			player.body->Integrate();
 			targetObj.body->Integrate();
+
+			if (collisionManager.CheckCollision(player.body->collisionShape, player.body->Position, targetObj.body->collisionShape, targetObj.body->Position))
+			{
+				std::cout << glfwGetTime() << "_Collide!" << std::endl;
+				//CollisionEvent c = CollisionEvent();
+				//c.gobj1 = &player;
+				//c.gobj2 = &targetObj;
+				//eventSystem.BroadcastEvent(&c);
+			}
+			
+
 
 			// swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 			mainWindow->SwapBuffers();

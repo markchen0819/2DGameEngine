@@ -10,7 +10,9 @@ public:
 	CollisionShape();
 	~CollisionShape();
 
-	// Debug only
-	CollisionAreaObject* collisionAreaObject = nullptr;
+	void SetScale(glm::vec3 s);
+	glm::vec3 GetScale();
+private:
+	glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f);
 };
 

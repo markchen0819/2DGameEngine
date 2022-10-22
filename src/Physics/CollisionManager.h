@@ -8,7 +8,7 @@ class CollisionManager
 public:
 	CollisionManager();
 	~CollisionManager();
-	bool CheckCollision(CollisionShape* shape1, float pos1_x, float pos1_y, CollisionShape* shape2, float pos2_x, float pos2_y);
+	bool CheckCollision(CollisionShape* shape1, glm::vec3 center1, CollisionShape* shape2, glm::vec3 center2);
 
 };
 

@@ -22,7 +22,7 @@ void TriangleObject::SetupTransform()
 	{
 		delete transform;
 	}
-	transform = new Transform(glm::vec3(-50, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	transform = new Transform(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 }
 
 void TriangleObject::SetupMesh()

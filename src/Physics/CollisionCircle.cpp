@@ -10,8 +10,6 @@ CollisionCircle::CollisionCircle()
 CollisionCircle::CollisionCircle(float r):Radius(r)
 {
 	Type = ShapeType::CIRCLE;
-	collisionAreaObject = new CollisionAreaObject();
-	collisionAreaObject->SetMesh(Radius);
 }
 
 CollisionCircle::~CollisionCircle()

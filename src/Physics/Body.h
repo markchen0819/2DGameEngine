@@ -27,8 +27,12 @@ public:
 	void Integrate();
 
 	void PrintInfo();
+	// Debug only
+	CollisionAreaObject& GetCollisionAreaObject();
 
 private:
 
+	// Debug only
+	CollisionAreaObject* collisionAreaObject = nullptr;
 };
 

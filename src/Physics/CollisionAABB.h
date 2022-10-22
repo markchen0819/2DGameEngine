@@ -8,5 +8,7 @@ public:
 	CollisionAABB(float r, float l, float u, float d);
 	~CollisionAABB();
 	float Right, Up, Left, Down;
+
+private:
 };
 

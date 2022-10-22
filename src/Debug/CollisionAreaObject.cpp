@@ -33,15 +33,12 @@ void CollisionAreaObject::SetupObj()
 void CollisionAreaObject::UpdateTransform(const Transform t)
 {
 	delete transform;
-	transform = new Transform(t);
+	transform = new Transform(t); // need to new to prevent double delete from node
 	
 	if (shapeType == ShapeType::AABB || shapeType == ShapeType::CIRCLE)
 	{
 		transform->SetRotation(0, 0, 0);
-		transform->SetScale(1, 1, 1);
 	}
-
-
 }
 
 // Circle
@@ -105,7 +102,27 @@ void CollisionAreaObject::SetMesh(float r, float l, float u, float d)
 	mesh = new Mesh(vertices, indices);
 	mesh->SetDrawMode(GL_LINE_LOOP);
 }
-
+// OBB
+void CollisionAreaObject::SetMesh(std::vector<glm::vec4> v)
+{
+	shapeType = ShapeType::OBB;
+	delete mesh;
+	//Create Mesh
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices =
+	{ 0, 1, 3,
+	1, 2, 3 };
+	Vertex v0(v[0], glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 1.0f));
+	Vertex v1(v[1], glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f));
+	Vertex v2(v[2], glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+	Vertex v3(v[3], glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f));
+	vertices.push_back(v0);
+	vertices.push_back(v1);
+	vertices.push_back(v2);
+	vertices.push_back(v3);
+	mesh = new Mesh(vertices, indices);
+	mesh->SetDrawMode(GL_LINE_LOOP);
+}
 void CollisionAreaObject::AttachMaterial(Material* m)
 {
 	material = m;

@@ -6,8 +6,14 @@ CollisionShape::CollisionShape()
 }
 CollisionShape::~CollisionShape()
 {
-	if (collisionAreaObject != nullptr)
-	{
-		delete collisionAreaObject;
-	}
+}
+
+void CollisionShape::SetScale(glm::vec3 s)
+{
+	scale = s;
+}
+
+glm::vec3 CollisionShape::GetScale()
+{
+	return scale;
 }
