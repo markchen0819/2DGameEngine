@@ -14,14 +14,15 @@
 #include "Graphics/Node.h"
 #include "Camera.h"
 
-#include "UserDefined/TriangleObject.h"
-#include "InputManager.h"
 #include "Physics/CollisionManager.h"
-#include "GameObject.h"
 #include "Physics/CollisionCircle.h"
 #include "Physics/CollisionAABB.h"
 #include "Physics/CollisionOBB.h"
 #include "EventSystem/EventSystem.h"
+
+#include "InputManager.h"
+#include "UserDefined/TriangleObject.h"
+#include "GameObject.h"
 
 void callbackForCollision(void *eventData)
 {
@@ -36,6 +37,7 @@ void callbackForCollision(void *eventData)
 			<<" and "<< converted->gobj2.Name << std::endl;
 	}
 }
+
 void execute();
 int main(int argc, char* argv[]) // Entry Point
 {
@@ -69,7 +71,7 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	/////////////// User logic ///////////////////
 	
 	// Input
-	InputManager inputmanager = InputManager::GetInstance();
+	InputManager& inputmanager = InputManager::GetInstance();
 	inputmanager.Init(mainWindow);
 
 	// Create Shader
@@ -93,6 +95,7 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	collisionMaterial.AttachTexture(&sampleTexture);
 
 	////// Create Graphic Nodes ( UserDefined Triangle class ) //////
+	
 	// Player Nodes
 	TriangleObject mytriangle;
 	mytriangle.AttachMaterial(&sampleMaterial);
@@ -112,11 +115,13 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	TriangleObject targetT;
 	targetT.AttachMaterial(&sampleMaterial);
 	targetT.transform->SetTranslation(200.0f, 0.0f, 0.0f);
+	// TargetObject2 Node
 	TriangleObject targetT2;
 	targetT2.AttachMaterial(&sampleMaterial2);
 	targetT2.transform->SetTranslation(0.0f, 300.0f, 0.0f);
 	targetT2.transform->SetRotation(0.0f, 0.0f, 45.0f);
 	targetT2.transform->SetScale(0.5f, 0.5f, 0.0f);
+
 	////// Create bodies and collision shapes //////
 
 	CollisionManager collisionManager;
@@ -167,6 +172,7 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	targetBody2.collisionShape = &c3;
 
 	////// Attach graphic and physic body to gameobj //////
+
 	GameObject player;
 	player.Name = "Player";
 	player.AttachNode(&mytriangle);
@@ -181,12 +187,13 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	targetObj2.Name = "Target2";
 	targetObj2.AttachNode(&targetT2);
 	targetObj2.AttachBody(&targetBody2);
+
 	// Add gameObjects for broad phase collision checking
 	collisionManager.AddGameObjectForCollisionChecking(&player);
 	collisionManager.AddGameObjectForCollisionChecking(&targetObj);
 	collisionManager.AddGameObjectForCollisionChecking(&targetObj2);
 
-	//Test eventsystem
+	//Eventsystem
 	EventSystem& eventSystem = EventSystem::GetInstance();
 	EventListener c(callbackForCollision, EventType::Collision);
 	eventSystem.AddListener(EventType::Collision, &c);
@@ -254,7 +261,7 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 			player.node->transform->SetTranslation(x, y, 0.0f);
 			player.node->transform->SetScale(0.5+y/500, 0.5 + y / 500, 0.5 + y / 500);*/
 
-			// New input to Physics body then feed to transform
+			//// New input to Physics body ////
 			if (inputmanager.IsKeyDown(RIGHT))
 			{
 				player.body->AngularVelocity = glm::vec3(0.0f, 0.0f, -5.0f);
@@ -275,36 +282,32 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 				player.body->Velocity =
 					glm::vec3(playerRotationMatrix * glm::vec4(0.0f, -5.0f, 0.0f, 1.0f));
 			}
-			
 			// Check if collision scale working properly
 			player.body->Scale = glm::vec3(0.5 + player.body->Position.y/500, 0.5 + player.body->Position.y / 500, 0.5 + player.body->Position.y / 500);
 
+			//// Feed to transform ////
 			player.node->transform->SetRotation(0, 0, player.body->Rotation.z);
 			player.node->transform->SetTranslation(player.body->Position.x, player.body->Position.y, 0.0f);
 			player.node->transform->SetScale(player.body->Scale.x, player.body->Scale.y, player.body->Scale.z);
-
 			//player.node->transform->PrintTransform();
 
+			// Draw Gobjs and collision area(Debug)
 			player.Draw();
 			targetObj.Draw();
 			targetObj2.Draw();
-
-			// Debug, draw collision area
 			player.body->GetCollisionAreaObject().Draw(); 
 			targetObj.body->GetCollisionAreaObject().Draw();
 			targetObj2.body->GetCollisionAreaObject().Draw();
+
+			//// Apply physics ////
 			player.body->Integrate();
 			targetObj.body->Integrate();
 			targetObj2.body->Integrate();
 
+			//// Check collision ////
 			collisionManager.CheckAllCollisions();
 
-			//CollisionEvent c = CollisionEvent();
-			//c.gobj1 = &player;
-			//c.gobj2 = &targetObj;
-			//eventSystem.BroadcastEvent(&c);
-
-			// swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+			// swap buffers and poll IO events
 			mainWindow->SwapBuffers();
 			mainWindow->PollEvents(); // Window events
 			inputmanager.PollEvents();// Input events
@@ -324,6 +327,7 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 
 	renderer.TerminateGLFW();
 	TraceShutdown();
+
 }
 
 

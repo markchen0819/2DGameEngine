@@ -21,5 +21,5 @@ private:
 	static EventSystem* instance;
 
 	// List of Listeners registed sorted by EventType
-	std::vector<std::vector<EventListener*>>* listOfEventListenerLists;
+	std::vector<std::vector<EventListener*>> listOfEventListenerLists;
 };

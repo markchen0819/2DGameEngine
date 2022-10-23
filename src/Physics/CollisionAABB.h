@@ -1,6 +1,6 @@
 #pragma once
 #include "CollisionShape.h"
-#include "../Debug/CollisionAreaObject.h"
+
 class CollisionAABB : public CollisionShape
 {
 public:

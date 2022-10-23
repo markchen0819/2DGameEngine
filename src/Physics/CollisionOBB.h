@@ -1,6 +1,7 @@
 #pragma once
 #include "CollisionShape.h"
-#include "../Graphics/Vertex.h"
+#include <vector>
+
 class CollisionOBB : public CollisionShape
 {
 public:

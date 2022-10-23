@@ -4,14 +4,13 @@
 #include "CollisionOBB.h"
 #include <glm/gtx/string_cast.hpp>
 
-CollisionManager::CollisionManager()
-{
-}
+CollisionManager::CollisionManager() { }
+CollisionManager::~CollisionManager() { }
 
-CollisionManager::~CollisionManager()
+void CollisionManager::AddGameObjectForCollisionChecking(GameObject* gobj)
 {
+	gobjList.push_back(gobj);
 }
-
 void CollisionManager::CheckAllCollisions()
 {
 	std::vector<int> x;
@@ -49,10 +48,6 @@ void CollisionManager::CheckAllCollisions()
 		}
 	}
 
-}
-void CollisionManager::AddGameObjectForCollisionChecking(GameObject* gobj)
-{
-	gobjList.push_back(gobj);
 }
 
 bool CheckCollisionCircleToCircle(CollisionShape* circle1, glm::vec3 center1, CollisionShape* circle2, glm::vec3 center2)

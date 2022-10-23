@@ -1,14 +1,9 @@
 #include "CollisionAreaObject.h"
 
+CollisionAreaObject::CollisionAreaObject() { SetupObj();}
+CollisionAreaObject::~CollisionAreaObject() { }
 
-CollisionAreaObject::CollisionAreaObject()
-{
-	SetupObj();
-}
-CollisionAreaObject::~CollisionAreaObject()
-{
-}
-void CollisionAreaObject::SetupObj()
+void CollisionAreaObject::SetupObj() // Create a default 10x10 square shape
 {
 	//Create Transform
 	transform = new Transform(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
@@ -30,6 +25,7 @@ void CollisionAreaObject::SetupObj()
 	mesh->SetDrawMode(GL_LINE_LOOP);
 }
 
+// Just update transform and simulate transform of AABB Circle OBB
 void CollisionAreaObject::UpdateTransform(const Transform t)
 {
 	delete transform;
@@ -123,11 +119,11 @@ void CollisionAreaObject::SetMesh(std::vector<glm::vec4> v)
 	mesh = new Mesh(vertices, indices);
 	mesh->SetDrawMode(GL_LINE_LOOP);
 }
+
 void CollisionAreaObject::AttachMaterial(Material* m)
 {
 	material = m;
 }
-
 void CollisionAreaObject::Draw()
 {
 	Node::Draw();

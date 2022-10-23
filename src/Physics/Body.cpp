@@ -6,7 +6,6 @@ Body::Body()
 {
 	collisionAreaObject = new CollisionAreaObject();
 }
-
 Body::~Body() 
 {
 	delete collisionAreaObject;
@@ -19,7 +18,7 @@ void Body::AttachTransform(Transform* t)
 	Rotation = transform->GetRotation();
 	Scale = transform->GetScale();
 }
-
+// Feed calculations from Physics to Graphics Node's Transform
 void Body::UpdateTransform()
 {
 	if (transform != nullptr)
@@ -31,7 +30,7 @@ void Body::UpdateTransform()
 		// Debug View 
 		collisionAreaObject->UpdateTransform(*transform);
 	}
-	if (collisionShape != nullptr)
+	if (collisionShape != nullptr) // Debug Shape
 	{
 		collisionShape->SetScale(glm::vec3(Scale.x, Scale.y, Scale.z));
 
@@ -44,7 +43,6 @@ void Body::UpdateTransform()
 	}
 
 }
-
 
 void Body::Integrate()
 {
