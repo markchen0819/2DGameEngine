@@ -12,6 +12,29 @@ CollisionManager::~CollisionManager()
 {
 }
 
+void CollisionManager::CheckAllCollisions()
+{
+	for (int i = 0; i < gobjList.size(); i++)
+	{
+		for (int j = 0; j < gobjList.size(); j++) 
+		{
+			if (i!=j) 
+			{
+				if (CheckCollision((*gobjList[i]).body->collisionShape, (*gobjList[i]).body->Position, (*gobjList[j]).body->collisionShape, (*gobjList[j]).body->Position))
+				{
+					//std::cout << glfwGetTime() << "_Collide!" << std::endl;
+					CollisionEvent c(*gobjList[i], *gobjList[j]);
+					EventSystem::GetInstance().BroadcastEvent(EventType::Collision, &c);
+				}
+			}
+		}
+	}
+}
+void CollisionManager::AddGameObjectForCollisionChecking(GameObject* gobj)
+{
+	gobjList.push_back(gobj);
+}
+
 bool CheckCollisionCircleToCircle(CollisionShape* circle1, glm::vec3 center1, CollisionShape* circle2, glm::vec3 center2)
 {
 	float sqDistance = (center1.x - center2.x) * (center1.x - center2.x) + (center1.y - center2.y) * (center1.y - center2.y);
@@ -141,8 +164,7 @@ bool CollisionManager::CheckCollision(CollisionShape* shape1, glm::vec3 center1,
 	else
 	{
 		std::cout << "Collision between types not found" << std::endl;
-		return CheckCollisionAABBToAABB(shape1, center1, shape2, center2);
+		return false;
 	}
-
 }
 

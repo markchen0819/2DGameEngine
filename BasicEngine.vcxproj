@@ -151,8 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\EventSystem\EventListener.cpp" />
     <ClCompile Include="src\Physics\CollisionOBB.cpp" />
-    <ClCompile Include="src\EventSystem.cpp" />
+    <ClCompile Include="src\EventSystem\EventSystem.cpp" />
     <ClCompile Include="src\Physics\CollisionAABB.cpp" />
     <ClCompile Include="src\Physics\Body.cpp" />
     <ClCompile Include="src\Debug\CollisionAreaObject.cpp" />
@@ -178,9 +179,11 @@
     <ClCompile Include="src\UserDefined\TriangleObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\EventSystem\EventListener.h" />
+    <ClInclude Include="src\EventSystem\EventType.h" />
     <ClInclude Include="src\Graphics\Vertex.h" />
     <ClInclude Include="src\Physics\CollisionOBB.h" />
-    <ClInclude Include="src\EventSystem.h" />
+    <ClInclude Include="src\EventSystem\EventSystem.h" />
     <ClInclude Include="src\Physics\CollisionAABB.h" />
     <ClInclude Include="src\Physics\Body.h" />
     <ClInclude Include="src\Debug\CollisionAreaObject.h" />
