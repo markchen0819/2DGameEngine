@@ -14,21 +14,41 @@ CollisionManager::~CollisionManager()
 
 void CollisionManager::CheckAllCollisions()
 {
+	std::vector<int> x;
+	std::vector<int> y;
+
 	for (int i = 0; i < gobjList.size(); i++)
 	{
 		for (int j = 0; j < gobjList.size(); j++) 
 		{
 			if (i!=j) 
 			{
+				// Prevent double check ( check(A,B), check(B,A))
+				bool checked = false;
+				for (int k = 0; k < x.size(); ++k)
+				{
+
+					if ((i == x[k] && j == y[k]) || (i == y[k] && j == x[k]))
+					{
+						checked = true;
+						break;
+					}
+				}
+				if (checked) { continue; }; // Checked before, skip this
+
+				// CheckCollision
 				if (CheckCollision((*gobjList[i]).body->collisionShape, (*gobjList[i]).body->Position, (*gobjList[j]).body->collisionShape, (*gobjList[j]).body->Position))
 				{
 					//std::cout << glfwGetTime() << "_Collide!" << std::endl;
 					CollisionEvent c(*gobjList[i], *gobjList[j]);
 					EventSystem::GetInstance().BroadcastEvent(EventType::Collision, &c);
 				}
+				x.push_back(i);
+				y.push_back(j);
 			}
 		}
 	}
+
 }
 void CollisionManager::AddGameObjectForCollisionChecking(GameObject* gobj)
 {
