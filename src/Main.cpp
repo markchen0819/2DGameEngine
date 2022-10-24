@@ -71,8 +71,9 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	/////////////// User logic ///////////////////
 	
 	// Input
-	InputManager& inputmanager = InputManager::GetInstance();
-	inputmanager.Init(mainWindow);
+
+	InputManager* inputmanager = InputManager::GetInstance();
+	inputmanager->Init(mainWindow);
 
 	// Create Shader
 	Shader sampleShader("src/Graphics/SampleShader.vert", "src/Graphics/SampleShader.frag");
@@ -194,9 +195,9 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	collisionManager.AddGameObjectForCollisionChecking(&targetObj2);
 
 	//Eventsystem
-	EventSystem& eventSystem = EventSystem::GetInstance();
+	EventSystem* eventSystem = EventSystem::GetInstance();
 	EventListener c(callbackForCollision, EventType::Collision);
-	eventSystem.AddListener(EventType::Collision, &c);
+	eventSystem->AddListener(EventType::Collision, &c);
 
 	// Create camera
 	sampleShader.useProgram();
@@ -262,21 +263,21 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 			player.node->transform->SetScale(0.5+y/500, 0.5 + y / 500, 0.5 + y / 500);*/
 
 			//// New input to Physics body ////
-			if (inputmanager.IsKeyDown(RIGHT))
+			if (inputmanager->IsKeyDown(RIGHT))
 			{
 				player.body->AngularVelocity = glm::vec3(0.0f, 0.0f, -5.0f);
 			}
-			if (inputmanager.IsKeyDown(LEFT))
+			if (inputmanager->IsKeyDown(LEFT))
 			{
 				player.body->AngularVelocity = glm::vec3(0.0f, 0.0f, 5.0f);
 			}
-			if (inputmanager.IsKeyDown(UP))
+			if (inputmanager->IsKeyDown(UP))
 			{
 				glm::mat4 playerRotationMatrix = player.node->transform->GetRotationMatrix();
 				player.body->Velocity =
 					glm::vec3(playerRotationMatrix * glm::vec4(0.0f, 5.0f, 0.0f, 1.0f));
 			}
-			if (inputmanager.IsKeyDown(DOWN))
+			if (inputmanager->IsKeyDown(DOWN))
 			{
 				glm::mat4 playerRotationMatrix = player.node->transform->GetRotationMatrix();
 				player.body->Velocity =
@@ -299,18 +300,18 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 			targetObj.body->GetCollisionAreaObject().Draw();
 			targetObj2.body->GetCollisionAreaObject().Draw();
 
+			//// Check collision ////
+			collisionManager.CheckAllCollisions();
+
 			//// Apply physics ////
 			player.body->Integrate();
 			targetObj.body->Integrate();
 			targetObj2.body->Integrate();
 
-			//// Check collision ////
-			collisionManager.CheckAllCollisions();
-
 			// swap buffers and poll IO events
 			mainWindow->SwapBuffers();
 			mainWindow->PollEvents(); // Window events
-			inputmanager.PollEvents();// Input events
+			inputmanager->PollEvents();// Input events
 
 			//ExecuteScreenSaverMovement(mainWindow, deltaTime);
 			// Experimenting 2nd window

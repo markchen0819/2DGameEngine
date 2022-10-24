@@ -1,13 +1,15 @@
 #include "InputManager.h"
 
 InputManager* InputManager::instance = nullptr;
-InputManager& InputManager::GetInstance()
+InputManager* InputManager::GetInstance()
 {
-	static InputManager instance; // Guaranteed to be destroyed,  Instantiated on first use.
+	static InputManager* instance = new InputManager();
 	return instance;
 }
-
-InputManager::~InputManager() {}
+InputManager::~InputManager()
+{
+	delete instance;
+}
 
 
 void InputManager::Init(GameWindow* gameWindow)

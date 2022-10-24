@@ -1,9 +1,9 @@
 #include "EventSystem.h"
 
 EventSystem* EventSystem::instance = nullptr;
-EventSystem& EventSystem::GetInstance()
+EventSystem* EventSystem::GetInstance()
 {
-	static EventSystem instance; // Guaranteed to be destroyed,  Instantiated on first use.
+	static EventSystem* instance = new EventSystem(); // Guaranteed to be destroyed,  Instantiated on first use.
 	return instance;
 }
 EventSystem::EventSystem() 
@@ -22,6 +22,7 @@ EventSystem::~EventSystem()
 		listOfEventListenerLists.at(i).clear();
 	}
 	listOfEventListenerLists.clear();
+	delete instance;
 }
 
 void EventSystem::AddListener(EventType Type, EventListener* eventlistener)

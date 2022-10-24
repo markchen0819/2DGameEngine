@@ -1,7 +1,7 @@
 #pragma once
 #include <GLFW/include/GLFW/glfw3.h>
 #include <stdlib.h>
-#include "Logging.h"
+#include "../Logging.h"
 
 class Renderer
 {

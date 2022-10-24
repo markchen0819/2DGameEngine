@@ -40,7 +40,7 @@ void CollisionManager::CheckAllCollisions()
 				{
 					//std::cout << glfwGetTime() << "_Collide!" << std::endl;
 					CollisionEvent c(*gobjList[i], *gobjList[j]);
-					EventSystem::GetInstance().BroadcastEvent(EventType::Collision, &c);
+					EventSystem::GetInstance()->BroadcastEvent(EventType::Collision, &c);
 				}
 				x.push_back(i);
 				y.push_back(j);

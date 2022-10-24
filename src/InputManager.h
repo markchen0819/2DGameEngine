@@ -25,7 +25,7 @@ class InputManager
 public:
 
 	~InputManager();
-	static InputManager& GetInstance();
+	static InputManager* GetInstance();
 	void Init(GameWindow* gamewindow);
 
 	void PollEvents();

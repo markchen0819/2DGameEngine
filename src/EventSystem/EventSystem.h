@@ -9,7 +9,7 @@ class EventSystem
 {
 public:
 	~EventSystem();
-	static EventSystem& GetInstance();
+	static EventSystem* GetInstance();
 
 	void AddListener(EventType Type, EventListener* eventlistener);
 	void BroadcastEvent(EventType Type, void* eventData);
