@@ -36,12 +36,12 @@ void CollisionManager::CheckAllCollisions()
 				if (checked) { continue; }; // Checked before, skip this
 
 				// CheckCollision
-				if (CheckCollision((*gobjList[i]).body->collisionShape, (*gobjList[i]).body->Position, (*gobjList[j]).body->collisionShape, (*gobjList[j]).body->Position))
-				{
-					//std::cout << glfwGetTime() << "_Collide!" << std::endl;
-					CollisionEvent c(*gobjList[i], *gobjList[j]);
-					EventSystem::GetInstance()->BroadcastEvent(EventType::Collision, &c);
-				}
+				//if (CheckCollision((*gobjList[i]).body->collisionShape, (*gobjList[i]).body->Position, (*gobjList[j]).body->collisionShape, (*gobjList[j]).body->Position))
+				//{
+				//	//std::cout << glfwGetTime() << "_Collide!" << std::endl;
+				//	CollisionEvent c(*gobjList[i], *gobjList[j]);
+				//	EventSystem::GetInstance()->BroadcastEvent(EventType::Collision, &c);
+				//}
 				x.push_back(i);
 				y.push_back(j);
 			}

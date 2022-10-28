@@ -3,26 +3,8 @@
 #include <crtdbg.h>
 
 #include <iostream>
-#include "GameWindow.h"
-#include "Experiment/ScreenSaverMovement.h"
-#include "Logging.h"
-#include "Graphics/Renderer.h"
-#include "Graphics/Shader.h"
-#include "Graphics/Texture.h"
-#include "Graphics/Material.h"
-#include "Graphics/Mesh.h";
-#include "Graphics/Node.h"
-#include "Camera.h"
+#include "Allheaders.h"
 
-#include "Physics/CollisionManager.h"
-#include "Physics/CollisionCircle.h"
-#include "Physics/CollisionAABB.h"
-#include "Physics/CollisionOBB.h"
-#include "EventSystem/EventSystem.h"
-
-#include "InputManager.h"
-#include "UserDefined/TriangleObject.h"
-#include "GameObject.h"
 
 void callbackForCollision(void *eventData)
 {
@@ -33,8 +15,9 @@ void callbackForCollision(void *eventData)
 	if (converted)
 	{
 		std::cout <<"TimeStamp: "<<glfwGetTime() << std::endl;
-		std::cout << "Collision between " << converted->gobj1.Name 
-			<<" and "<< converted->gobj2.Name << std::endl;
+		std::cout << "Collision between ";
+			//<< converted->gobj1.Name 
+			//<<" and "<< converted->gobj2.Name << std::endl;
 	}
 }
 
@@ -86,131 +69,100 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	Material sampleMaterial;
 	sampleMaterial.AttachShader(&sampleShader);
 	sampleMaterial.AttachTexture(&sampleTexture);
-	Material sampleMaterial2;
-	sampleMaterial2.SetColor(1.0f, 0.0f, 0.0f, 1.0f);
-	sampleMaterial2.AttachShader(&sampleShader);
-	sampleMaterial2.AttachTexture(&sampleTexture2);
-	Material collisionMaterial;
-	collisionMaterial.SetColor(0.0f, 1.0f, 0.0f, 1.0f);
-	collisionMaterial.AttachShader(&sampleShader);
-	collisionMaterial.AttachTexture(&sampleTexture);
+	//Material sampleMaterial2;
+	//sampleMaterial2.SetColor(1.0f, 0.0f, 0.0f, 1.0f);
+	//sampleMaterial2.AttachShader(&sampleShader);
+	//sampleMaterial2.AttachTexture(&sampleTexture2);
+	//Material collisionMaterial;
+	//collisionMaterial.SetColor(0.0f, 1.0f, 0.0f, 1.0f);
+	//collisionMaterial.AttachShader(&sampleShader);
+	//collisionMaterial.AttachTexture(&sampleTexture);
 
 	////// Create Graphic Nodes ( UserDefined Triangle class ) //////
 	
-	// Player Nodes
-	TriangleObject mytriangle;
-	mytriangle.AttachMaterial(&sampleMaterial);
-	TriangleObject mytriangle2;
-	mytriangle2.AttachMaterial(&sampleMaterial2);
-	mytriangle.AddChildNode(&mytriangle2); // Scene graph
-	mytriangle2.transform->SetScale(0.3f, 0.3f, 0.3f);
-	mytriangle2.transform->SetTranslation(50.0f, -70.0f, 0.0f);
-	mytriangle2.transform->SetRotation(0, 0, 180.0f);
-	TriangleObject mytriangle3;
-	mytriangle3.AttachMaterial(&sampleMaterial2);
-	mytriangle.AddChildNode(&mytriangle3); // Scene graph
-	mytriangle3.transform->SetScale(0.3f, 0.3f, 0.3f);
-	mytriangle3.transform->SetTranslation(-50.0f, -70.0f, 0.0f);
-	mytriangle3.transform->SetRotation(0, 0, 180.0f);
-	// TargetObject Node
-	TriangleObject targetT;
-	targetT.AttachMaterial(&sampleMaterial);
-	targetT.transform->SetTranslation(200.0f, 0.0f, 0.0f);
-	// TargetObject2 Node
-	TriangleObject targetT2;
-	targetT2.AttachMaterial(&sampleMaterial2);
-	targetT2.transform->SetTranslation(0.0f, 300.0f, 0.0f);
-	targetT2.transform->SetRotation(0.0f, 0.0f, 45.0f);
-	targetT2.transform->SetScale(0.5f, 0.5f, 0.0f);
+
 
 	////// Create bodies and collision shapes //////
 
-	CollisionManager collisionManager;
+	//CollisionManager collisionManager;
 
-	Body playerBody;
-	playerBody.AttachTransform(mytriangle.transform);
-	playerBody.GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
-	Body targetBody;
-	targetBody.AttachTransform(targetT.transform);
-	targetBody.GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
-	Body targetBody2;
-	targetBody2.AttachTransform(targetT2.transform);
-	targetBody2.GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
+	//Body playerBody;
+	//playerBody.AttachTransform(mytriangle.transform);
+	//playerBody.GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
+	//Body targetBody;
+	//targetBody.AttachTransform(targetT.transform);
+	//targetBody.GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
+	//Body targetBody2;
+	//targetBody2.AttachTransform(targetT2.transform);
+	//targetBody2.GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
 
-	// AABB
-	//CollisionAABB c1(100, -100, 100, -100);
-	//CollisionAABB c2(100, -100, 100, -100);
-	//playerBody.GetCollisionAreaObject().SetMesh(100, -100, 100, -100);
-	//targetBody.GetCollisionAreaObject().SetMesh(100, -100, 100, -100);
 
-	// Circle
-	//CollisionCircle c1(100);
-	//CollisionCircle c2(100);
-	//playerBody.GetCollisionAreaObject().SetMesh(100);
-	//targetBody.GetCollisionAreaObject().SetMesh(100);
+	//// OBB
+	//std::vector<glm::vec4> obbVerticies;
+	//// Box vertices
+	//obbVerticies.push_back(glm::vec4(100.0f, 100.0f, 0.0f, 1.0f));
+	//obbVerticies.push_back(glm::vec4(100.0f, -100.0f, 0.0f, 1.0f));
+	//obbVerticies.push_back(glm::vec4(-100.0f, -100.0f, 0.0f, 1.0f));
+	//obbVerticies.push_back(glm::vec4(-100.0f, 100.0f, 0.0f, 1.0f));
 
-	// OBB
-	std::vector<glm::vec4> obbVerticies;
-	// Box vertices
-	obbVerticies.push_back(glm::vec4(100.0f, 100.0f, 0.0f, 1.0f));
-	obbVerticies.push_back(glm::vec4(100.0f, -100.0f, 0.0f, 1.0f));
-	obbVerticies.push_back(glm::vec4(-100.0f, -100.0f, 0.0f, 1.0f));
-	obbVerticies.push_back(glm::vec4(-100.0f, 100.0f, 0.0f, 1.0f));
-	// Polygon vertices (SAT supports polygons)
-	//obbVerticies.push_back(glm::vec4(120.0f, 100.0f, 0.0f, 1.0f));
-	//obbVerticies.push_back(glm::vec4(80.0f, -100.0f, 0.0f, 1.0f));
-	//obbVerticies.push_back(glm::vec4(-120.0f, -100.0f, 0.0f, 1.0f));
-	//obbVerticies.push_back(glm::vec4(-80.0f, 100.0f, 0.0f, 1.0f));
-	CollisionOBB c1(obbVerticies);
-	CollisionOBB c2(obbVerticies);
-	CollisionOBB c3(obbVerticies);
-	playerBody.GetCollisionAreaObject().SetMesh(obbVerticies);
-	targetBody.GetCollisionAreaObject().SetMesh(obbVerticies);
-	targetBody2.GetCollisionAreaObject().SetMesh(obbVerticies);
+	//CollisionOBB c1(obbVerticies);
+	//CollisionOBB c2(obbVerticies);
+	//CollisionOBB c3(obbVerticies);
+	//playerBody.GetCollisionAreaObject().SetMesh(obbVerticies);
+	//targetBody.GetCollisionAreaObject().SetMesh(obbVerticies);
+	//targetBody2.GetCollisionAreaObject().SetMesh(obbVerticies);
 
-	playerBody.collisionShape = &c1;
-	targetBody.collisionShape = &c2;
-	targetBody2.collisionShape = &c3;
+	//playerBody.collisionShape = &c1;
+	//targetBody.collisionShape = &c2;
+	//targetBody2.collisionShape = &c3;
 
 	////// Attach graphic and physic body to gameobj //////
 
 	GameObject player;
-	player.Name = "Player";
-	player.AttachNode(&mytriangle);
-	player.AttachBody(&playerBody);
+	//player.Name = "Player";
+	//player.AttachNode(&mytriangle);
+	//player.AttachBody(&playerBody);
 
-	GameObject targetObj;
-	targetObj.Name = "Target";
-	targetObj.AttachNode(&targetT);
-	targetObj.AttachBody(&targetBody);
+	//GameObject targetObj;
+	//targetObj.Name = "Target";
+	//targetObj.AttachNode(&targetT);
+	//targetObj.AttachBody(&targetBody);
 
-	GameObject targetObj2;
-	targetObj2.Name = "Target2";
-	targetObj2.AttachNode(&targetT2);
-	targetObj2.AttachBody(&targetBody2);
+	//GameObject targetObj2;
+	//targetObj2.Name = "Target2";
+	//targetObj2.AttachNode(&targetT2);
+	//targetObj2.AttachBody(&targetBody2);
 
 	// Add gameObjects for broad phase collision checking
-	collisionManager.AddGameObjectForCollisionChecking(&player);
+	/*collisionManager.AddGameObjectForCollisionChecking(&player);
 	collisionManager.AddGameObjectForCollisionChecking(&targetObj);
-	collisionManager.AddGameObjectForCollisionChecking(&targetObj2);
+	collisionManager.AddGameObjectForCollisionChecking(&targetObj2);*/
 
 	//Eventsystem
-	EventSystem* eventSystem = EventSystem::GetInstance();
-	EventListener c(callbackForCollision, EventType::Collision);
-	eventSystem->AddListener(EventType::Collision, &c);
+	//EventSystem* eventSystem = EventSystem::GetInstance();
+	//EventListener c(callbackForCollision, EventType::Collision);
+	//eventSystem->AddListener(EventType::Collision, &c);
 
 	// Create camera
 	sampleShader.useProgram();
 	Camera camera(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), mainWindow->Props.Heigth, mainWindow->Props.Width);
 	camera.SetupVP(sampleShader);
 
-	// Old test vars for Old direct input for transform
-	/*
-	// Test vars to Scale, Rotate, Translate
-	float val = 0;
-	int dir = 0;
-	float x = 0.0f;
-	float y = 0.0f;*/
+
+	//
+	player.SetMaterial(&sampleMaterial);
+	TransformComponent tc;
+	RenderComponent rc;
+	PhysicComponent pc;
+
+	player.AddComponent(&tc);
+	player.AddComponent(&rc);
+	player.AddComponent(&pc);
+	tc.Init();
+	rc.Init();
+	pc.Init();
+	PhysicComponent* playerPC = player.GetComponent<PhysicComponent>();
+	TransformComponent* playerTC = player.GetComponent<TransformComponent>();
 
 	while (!mainWindow->ShouldClose())// && !secondWindow->ShouldClose()
 	{
@@ -221,92 +173,53 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 			mainWindow->Update();
 			renderer.ClearScreen();
 
-			// Old direct input for transform
-			/*if (inputmanager.IsKeyDown(RIGHT))
-			{
-				x += 5.0f;
-				dir = 270;
-			}
-			if (inputmanager.IsKeyDown(LEFT))
-			{
-				x -= 5.0f;
-				dir = 90;
-			}
-			if (inputmanager.IsKeyDown(UP))
-			{
-				y += 5.0f;
-				dir = 0;
-			}
-			if (inputmanager.IsKeyDown(DOWN))
-			{
-				y -= 5.0f;
-				dir = 180;
-			}
-			if (inputmanager.IsKeyDown(RIGHT) && inputmanager.IsKeyDown(UP))
-			{
-				dir = 315;
-			}
-			else if (inputmanager.IsKeyDown(RIGHT) && inputmanager.IsKeyDown(DOWN))
-			{
-				dir = 225;
-			}
-			else if (inputmanager.IsKeyDown(LEFT) && inputmanager.IsKeyDown(UP))
-			{
-				dir = 45;
-			}
-			else if (inputmanager.IsKeyDown(LEFT) && inputmanager.IsKeyDown(DOWN))
-			{
-				dir = 135;
-			}
-			player.node->transform->SetRotation(0, 0, dir);
-			player.node->transform->SetTranslation(x, y, 0.0f);
-			player.node->transform->SetScale(0.5+y/500, 0.5 + y / 500, 0.5 + y / 500);*/
+
 
 			//// New input to Physics body ////
 			if (inputmanager->IsKeyDown(RIGHT))
 			{
-				player.body->AngularVelocity = glm::vec3(0.0f, 0.0f, -5.0f);
+				playerPC->SetAngularVelocity(glm::vec3(0.0f, 0.0f, -5.0f));
 			}
 			if (inputmanager->IsKeyDown(LEFT))
 			{
-				player.body->AngularVelocity = glm::vec3(0.0f, 0.0f, 5.0f);
+				playerPC->SetAngularVelocity(glm::vec3(0.0f, 0.0f, 5.0f));
 			}
 			if (inputmanager->IsKeyDown(UP))
 			{
-				glm::mat4 playerRotationMatrix = player.node->transform->GetRotationMatrix();
-				player.body->Velocity =
-					glm::vec3(playerRotationMatrix * glm::vec4(0.0f, 5.0f, 0.0f, 1.0f));
+				playerPC->SetVelocity(glm::vec3(playerTC->GetRotationMatrix() * glm::vec4(0.0f, 5.0f, 0.0f, 1.0f)));
 			}
 			if (inputmanager->IsKeyDown(DOWN))
 			{
-				glm::mat4 playerRotationMatrix = player.node->transform->GetRotationMatrix();
-				player.body->Velocity =
-					glm::vec3(playerRotationMatrix * glm::vec4(0.0f, -5.0f, 0.0f, 1.0f));
+				playerPC->SetVelocity(glm::vec3(playerTC->GetRotationMatrix() * glm::vec4(0.0f, -5.0f, 0.0f, 1.0f)));
 			}
 			// Check if collision scale working properly
-			player.body->Scale = glm::vec3(0.5 + player.body->Position.y/500, 0.5 + player.body->Position.y / 500, 0.5 + player.body->Position.y / 500);
+			
+			glm::vec3 newScale = glm::vec3(0.5 + playerPC->GetPosition().y / 500, 0.5 + playerPC->GetPosition().y / 500, 0.5 + playerPC->GetPosition().y / 500);
+			playerPC->SetScale(newScale);
 
 			//// Feed to transform ////
-			player.node->transform->SetRotation(0, 0, player.body->Rotation.z);
-			player.node->transform->SetTranslation(player.body->Position.x, player.body->Position.y, 0.0f);
-			player.node->transform->SetScale(player.body->Scale.x, player.body->Scale.y, player.body->Scale.z);
+			playerTC->SetRotation(0, 0, playerPC->GetRotation().z);
+			playerTC->SetTranslation(playerPC->GetPosition().x, playerPC->GetPosition().y, playerPC->GetPosition().z);
+			playerTC->SetScale(playerPC->GetScale().x, playerPC->GetScale().y, playerPC->GetScale().z);
 			//player.node->transform->PrintTransform();
 
 			// Draw Gobjs and collision area(Debug)
 			player.Draw();
-			targetObj.Draw();
-			targetObj2.Draw();
-			player.body->GetCollisionAreaObject().Draw(); 
-			targetObj.body->GetCollisionAreaObject().Draw();
-			targetObj2.body->GetCollisionAreaObject().Draw();
+			//targetObj.Draw();
+			//targetObj2.Draw();
+			//player.body->GetCollisionAreaObject().Draw(); 
+			//targetObj.body->GetCollisionAreaObject().Draw();
+			//targetObj2.body->GetCollisionAreaObject().Draw();
 
 			//// Check collision ////
-			collisionManager.CheckAllCollisions();
+			//collisionManager.CheckAllCollisions();
 
 			//// Apply physics ////
-			player.body->Integrate();
-			targetObj.body->Integrate();
-			targetObj2.body->Integrate();
+			
+			player.Update();
+			//player.body->Integrate();
+			//targetObj.body->Integrate();
+			//targetObj2.body->Integrate();
 
 			// swap buffers and poll IO events
 			mainWindow->SwapBuffers();

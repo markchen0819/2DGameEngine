@@ -1,32 +1,74 @@
-#include "GameObject.h"
-#include "Graphics/Shader.h"
+#include "Allheaders.h"
 
-GameObject::GameObject()
+GameObject::GameObject() { }
+GameObject::~GameObject() { }
+
+void GameObject::Init() { }
+void GameObject::Update() 
 {
+	if (!isAlive) return;
 
+	std::vector<Component*>::iterator it = components.begin();
+	while (it != components.end())
+	{
+		if (!*it)
+		{
+			TraceMessage("Error: Updating NULL component");
+		}
+		(*it)->Update();
+		it = it + 1;
+	}
 }
-GameObject::~GameObject()
+void GameObject::Destroy() 
 {
-
+	std::vector<Component*>::iterator it = components.begin();
+	while (it != components.end())
+	{
+		if (!*it)
+		{
+			TraceMessage("Error: Deleting non existed component");
+		}
+		delete (*it);
+		it = it + 1;
+	}
+	components.clear();
 }
+void GameObject::HandleEvent(void* eventData) {}
 
 void GameObject::Draw()
 {
-	node->Draw();
+	RenderComponent* renderComponent = this->GetComponent<RenderComponent>();
+	if(!renderComponent)
+	{
+		return; //Don't draw
+	}
+	renderComponent->Draw();
+	Node::Draw();
 }
 
-void GameObject::AttachNode(Node* n)
+Transform* GameObject::GetTransform()
 {
-	node = n;
+	return transform;
 }
 
-void GameObject::AttachBody(Body* b)
+void GameObject::SetMaterial(Material* m)
 {
-	body = b;
-	body->transform = node->transform;
+	material = m;
 }
 
-void GameObject::SetBodyCollisionShape(CollisionShape * cs)
+Material* GameObject::GetMaterial()
 {
-	body->collisionShape = cs;
+	return material;
 }
+
+
+void GameObject::AddComponent(Component* component)
+{
+	component->SetOwner(this);
+	components.push_back(component);
+}
+
+//void GameObject::SetBodyCollisionShape(CollisionShape * cs)
+//{
+//	body->collisionShape = cs;
+//}

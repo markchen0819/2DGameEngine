@@ -11,18 +11,20 @@ public:
 	Node(Transform t, Mesh m, Material* mat);
 	~Node();
 
+	void Draw();
+	void UpdateModelMatrix();
+
+	void AddChild(Node* node);
+
+	std::string Name = "";
 	Transform* transform = nullptr;
 	Mesh* mesh = nullptr;
 	Material* material = nullptr;
 
-	void Draw();
-
-	void AddChildNode(Node* node);
+protected:
 
 	Node* parent = nullptr;
-
-private:
 	std::vector<Node*> childNodes;
-	void UpdateTransform();
+
 };
 

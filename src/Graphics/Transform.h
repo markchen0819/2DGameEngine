@@ -40,5 +40,4 @@ private:
 	glm::mat4 createTranslateMatrix(const float x, const float y, const float z);
 
 
-
 };

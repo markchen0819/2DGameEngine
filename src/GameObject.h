@@ -1,8 +1,10 @@
 #pragma once
 #include "Graphics/Node.h"
 #include "Physics/Body.h"
+#include "Logging.h"
 
-class GameObject // Inherit from Node
+class Component; // Forward declaration
+class GameObject : public Node
 {
 
 public:
@@ -10,18 +12,42 @@ public:
 	GameObject();
 	~GameObject();
 
-	std::string Name = ""; // Just for identifying purpose
-	Node* node = nullptr;
-	Body* body = nullptr;
+	void Init();
+	void Update();
+	void Destroy();
+	void HandleEvent(void* eventData);
 
-    void Draw();
-	void AttachNode(Node* n);
-	void AttachBody(Body* b);
-	void SetBodyCollisionShape(CollisionShape* cs);
+	void AddComponent(Component* component);
+	template<class T>
+	T* GetComponent()
+	{
+		std::vector<Component*>::iterator it = components.begin();
+		while (it != components.end())
+		{
+			T* targetComponent = dynamic_cast<T*>((*it));
+			if (targetComponent != 0)
+			{
+				return targetComponent;
+			}
+			it = it + 1;
+		}
+		TraceMessage("Null Component: ");
+		TraceMessage(typeid(T).name());
+		return nullptr;
+	}
+
+
+	void Draw();
+	Transform* GetTransform();
+	void SetMaterial(Material* m);
+	Material* GetMaterial();
+
+	//void SetBodyCollisionShape(CollisionShape* cs);
 
 
 private:
 
-
+	std::vector<Component*> components;
+	bool isAlive = true;
 };
 

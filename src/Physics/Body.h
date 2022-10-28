@@ -21,18 +21,22 @@ public:
 	float Mass = 1;
 	float InverseMass = 1;
 
-	Transform* transform = nullptr;
-	CollisionShape* collisionShape = nullptr;
-
-	void AttachTransform(Transform* t);
-	void UpdateTransform();
 	void Integrate();
 
-	void PrintInfo();
+	void SetCollisionShape(CollisionShape* cs);
+	CollisionShape* GetCollisionShape();
+	void SetTransform(Transform* t);
+
+
 	// Debug only
+	void PrintInfo();
 	CollisionAreaObject& GetCollisionAreaObject();
 
 private:
+
+	CollisionShape* collisionShape = nullptr;
+	Transform* transform = nullptr;
+	void FeedPhysicsCalculationToTransform();
 
 	// Debug only
 	CollisionAreaObject* collisionAreaObject = nullptr;

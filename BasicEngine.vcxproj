@@ -151,6 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\PhysicComponent.cpp" />
+    <ClCompile Include="src\Components\RenderComponent.cpp" />
+    <ClCompile Include="src\Components\Component.cpp" />
     <ClCompile Include="src\EventSystem\EventListener.cpp" />
     <ClCompile Include="src\Physics\CollisionOBB.cpp" />
     <ClCompile Include="src\EventSystem\EventSystem.cpp" />
@@ -177,8 +180,13 @@
     <ClCompile Include="src\Graphics\Transform.cpp" />
     <ClCompile Include="src\Graphics\Texture.cpp" />
     <ClCompile Include="src\UserDefined\TriangleObject.cpp" />
+    <ClCompile Include="src\Components\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AllHeaders.h" />
+    <ClInclude Include="src\Components\PhysicComponent.h" />
+    <ClInclude Include="src\Components\RenderComponent.h" />
+    <ClInclude Include="src\Components\Component.h" />
     <ClInclude Include="src\EventSystem\EventListener.h" />
     <ClInclude Include="src\EventSystem\EventType.h" />
     <ClInclude Include="src\Graphics\Vertex.h" />
@@ -489,6 +497,7 @@
     <ClInclude Include="src\Graphics\Texture.h" />
     <ClInclude Include="src\Physics\ShapeType.h" />
     <ClInclude Include="src\UserDefined\TriangleObject.h" />
+    <ClInclude Include="src\Components\TransformComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dependencies\glm\detail\func_common.inl" />

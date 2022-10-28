@@ -1,24 +1,27 @@
 #include "Mesh.h"
 
+
+Mesh::Mesh()
+{
+    // will it double delete?
+    SetDefaultSquareMesh();
+}
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
 {
-	this->vertices = vertices;
-	this->indices = indices;
-	setupMesh();
+    SetVerticesAndIndicies(vertices, indices);
+    CreateMeshFromData();
 }
 Mesh::Mesh(Mesh& m) // Copy ctor
 {
-    this->vertices = m.vertices;
-    this->indices = m.indices;
-    setupMesh(); // when passed as a copy we need a new id
+    DeleteMesh();
+    SetVerticesAndIndicies(vertices, indices);
+    CreateMeshFromData(); // when passed as a copy we need a new id
 }
 Mesh::~Mesh()
 {
     vertices.clear();
     indices.clear();
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
+    DeleteMesh();
 }
 
 void Mesh::Draw()
@@ -27,15 +30,18 @@ void Mesh::Draw()
     glBindVertexArray(VAO);
     glDrawElements(drawMode, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
-
 }
 
 void Mesh::SetDrawMode(GLenum glenum)
 {
     drawMode = glenum;
 }
-
-void Mesh::setupMesh()
+void Mesh::SetVerticesAndIndicies(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
+{
+    this->vertices = vertices;
+    this->indices = indices;
+}
+void Mesh::CreateMeshFromData()
 {
     // create buffers/arrays
     glGenVertexArrays(1, &VAO);
@@ -61,4 +67,31 @@ void Mesh::setupMesh()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
 
     glBindVertexArray(0);
+}
+void Mesh::DeleteMesh()
+{
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
+}
+
+void Mesh::SetDefaultSquareMesh()
+{
+    DeleteMesh();
+    
+    vertices.clear();
+    indices.clear();
+
+    Vertex v0(glm::vec3(50.0f, 50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(1.0f, 1.0f));
+    Vertex v1(glm::vec3(50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(1.0f, 0.0f));
+    Vertex v2(glm::vec3(-50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+    Vertex v3(glm::vec3(-50.0f, 50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f));
+    vertices.push_back(v0);
+    vertices.push_back(v1);
+    vertices.push_back(v2);
+    vertices.push_back(v3);
+    indices = { 0, 1, 3, 
+                1, 2 ,3 };
+
+    CreateMeshFromData();
 }

@@ -1,17 +1,13 @@
 #include "Node.h"
+#include "../Logging.h"
 
-Node::Node()
-{
-
-}
-
+Node::Node():transform(new Transform()), mesh(new Mesh()) {}
 Node::Node(Transform t, Mesh m, Material* mat)
 {
 	transform = new Transform(t);
 	mesh = new Mesh(m);
 	material = mat;
 }
-
 Node::~Node()
 {
 	if (transform)
@@ -26,7 +22,32 @@ Node::~Node()
 	childNodes.clear();
 }
 
-void Node::UpdateTransform()
+
+void Node::Draw()
+{
+	//UpdateModelMatrix();
+
+	if (material == nullptr)
+	{
+		std::string s = "Error: Node [" + Name + "] has not attached a material";
+		TraceMessage(s.c_str());
+		return;
+	}
+	material->shader->useProgram();
+	material->texture->activeTextureUnit(0);
+	material->texture->bindTexture();
+	material->shader->setVec4("color", material->color.color);
+	material->shader->setMat4("model", transform->model);
+	mesh->Draw();
+	material->texture->activeTextureUnit(0);
+	glUseProgram(0);
+
+	for (Node* i : childNodes)
+	{
+		i->Draw();
+	}
+}
+void Node::UpdateModelMatrix()
 {
 	if (parent)
 	{
@@ -42,27 +63,10 @@ void Node::UpdateTransform()
 	}
 
 }
-void Node::Draw()
-{
-	//transform->Update();
-	UpdateTransform();
-	material->shader->useProgram();
-	material->texture->activeTextureUnit(0);
-	material->texture->bindTexture();
-	material->shader->setVec4("color", material->color.color);
-	material->shader->setMat4("model", transform->model);
-	mesh->Draw();
 
-	for (Node* i : childNodes)
-	{
-		i->Draw();
-	}
-	material->texture->activeTextureUnit(0);
-	glUseProgram(0);
-}
-
-void Node::AddChildNode(Node* node)
+void Node::AddChild(Node* node)
 {
 	node->parent = this;
 	childNodes.push_back(node);
 }
+
