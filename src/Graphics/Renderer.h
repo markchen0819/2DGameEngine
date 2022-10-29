@@ -1,4 +1,5 @@
 #pragma once
+#include <GLEW/include/glew.h>
 #include <GLFW/include/GLFW/glfw3.h>
 #include <stdlib.h>
 #include "../Logging.h"
@@ -13,7 +14,7 @@ public:
 	void InitGLFW();
 	void TerminateGLFW();
 	void ClearScreen();
-
+	void UnuseShaderProgram();
 private:
 
 };

@@ -11,12 +11,19 @@ public:
 	void SetMesh(float radius);
 	void SetMesh(float r, float l, float u, float d);
 	void SetMesh(std::vector<glm::vec4> v);
-	void AttachMaterial(Material* m);
-	void Draw();
 
+	void SetName(std::string s);
+	void Draw();
+	void AttachMaterial(Material* m);
 private:
-	void SetupObj();
+
 	ShapeType shapeType = ShapeType::NONE;
+
+	Material collisionMaterial;
+	Shader* collisionShader; 
+	Texture* collisionTexture; 
+	void SetDefaultShape();
+
 };
 
 

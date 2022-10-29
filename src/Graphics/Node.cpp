@@ -42,6 +42,7 @@ void Node::Draw()
 	material->texture->activeTextureUnit(0);
 	glUseProgram(0);
 
+
 	for (Node* i : childNodes)
 	{
 		i->Draw();

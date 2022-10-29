@@ -11,7 +11,7 @@ public:
 
 	void SetTranslation(glm::vec3 p);
 	void SetRotation(glm::vec3 r);
-	void SetScale(glm::vec3 s);
+	//void SetScale(glm::vec3 s);
 	glm::vec3 GetPosition();
 	glm::vec3 GetScale();
 	glm::vec3 GetRotation();
@@ -23,6 +23,8 @@ public:
 	void SetMass(float m);
 	void SetInverseMass(float im);
 
+	Body* GetBody();
+
 	virtual void Init();
 	virtual void Update();
 	virtual void Destroy();
@@ -30,8 +32,12 @@ public:
 
 	void Integrate();
 
+	//Debug
+	CollisionAreaObject& GetCollisionAreaObject();
+
 private:
 
 	Body* physicBody = nullptr;
+	bool ShowCollisionArea = true;
 };
 

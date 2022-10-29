@@ -82,10 +82,10 @@ void Mesh::SetDefaultSquareMesh()
     vertices.clear();
     indices.clear();
 
-    Vertex v0(glm::vec3(50.0f, 50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(1.0f, 1.0f));
-    Vertex v1(glm::vec3(50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(1.0f, 0.0f));
-    Vertex v2(glm::vec3(-50.0f, -50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f));
-    Vertex v3(glm::vec3(-50.0f, 50.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f));
+    Vertex v0(glm::vec3(100.0f, 100.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(1.0f, 1.0f));
+    Vertex v1(glm::vec3(100.0f, -100.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(1.0f, 0.0f));
+    Vertex v2(glm::vec3(-100.0f, -100.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+    Vertex v3(glm::vec3(-100.0f, 100.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f));
     vertices.push_back(v0);
     vertices.push_back(v1);
     vertices.push_back(v2);

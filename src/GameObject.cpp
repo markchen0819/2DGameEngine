@@ -1,9 +1,23 @@
 #include "Allheaders.h"
 
 GameObject::GameObject() { }
-GameObject::~GameObject() { }
+GameObject::~GameObject() {}
 
-void GameObject::Init() { }
+void GameObject::Init() 
+{
+	if (!isAlive) return;
+
+	std::vector<Component*>::iterator it = components.begin();
+	while (it != components.end())
+	{
+		if (!*it)
+		{
+			TraceMessage("Error: Init NULL component");
+		}
+		(*it)->Init();
+		it = it + 1;
+	}
+}
 void GameObject::Update() 
 {
 	if (!isAlive) return;
@@ -17,6 +31,12 @@ void GameObject::Update()
 		}
 		(*it)->Update();
 		it = it + 1;
+	}
+
+	for (Node* i : childNodes)
+	{
+		GameObject* a = static_cast<GameObject*>(i);
+		a->Update();
 	}
 }
 void GameObject::Destroy() 
@@ -35,16 +55,16 @@ void GameObject::Destroy()
 }
 void GameObject::HandleEvent(void* eventData) {}
 
-void GameObject::Draw()
-{
-	RenderComponent* renderComponent = this->GetComponent<RenderComponent>();
-	if(!renderComponent)
-	{
-		return; //Don't draw
-	}
-	renderComponent->Draw();
-	Node::Draw();
-}
+//void GameObject::Draw()
+//{
+//	RenderComponent* renderComponent = this->GetComponent<RenderComponent>();
+//	if(!renderComponent)
+//	{
+//		return; //Don't draw
+//	}
+//	renderComponent->Draw();
+//	Node::Draw();
+//}
 
 Transform* GameObject::GetTransform()
 {
@@ -61,12 +81,6 @@ Material* GameObject::GetMaterial()
 	return material;
 }
 
-
-void GameObject::AddComponent(Component* component)
-{
-	component->SetOwner(this);
-	components.push_back(component);
-}
 
 //void GameObject::SetBodyCollisionShape(CollisionShape * cs)
 //{

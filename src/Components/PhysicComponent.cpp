@@ -1,11 +1,14 @@
 #include "../Allheaders.h"
 
 PhysicComponent::PhysicComponent(){}
-PhysicComponent::~PhysicComponent(){}
+PhysicComponent::~PhysicComponent() 
+{
+	Destroy(); 
+}
 
 void PhysicComponent::SetTranslation(glm::vec3 p) { physicBody->Position = p; }
 void PhysicComponent::SetRotation(glm::vec3 r) { physicBody->Rotation = r; }
-void PhysicComponent::SetScale(glm::vec3 s) { physicBody->Scale = s; }
+//void PhysicComponent::SetScale(glm::vec3 s) { physicBody->Scale = s; }
 glm::vec3 PhysicComponent::GetPosition() { return physicBody->Position; }
 glm::vec3 PhysicComponent::GetScale() { return physicBody->Scale; }
 glm::vec3 PhysicComponent::GetRotation() { return physicBody->Rotation; }
@@ -16,8 +19,18 @@ void PhysicComponent::SetAngularVelocity(glm::vec3 av) { physicBody->AngularVelo
 void PhysicComponent::SetMass(float m) { physicBody->Mass = m; }
 void PhysicComponent::SetInverseMass(float im) { physicBody->InverseMass = im; }
 
+Body* PhysicComponent::GetBody()
+{
+	return physicBody;
+}
+
 void PhysicComponent::Integrate()
 {
+}
+
+CollisionAreaObject& PhysicComponent::GetCollisionAreaObject()
+{
+	return physicBody->GetCollisionAreaObject();
 }
 
 void PhysicComponent::Init() 
@@ -32,6 +45,7 @@ void PhysicComponent::Init()
 	obbVerticies.push_back(glm::vec4(-100.0f, 100.0f, 0.0f, 1.0f));
 	CollisionOBB* obb = new CollisionOBB(obbVerticies);
 	physicBody->SetCollisionShape(obb);
+	physicBody->GetCollisionAreaObject().SetMesh(obbVerticies); // Debug
 
 	// Init transform
 	Transform* trans = GetOwner()->GetTransform();
@@ -43,6 +57,10 @@ void PhysicComponent::Init()
 void PhysicComponent::Update() 
 {
 	physicBody->Integrate();
+	if (ShowCollisionArea)
+	{
+		physicBody->GetCollisionAreaObject().Draw();
+	}
 
 }
 void PhysicComponent::Destroy() 

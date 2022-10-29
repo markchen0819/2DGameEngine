@@ -27,7 +27,6 @@ public:
 	CollisionShape* GetCollisionShape();
 	void SetTransform(Transform* t);
 
-
 	// Debug only
 	void PrintInfo();
 	CollisionAreaObject& GetCollisionAreaObject();

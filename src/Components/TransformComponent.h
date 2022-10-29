@@ -25,7 +25,7 @@ public:
 	virtual void HandleEvent(void* eventData);
 
 private:
-	// point to the gameobject's transform
-	Transform* transform; 
+	
+	Transform* transform;  // point to the gameobject's transform
 };
 

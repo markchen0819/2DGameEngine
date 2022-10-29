@@ -7,7 +7,7 @@ RenderComponent::~RenderComponent() { }
 
 void RenderComponent::Draw()
 {
-
+	GetOwner()->Draw();
 }
 
 void RenderComponent::SetMesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
@@ -32,7 +32,7 @@ void RenderComponent::Init() { }
 void RenderComponent::Update() 
 {
 	GetOwner()->UpdateModelMatrix();
-	GetOwner()->Draw();
+	Draw();
 }
 void RenderComponent::Destroy() {}
 void RenderComponent::HandleEvent(void* eventData) {}

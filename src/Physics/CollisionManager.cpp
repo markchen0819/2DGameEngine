@@ -3,6 +3,7 @@
 #include "CollisionAABB.h"
 #include "CollisionOBB.h"
 #include <glm/gtx/string_cast.hpp>
+#include "../Components/PhysicComponent.h"
 
 CollisionManager::CollisionManager() { }
 CollisionManager::~CollisionManager() { }
@@ -36,12 +37,14 @@ void CollisionManager::CheckAllCollisions()
 				if (checked) { continue; }; // Checked before, skip this
 
 				// CheckCollision
-				//if (CheckCollision((*gobjList[i]).body->collisionShape, (*gobjList[i]).body->Position, (*gobjList[j]).body->collisionShape, (*gobjList[j]).body->Position))
-				//{
-				//	//std::cout << glfwGetTime() << "_Collide!" << std::endl;
-				//	CollisionEvent c(*gobjList[i], *gobjList[j]);
-				//	EventSystem::GetInstance()->BroadcastEvent(EventType::Collision, &c);
-				//}
+				Body* b1 = (*gobjList[i]).GetComponent<PhysicComponent>()->GetBody();
+				Body* b2 = (*gobjList[j]).GetComponent<PhysicComponent>()->GetBody();
+				if (CheckCollision(b1->GetCollisionShape(), b1->Position,b2->GetCollisionShape(),b2->Position))
+				{
+					//std::cout << glfwGetTime() << "_Collide!" << std::endl;
+					CollisionEvent c(gobjList[i], gobjList[j]);
+					EventSystem::GetInstance()->BroadcastEvent(EventType::Collision, &c);
+				}
 				x.push_back(i);
 				y.push_back(j);
 			}

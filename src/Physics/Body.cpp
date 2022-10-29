@@ -10,14 +10,18 @@ Body::Body()
 Body::~Body() 
 {
 	delete collisionAreaObject;
+	if (collisionShape != nullptr)
+	{
+		delete collisionShape;
+	}
 }
 
 void Body::Integrate()
 {
 	// Get current values
-	//Position = transform->GetPosition();
-	//Rotation = transform->GetRotation();
-	//Scale = transform->GetScale();
+	Position = transform->GetPosition();
+	Rotation = transform->GetRotation();
+	Scale = transform->GetScale();
 
 	// Calculate physics (per frame)
 	Acceleration = Force * InverseMass;

@@ -10,6 +10,7 @@ class GameObject : public Node
 public:
 
 	GameObject();
+	GameObject(const GameObject& obj);
 	~GameObject();
 
 	void Init();
@@ -17,7 +18,15 @@ public:
 	void Destroy();
 	void HandleEvent(void* eventData);
 
-	void AddComponent(Component* component);
+	template<class T>
+	void AddComponent()
+	{
+		T* component = new T;
+		component->SetOwner(this);
+		components.push_back(component);
+	}
+
+
 	template<class T>
 	T* GetComponent()
 	{
@@ -37,7 +46,7 @@ public:
 	}
 
 
-	void Draw();
+	//void Draw();
 	Transform* GetTransform();
 	void SetMaterial(Material* m);
 	Material* GetMaterial();
