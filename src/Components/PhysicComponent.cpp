@@ -1,4 +1,6 @@
-#include "../pch.h"
+#include "PhysicComponent.h"
+#include "../Physics/PhysicsManager.h"
+
 
 PhysicComponent::PhysicComponent(){}
 PhysicComponent::~PhysicComponent() {}
