@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Physics\PhysicsManager.cpp" />
     <ClCompile Include="src\Components\PhysicComponent.cpp" />
     <ClCompile Include="src\Components\RenderComponent.cpp" />
     <ClCompile Include="src\Components\Component.cpp" />
@@ -183,10 +184,12 @@
     <ClCompile Include="src\Components\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AllHeaders.h" />
+    <ClInclude Include="src\Physics\PhysicsManager.h" />
+    <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Components\PhysicComponent.h" />
     <ClInclude Include="src\Components\RenderComponent.h" />
     <ClInclude Include="src\Components\Component.h" />
+    <ClInclude Include="src\EventSystem\Event.h" />
     <ClInclude Include="src\EventSystem\EventListener.h" />
     <ClInclude Include="src\EventSystem\EventType.h" />
     <ClInclude Include="src\Graphics\Vertex.h" />

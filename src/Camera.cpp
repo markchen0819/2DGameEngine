@@ -14,7 +14,7 @@ Camera::Camera(glm::vec3 position, glm::vec3 lookAtTarget, float const height, f
 	view = glm::lookAt(position, lookAtTarget, glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
-void Camera::SetupVP(Shader& shader)
+void Camera::SetShaderVP(Shader& shader)
 {
 	shader.setMat4("projection", projection);
 	shader.setMat4("view", view);

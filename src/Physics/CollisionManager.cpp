@@ -4,6 +4,7 @@
 #include "CollisionOBB.h"
 #include <glm/gtx/string_cast.hpp>
 #include "../Components/PhysicComponent.h"
+#include "../EventSystem/Event.h"
 
 CollisionManager::CollisionManager() { }
 CollisionManager::~CollisionManager() { }
@@ -185,4 +186,3 @@ bool CollisionManager::CheckCollision(CollisionShape* shape1, glm::vec3 center1,
 		return false;
 	}
 }
-

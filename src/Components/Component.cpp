@@ -1,4 +1,4 @@
-#include "../Allheaders.h"
+#include "../pch.h"
 
 Component::Component() { }
 Component::~Component() { }

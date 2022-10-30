@@ -1,4 +1,4 @@
-#include "Allheaders.h"
+#include "pch.h"
 
 GameObject::GameObject() { }
 GameObject::~GameObject() {}
@@ -17,6 +17,8 @@ void GameObject::Init()
 		(*it)->Init();
 		it = it + 1;
 	}
+	Node::Init();
+
 }
 void GameObject::Update() 
 {
@@ -32,12 +34,7 @@ void GameObject::Update()
 		(*it)->Update();
 		it = it + 1;
 	}
-
-	for (Node* i : childNodes)
-	{
-		GameObject* a = static_cast<GameObject*>(i);
-		a->Update();
-	}
+	Node::Update();
 }
 void GameObject::Destroy() 
 {
@@ -48,23 +45,39 @@ void GameObject::Destroy()
 		{
 			TraceMessage("Error: Deleting non existed component");
 		}
+		(*it)->Destroy();
 		delete (*it);
 		it = it + 1;
 	}
 	components.clear();
+	Node::Destroy();
 }
-void GameObject::HandleEvent(void* eventData) {}
-
-//void GameObject::Draw()
+//void GameObject::HandleEvent(void* eventData) 
 //{
-//	RenderComponent* renderComponent = this->GetComponent<RenderComponent>();
-//	if(!renderComponent)
+//	std::vector<Component*>::iterator it = components.begin();
+//	while (it != components.end())
 //	{
-//		return; //Don't draw
+//		if (!*it)
+//		{
+//			TraceMessage("Error: HandleEvent of non existed component");
+//		}
+//		(*it)->HandleEvent(eventData);
+//		it = it + 1;
 //	}
-//	renderComponent->Draw();
-//	Node::Draw();
+//	components.clear();
+//	Node::HandleEvent(eventData);
 //}
+
+void GameObject::Draw()
+{
+	RenderComponent* renderComponent = this->GetComponent<RenderComponent>();
+	if(!renderComponent)
+	{
+		return; //Don't draw
+	}
+	renderComponent->Draw();
+	Node::Draw();
+}
 
 Transform* GameObject::GetTransform()
 {

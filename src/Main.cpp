@@ -2,22 +2,17 @@
 #include <stdlib.h>
 #include <crtdbg.h>
 
-#include <iostream>
-#include "Allheaders.h"
 
+#include "pch.h"
 
-void callbackForCollision(void *eventData)
+void collisionCallback(void* eventData)
 {
-	std::cout << "callbackForCollision" << std::endl;
-	//std::cout << "eventData raw argument was : '" << eventData << "'" << std::endl;
-
 	CollisionEvent* converted = static_cast<CollisionEvent*>(eventData);
 	if (converted)
 	{
-		std::cout <<"TimeStamp: "<<glfwGetTime() << std::endl;
-		std::cout << "Collision between "
-			<< converted->gobj1->Name 
-			<<" and "<< converted->gobj2->Name << std::endl;
+		std::cout << "TimeStamp: " << glfwGetTime() << std::endl;
+		std::cout << "Collision between " << converted->gobj1->Name
+			<< " and " << converted->gobj2->Name << std::endl;
 	}
 }
 
@@ -28,13 +23,12 @@ int main(int argc, char* argv[]) // Entry Point
 	execute();
 	_CrtDumpMemoryLeaks();
 }
-
 void execute() // All code to excute (for CRT detect memory leak and VS heap snapshot)
 {
 	TraceInit();
 
-	Renderer renderer;
-	renderer.InitGLFW();
+	Renderer* renderer = Renderer::GetInstance();
+	(*renderer).InitGLFW();
 
 	GameWindow* mainWindow = new GameWindow();
 	mainWindow->Props.Title = "1stWindow";
@@ -54,7 +48,6 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	/////////////// User logic ///////////////////
 	
 	// Input
-
 	InputManager* inputmanager = InputManager::GetInstance();
 	inputmanager->Init(mainWindow);
 
@@ -79,9 +72,6 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	collisionMaterial.AttachShader(&sampleShader);
 	collisionMaterial.AttachTexture(&sampleTexture);
 
-
-	GameObject scene;
-	scene.Init();
 	// Create GameObjects
 	GameObject player;
 	player.Name = "Player";
@@ -89,12 +79,6 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	player.AddComponent<TransformComponent>();
 	player.AddComponent<RenderComponent>();
 	player.AddComponent<PhysicComponent>();
-	player.Init();
-	TransformComponent* playerTC = player.GetComponent<TransformComponent>();
-	PhysicComponent* playerPC = player.GetComponent<PhysicComponent>();
-	playerPC->GetCollisionAreaObject().SetName("Player Collision Area");
-	playerPC->GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
-	scene.AddChild(&player);
 
 	GameObject targetObj;
 	targetObj.Name = "Target";
@@ -102,42 +86,58 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	targetObj.AddComponent<TransformComponent>();
 	targetObj.AddComponent<RenderComponent>();
 	targetObj.AddComponent<PhysicComponent>();
-	targetObj.Init();
-	PhysicComponent* targetObjPC = targetObj.GetComponent<PhysicComponent>();
-	targetObjPC->GetCollisionAreaObject().SetName("targetObj Collision Area");
-	targetObjPC->GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
-	scene.AddChild(&targetObj);
+
+	GameObject targetObj2;
+	targetObj2.Name = "Target2";
+	targetObj2.SetMaterial(&sampleMaterial2);
+	targetObj2.AddComponent<TransformComponent>();
+	targetObj2.AddComponent<RenderComponent>();
+	targetObj2.AddComponent<PhysicComponent>();
 
 	GameObject child;
 	child.Name = "child";
 	child.SetMaterial(&sampleMaterial2);
 	child.AddComponent<TransformComponent>();
 	child.AddComponent<RenderComponent>();
-	child.Init();
-
 	child.GetTransform()->SetTranslation(0, -200, 0);
 	child.GetTransform()->SetScale (0.5, 0.5, 0.5);
 	player.AddChild(&child);
 
-	// Handle collision and events
-	CollisionManager collisionManager;
-	collisionManager.AddGameObjectForCollisionChecking(&player);
-	collisionManager.AddGameObjectForCollisionChecking(&targetObj);
+	player.Init();
+	targetObj.Init();
+	targetObj2.Init();
+	//child.Init();
+
+	TransformComponent* playerTC = player.GetComponent<TransformComponent>();
+	PhysicComponent* playerPC = player.GetComponent<PhysicComponent>();
+	playerPC->GetCollisionAreaObject().SetName("Player Collision Area");
+	playerPC->GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
+	PhysicComponent* targetObjPC = targetObj.GetComponent<PhysicComponent>();
+	targetObjPC->GetCollisionAreaObject().SetName("targetObj Collision Area");
+	targetObjPC->GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
+	PhysicComponent* targetObjPC2 = targetObj2.GetComponent<PhysicComponent>();
+	targetObjPC2->GetCollisionAreaObject().SetName("targetObj Collision Area");
+	targetObjPC2->GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
+
+	// Handle collisions
+	PhysicsManager* physicsManager = PhysicsManager::GetInstance();
+	(*physicsManager).collisionManager.AddGameObjectForCollisionChecking(&player);
+	(*physicsManager).collisionManager.AddGameObjectForCollisionChecking(&targetObj);
+	(*physicsManager).collisionManager.AddGameObjectForCollisionChecking(&targetObj2);
 
 	//Eventsystem
 	EventSystem* eventSystem = EventSystem::GetInstance();
-	EventListener c(callbackForCollision, EventType::Collision);
+	EventListener c(collisionCallback, EventType::Collision);
 	eventSystem->AddListener(EventType::Collision, &c);
 
-	// Create camera
+	// Create camera and Set Shader's View Projection uniform
 	cameraShader.useProgram();
 	Camera camera(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), mainWindow->Props.Heigth, mainWindow->Props.Width);
-	camera.SetupVP(cameraShader);
-	renderer.UnuseShaderProgram();
-	// Set projection and view uniform for sampleShader 
+	camera.SetShaderVP(cameraShader);
+	(*renderer).UnuseShaderProgram();
 	sampleShader.useProgram();
-	camera.SetupVP(sampleShader);
-	renderer.UnuseShaderProgram();
+	camera.SetShaderVP(sampleShader);
+	(*renderer).UnuseShaderProgram();
 
 	while (!mainWindow->ShouldClose())// && !secondWindow->ShouldClose()
 	{
@@ -146,8 +146,7 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 		{
 			lastFrameTime = glfwGetTime();
 			mainWindow->Update();
-			renderer.ClearScreen();
-
+			(*renderer).ClearScreen();
 
 			// Input
 			if (inputmanager->IsKeyDown(RIGHT))
@@ -169,20 +168,23 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 			glm::vec3 newScale = glm::vec3(0.5 + playerPC->GetPosition().y / 500, 0.5 + playerPC->GetPosition().y / 500, 0.5 + playerPC->GetPosition().y / 500);
 			playerTC->SetScale(newScale.x, newScale.y, newScale.z);
 			targetObj.GetTransform()->SetTranslation(200, 0, 0);
+			targetObj2.GetTransform()->SetTranslation(0, -200, 0);
 
+			//// Render ////
+			player.Update();
+			targetObj.Update();
+			targetObj2.Update();
+			player.Draw();
+			targetObj.Draw();
+			targetObj2.Draw();
 
-			//// Check collision ////
-			collisionManager.CheckAllCollisions();
+			//// Physics ////
+			(*physicsManager).collisionManager.CheckAllCollisions();
+			(*physicsManager).Integrate();
 
-			//// Apply physics ////
-			scene.Update();
-			//player.Update();
-			//targetObj.Update();
-			// PC intergrates, TC was fed new values, RC Draws
-
-			// swap buffers and poll IO events
+			// Swap buffers and poll IO events
 			mainWindow->SwapBuffers();
-			mainWindow->PollEvents(); // Window events
+			mainWindow->PollEvents();  // Window events
 			inputmanager->PollEvents();// Input events
 
 			//ExecuteScreenSaverMovement(mainWindow, deltaTime);
@@ -192,6 +194,8 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	}
 	player.Destroy();
 	targetObj.Destroy();
+	targetObj2.Destroy();
+
 	/////////////// User logic ///////////////////
 
 	//secondWindow->ShutDown();
@@ -199,7 +203,7 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	mainWindow->ShutDown();
 	delete mainWindow;
 
-	renderer.TerminateGLFW();
+	(*renderer).TerminateGLFW();
 	TraceShutdown();
 
 }

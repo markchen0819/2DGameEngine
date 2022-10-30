@@ -1,21 +1,20 @@
 #pragma once
-#include <GLEW/include/glew.h>
-#include <GLFW/include/GLFW/glfw3.h>
 #include <stdlib.h>
-#include "../Logging.h"
 
 class Renderer
 {
 public:
-
-	Renderer();
 	~Renderer();
+	static Renderer* GetInstance();
 
 	void InitGLFW();
 	void TerminateGLFW();
 	void ClearScreen();
 	void UnuseShaderProgram();
+	void Draw(std::string Name, Transform* transform, Mesh* mesh, Material* material);
+	void UpdateModelMatrix(Node* parent, Transform* transform);
 private:
-
+	Renderer() {};
+	static Renderer* instance;
 };
 

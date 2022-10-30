@@ -1,5 +1,4 @@
-#include "../Allheaders.h"
-
+#include "../pch.h"
 
 TransformComponent::TransformComponent(){}
 TransformComponent::~TransformComponent(){}
@@ -52,4 +51,4 @@ void TransformComponent::Init()
 }
 void TransformComponent::Update() {}
 void TransformComponent::Destroy() {}
-void TransformComponent::HandleEvent(void* eventData) {}
+// void TransformComponent::HandleEvent(void* eventData) {}

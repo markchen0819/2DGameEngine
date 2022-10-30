@@ -1,5 +1,4 @@
-#include "Node.h"
-#include "../Logging.h"
+#include "../pch.h"
 
 Node::Node():transform(new Transform()), mesh(new Mesh()) {}
 Node::Node(Transform t, Mesh m, Material* mat)
@@ -22,49 +21,44 @@ Node::~Node()
 	childNodes.clear();
 }
 
-
+void Node::Init()
+{
+	for (Node* n : childNodes)
+	{
+		n->Init();
+	}
+}
+void Node::Update()
+{
+	// Render ability now belongs to RenderComponent
+	// Renderer::GetInstance()->UpdateModelMatrix(parent, transform);
+	for (Node* n : childNodes)
+	{
+		n->Update();
+	}
+}
+void Node::Destroy()
+{
+	for (Node* n : childNodes)
+	{
+		n->Destroy();
+	}
+}
+//void Node::HandleEvent(void* eventData){ }
 void Node::Draw()
 {
-	//UpdateModelMatrix();
-
-	if (material == nullptr)
+	// Render ability now belongs to RenderComponent
+	// Renderer::GetInstance()->Draw(Name, transform, mesh, material);
+	for (Node* n : childNodes)
 	{
-		std::string s = "Error: Node [" + Name + "] has not attached a material";
-		TraceMessage(s.c_str());
-		return;
-	}
-	material->shader->useProgram();
-	material->texture->activeTextureUnit(0);
-	material->texture->bindTexture();
-	material->shader->setVec4("color", material->color.color);
-	material->shader->setMat4("model", transform->model);
-	mesh->Draw();
-	material->texture->activeTextureUnit(0);
-	glUseProgram(0);
-
-
-	for (Node* i : childNodes)
-	{
-		i->Draw();
+		n->Draw();
 	}
 }
-void Node::UpdateModelMatrix()
+
+Node* Node::GetParent()
 {
-	if (parent)
-	{
-		//std::cout << "Child" << std::endl;
-		transform->model = (*parent).transform->getLocalModelMatrix() * transform->getLocalModelMatrix();
-		//transform->PrintTransform();
-	}
-	else
-	{
-		//std::cout << "Parent" << std::endl;
-		transform->model = transform->getLocalModelMatrix();
-		//transform->PrintTransform();
-	}
-
+	return parent;
 }
-
 void Node::AddChild(Node* node)
 {
 	node->parent = this;

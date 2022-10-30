@@ -1,10 +1,7 @@
-#include "../Allheaders.h"
+#include "../pch.h"
 
 PhysicComponent::PhysicComponent(){}
-PhysicComponent::~PhysicComponent() 
-{
-	Destroy(); 
-}
+PhysicComponent::~PhysicComponent() {}
 
 void PhysicComponent::SetTranslation(glm::vec3 p) { physicBody->Position = p; }
 void PhysicComponent::SetRotation(glm::vec3 r) { physicBody->Rotation = r; }
@@ -19,24 +16,10 @@ void PhysicComponent::SetAngularVelocity(glm::vec3 av) { physicBody->AngularVelo
 void PhysicComponent::SetMass(float m) { physicBody->Mass = m; }
 void PhysicComponent::SetInverseMass(float im) { physicBody->InverseMass = im; }
 
-Body* PhysicComponent::GetBody()
-{
-	return physicBody;
-}
-
-void PhysicComponent::Integrate()
-{
-}
-
-CollisionAreaObject& PhysicComponent::GetCollisionAreaObject()
-{
-	return physicBody->GetCollisionAreaObject();
-}
 
 void PhysicComponent::Init() 
 { 
-	physicBody = new Body();
-
+	physicBody = PhysicsManager::GetInstance()->CreateBody();
 	// Init collision shape
 	std::vector<glm::vec4> obbVerticies;
 	obbVerticies.push_back(glm::vec4(100.0f, 100.0f, 0.0f, 1.0f));
@@ -56,15 +39,27 @@ void PhysicComponent::Init()
 }
 void PhysicComponent::Update() 
 {
-	physicBody->Integrate();
 	if (ShowCollisionArea)
 	{
 		physicBody->GetCollisionAreaObject().Draw();
 	}
-
 }
 void PhysicComponent::Destroy() 
 {
 	delete physicBody;
 }
-void PhysicComponent::HandleEvent(void* eventData) {}
+//void PhysicComponent::HandleEvent(void* eventData){}
+
+
+void PhysicComponent::Integrate()
+{
+	physicBody->Integrate();
+}
+Body* PhysicComponent::GetBody()
+{
+	return physicBody;
+}
+CollisionAreaObject& PhysicComponent::GetCollisionAreaObject()
+{
+	return physicBody->GetCollisionAreaObject();
+}

@@ -41,6 +41,7 @@ void Body::Integrate()
 }
 void Body::FeedPhysicsCalculationToTransform()
 {
+	// Feed Graphic Node Transform
 	if (transform != nullptr)
 	{
 		transform->SetTranslation(Position.x, Position.y, Position.z);
@@ -54,8 +55,8 @@ void Body::FeedPhysicsCalculationToTransform()
 	{
 		TraceMessage("Body has NULL transform");
 	}
-
-	if (collisionShape != nullptr) // Debug Shape
+	// Feed ColllisionShape Transform
+	if (collisionShape != nullptr) 
 	{
 		collisionShape->SetScale(glm::vec3(Scale.x, Scale.y, Scale.z));
 
@@ -70,9 +71,7 @@ void Body::FeedPhysicsCalculationToTransform()
 	{
 		TraceMessage("Body has NULL collisionShape");
 	}
-
 }
-
 void Body::SetCollisionShape(CollisionShape* cs)
 {
 	collisionShape = cs;

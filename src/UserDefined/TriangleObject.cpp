@@ -12,7 +12,7 @@ TriangleObject::~TriangleObject()
 
 void TriangleObject::Draw()
 {
-	Node::Draw();
+	//Node::Draw();
 }
 
 void TriangleObject::SetupTransform()

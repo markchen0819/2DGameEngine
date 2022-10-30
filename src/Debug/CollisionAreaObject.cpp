@@ -1,4 +1,5 @@
 #include "CollisionAreaObject.h"
+#include "../Graphics/Renderer.h"
 
 CollisionAreaObject::CollisionAreaObject() 
 { 
@@ -128,5 +129,5 @@ void CollisionAreaObject::SetName(std::string s)
 }
 void CollisionAreaObject::Draw()
 {
-	Node::Draw();
+	Renderer::GetInstance()->Draw(Name, transform, mesh, material);
 }

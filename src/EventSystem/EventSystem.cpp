@@ -17,11 +17,7 @@ EventSystem::EventSystem()
 };
 EventSystem::~EventSystem() 
 {
-	for (int i = 0; i != static_cast<int>(EventType::Default); ++i)
-	{
-		listOfEventListenerLists.at(i).clear();
-	}
-	listOfEventListenerLists.clear();
+	RemoveAllListeners();
 	delete instance;
 }
 
@@ -43,3 +39,31 @@ void EventSystem::BroadcastEvent(EventType Type, void* eventData)
 		(*el).HandleEvent(eventData);
 	}
 }
+
+void EventSystem::RemoveAllListeners()
+{
+	for (int i = 0; i != static_cast<int>(EventType::Default); ++i)
+	{
+		listOfEventListenerLists.at(i).clear();
+	}
+	listOfEventListenerLists.clear();
+}
+
+void EventSystem::RemoveListener(EventType Type, EventListener* eventlistener)
+{
+	int index = static_cast<int>(Type);
+	std::vector<EventListener*>* list = &(listOfEventListenerLists.at(index));
+	// Search that list
+	for (int i = 0; i < list->size(); i++)
+	{
+		// Delete the listener
+		if (list->at(i) == eventlistener)
+		{
+			list->erase(list->begin() + i);
+			break;
+		}
+	}
+
+}
+
+

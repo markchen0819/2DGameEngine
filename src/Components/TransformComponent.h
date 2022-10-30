@@ -1,6 +1,3 @@
-#pragma once
-#include "Component.h"
-#include "../Graphics/Transform.h"
 
 class TransformComponent : public Component
 {
@@ -22,7 +19,7 @@ public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Destroy();
-	virtual void HandleEvent(void* eventData);
+	//virtual void HandleEvent(void* eventData);
 
 private:
 	

@@ -10,7 +10,7 @@ public:
 	glm::mat4 view;
 
 	Camera(glm::vec3 position, glm::vec3 lookAtTarget, float const height, float const width);
-	void SetupVP(Shader& shader);
+	void SetShaderVP(Shader& shader);
 
 };
 

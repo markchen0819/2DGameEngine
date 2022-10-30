@@ -6,14 +6,17 @@
 class Node
 {
 public:
-
 	Node();
 	Node(Transform t, Mesh m, Material* mat);
 	~Node();
 
-	void Draw();
-	void UpdateModelMatrix();
+	virtual void Init(); 
+	virtual void Update();
+	virtual void Destroy();
+	//virtual void HandleEvent(void* eventData);
+	virtual void Draw();
 
+	Node* GetParent();
 	void AddChild(Node* node);
 
 	std::string Name = "";
@@ -22,9 +25,7 @@ public:
 	Material* material = nullptr;
 
 protected:
-
 	Node* parent = nullptr;
 	std::vector<Node*> childNodes;
-
 };
 

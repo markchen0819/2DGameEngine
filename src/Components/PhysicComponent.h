@@ -1,5 +1,5 @@
 #pragma once
-#include <glm/ext/vector_float3.hpp>
+
 #include "Component.h"
 #include "../Physics/Body.h"
 
@@ -15,7 +15,6 @@ public:
 	glm::vec3 GetPosition();
 	glm::vec3 GetScale();
 	glm::vec3 GetRotation();
-
 	void SetVelocity(glm::vec3 v);
 	void SetAcceleration(glm::vec3 a);
 	void SetForce(glm::vec3 f);
@@ -23,21 +22,19 @@ public:
 	void SetMass(float m);
 	void SetInverseMass(float im);
 
-	Body* GetBody();
-
 	virtual void Init();
 	virtual void Update();
 	virtual void Destroy();
-	virtual void HandleEvent(void* eventData);
+	//virtual void HandleEvent(void* eventData);
 
 	void Integrate();
+	Body* GetBody();
 
 	//Debug
+	bool ShowCollisionArea = true;
 	CollisionAreaObject& GetCollisionAreaObject();
 
 private:
-
 	Body* physicBody = nullptr;
-	bool ShowCollisionArea = true;
 };
 

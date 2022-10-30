@@ -10,13 +10,13 @@ class GameObject : public Node
 public:
 
 	GameObject();
-	GameObject(const GameObject& obj);
 	~GameObject();
 
-	void Init();
-	void Update();
-	void Destroy();
-	void HandleEvent(void* eventData);
+	virtual void Init();
+	virtual void Update();
+	virtual void Destroy();
+	//virtual void HandleEvent(void* eventData);
+	virtual void Draw();
 
 	template<class T>
 	void AddComponent()
@@ -25,8 +25,6 @@ public:
 		component->SetOwner(this);
 		components.push_back(component);
 	}
-
-
 	template<class T>
 	T* GetComponent()
 	{
