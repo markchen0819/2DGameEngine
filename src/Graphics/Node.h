@@ -1,7 +1,4 @@
 #pragma once
-#include "Transform.h"
-#include "Mesh.h"
-#include "Material.h"
 
 class Node
 {

@@ -1,6 +1,7 @@
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
+
 #include "pch.h"
 
 void collisionCallback(void* eventData)
@@ -97,15 +98,16 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	child.SetMaterial(&sampleMaterial2);
 	child.AddComponent<TransformComponent>();
 	child.AddComponent<RenderComponent>();
-	child.GetTransform()->SetTranslation(0, -200, 0);
-	child.GetTransform()->SetScale (0.5, 0.5, 0.5);
-	player.AddChild(&child);
 
+	player.AddChild(&child);
 	player.Init();
 	targetObj.Init();
 	targetObj2.Init();
 	//child.Init();
-
+	
+	//GetComponent after Init
+	child.GetComponent<TransformComponent>()->SetTranslation(0, -200, 0);
+	child.GetComponent<TransformComponent>()->SetScale(0.5, 0.5, 0.5);
 	TransformComponent* playerTC = player.GetComponent<TransformComponent>();
 	PhysicComponent* playerPC = player.GetComponent<PhysicComponent>();
 	playerPC->GetCollisionAreaObject().SetName("Player Collision Area");
@@ -165,8 +167,8 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 			}
 			glm::vec3 newScale = glm::vec3(0.5 + playerPC->GetPosition().y / 500, 0.5 + playerPC->GetPosition().y / 500, 0.5 + playerPC->GetPosition().y / 500);
 			playerTC->SetScale(newScale.x, newScale.y, newScale.z);
-			targetObj.GetTransform()->SetTranslation(200, 0, 0);
-			targetObj2.GetTransform()->SetTranslation(0, -200, 0);
+			targetObj.GetComponent<TransformComponent>()->SetTranslation(200, 0, 0);
+			targetObj2.GetComponent<TransformComponent>()->SetTranslation(0, -200, 0);
 
 			//// Render ////
 			player.Update();

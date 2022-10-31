@@ -1,7 +1,4 @@
 #pragma once
-#include "GameWindow.h"
-#include <array>
-
 
 enum Input
 {

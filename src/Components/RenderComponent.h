@@ -1,6 +1,4 @@
 #pragma once
-#include "../Graphics/Renderer.h"
-#include "Component.h"
 
 class RenderComponent : public Component
 {

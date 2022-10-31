@@ -1,11 +1,4 @@
 #pragma once
-#include <stdlib.h>
-#include <string>
-#include "Transform.h"
-#include "Mesh.h"
-#include "Material.h"
-#include "Node.h"
-#include "../Logging.h"
 
 class Renderer
 {

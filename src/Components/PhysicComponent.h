@@ -1,7 +1,4 @@
 #pragma once
-#include "Component.h"
-#include "../Physics/Body.h"
-#include "../Physics/CollisionOBB.h"
 
 class PhysicComponent : public Component
 {

@@ -8,6 +8,7 @@ public:
 };
 
 // Test
+class GameObject;
 class CollisionEvent : public Event
 {
 public:

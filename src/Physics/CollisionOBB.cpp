@@ -1,5 +1,4 @@
-#include "CollisionOBB.h"
-#include <glm/gtx/euler_angles.hpp>
+#include "pch.h"
 
 CollisionOBB::CollisionOBB()
 {

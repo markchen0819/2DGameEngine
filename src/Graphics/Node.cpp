@@ -1,4 +1,4 @@
-#include "Node.h"
+#include "pch.h"
 
 Node::Node():transform(new Transform()), mesh(new Mesh()) {}
 Node::Node(Transform t, Mesh m, Material* mat)

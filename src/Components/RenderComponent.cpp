@@ -1,4 +1,4 @@
-#include "RenderComponent.h"
+#include "pch.h"
 
 RenderComponent::RenderComponent() { }
 RenderComponent::~RenderComponent() { }

@@ -1,4 +1,4 @@
-#include "Renderer.h"
+#include "pch.h"
 
 Renderer* Renderer::instance = nullptr;
 Renderer* Renderer::GetInstance()

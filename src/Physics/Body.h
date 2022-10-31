@@ -1,8 +1,4 @@
 #pragma once
-#include <glm/ext/vector_float3.hpp>
-#include "../Graphics/Transform.h"
-#include "../Physics/CollisionShape.h"
-#include "../Debug/CollisionAreaObject.h"
 
 class Body
 {

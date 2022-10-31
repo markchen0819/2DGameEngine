@@ -1,7 +1,4 @@
-#include "Transform.h"
-#include <glm/gtx/euler_angles.hpp>
-#include <glm/gtx/string_cast.hpp>
-#include <iostream>
+#include "pch.h"
 
 Transform::Transform():
 	model(glm::mat4(1.0f)), localModel(glm::mat4(1.0f)),

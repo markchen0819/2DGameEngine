@@ -1,5 +1,4 @@
-#include "CollisionAreaObject.h"
-#include "../Graphics/Renderer.h"
+#include "pch.h"
 
 CollisionAreaObject::CollisionAreaObject() 
 { 

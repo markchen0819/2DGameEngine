@@ -1,6 +1,4 @@
-#include "Camera.h"
-#include <glm/ext/matrix_clip_space.hpp>
-#include <glm/ext/matrix_transform.hpp>
+#include "pch.h"
 
 Camera::Camera(glm::vec3 position, glm::vec3 lookAtTarget, float const height, float const width)
 {

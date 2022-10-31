@@ -79,10 +79,10 @@ void GameObject::Draw()
 	Node::Draw();
 }
 
-Transform* GameObject::GetTransform()
-{
-	return transform;
-}
+//Transform* GameObject::GetTransform()
+//{
+//	return transform;
+//}
 
 void GameObject::SetMaterial(Material* m)
 {

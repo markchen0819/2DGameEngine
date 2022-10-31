@@ -1,12 +1,4 @@
 #pragma once
-#include <GLEW/include/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-
 
 class Shader
 {

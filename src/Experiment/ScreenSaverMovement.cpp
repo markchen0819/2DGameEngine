@@ -1,5 +1,4 @@
-#include "../GameWindow.h"
-#include <glm/glm.hpp>
+#include "pch.h"
 // Experience code to move window like a screen Saver
 
 static int xDir = 1;

@@ -1,4 +1,4 @@
-#include "CollisionShape.h"
+#include "pch.h"
 
 CollisionShape::CollisionShape() { Type = ShapeType::NONE; }
 CollisionShape::~CollisionShape() { }

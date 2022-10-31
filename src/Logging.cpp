@@ -1,9 +1,4 @@
-#include "Logging.h"
-#include <iostream>
-#include <string>
-#include <cerrno>
-#include <cstdarg>
-
+#include "pch.h"
 
 static const char* traceFileName = "Trace.log";
 static FILE* traceFile;

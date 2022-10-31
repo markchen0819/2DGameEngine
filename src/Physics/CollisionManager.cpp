@@ -1,10 +1,4 @@
-#include "CollisionManager.h"
-#include "CollisionCircle.h"
-#include "CollisionAABB.h"
-#include "CollisionOBB.h"
-#include <glm/gtx/string_cast.hpp>
-#include "../Components/PhysicComponent.h"
-#include "../EventSystem/Event.h"
+#include "pch.h"
 
 CollisionManager::CollisionManager() { }
 CollisionManager::~CollisionManager() { }

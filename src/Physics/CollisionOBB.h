@@ -1,6 +1,4 @@
 #pragma once
-#include "CollisionShape.h"
-#include <vector>
 
 class CollisionOBB : public CollisionShape
 {

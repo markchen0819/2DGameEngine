@@ -1,14 +1,4 @@
 #pragma once
-#include <glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/ext/vector_float3.hpp>
-#include <glm/ext/vector_float2.hpp>
-#include <string>
-#include <vector>
-#include "Shader.h"
-#include "Texture.h"
-#include "Vertex.h"
-
 
 class Mesh
 {

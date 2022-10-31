@@ -1,5 +1,5 @@
 #pragma once
-#include <glm/ext/vector_float4.hpp>
+
 class Color
 {
 public:

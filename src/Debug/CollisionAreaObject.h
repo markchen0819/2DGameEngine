@@ -1,6 +1,5 @@
 #pragma once
-#include "../Graphics/Node.h"
-#include "../Physics/ShapeType.h"
+
 class CollisionAreaObject : public Node
 {
 public:

@@ -1,6 +1,4 @@
-#include "GameWindow.h"
-#include "Logging.h"
-#include <iostream>
+#include "pch.h"
 
 GameWindow::GameWindow() : pWindow(nullptr), pMonitor(nullptr), shouldClose(false)
 {

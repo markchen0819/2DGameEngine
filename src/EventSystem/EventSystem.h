@@ -1,9 +1,4 @@
 #pragma once
-#include <functional>
-#include <vector>
-#include <iostream>
-#include "EventType.h"
-#include "EventListener.h"
 
 class EventSystem
 {

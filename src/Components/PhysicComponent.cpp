@@ -1,6 +1,4 @@
-#include "PhysicComponent.h"
-#include "../Physics/PhysicsManager.h"
-
+#include "pch.h"
 
 PhysicComponent::PhysicComponent(){}
 PhysicComponent::~PhysicComponent() {}
@@ -33,7 +31,7 @@ void PhysicComponent::Init()
 	physicBody->GetCollisionAreaObject().SetMesh(obbVerticies); // Debug
 
 	// Init transform
-	Transform* trans = GetOwner()->GetTransform();
+	Transform* trans = GetOwner()->transform;
 	physicBody->SetTransform(trans);
 	physicBody->Position = trans->GetPosition();
 	physicBody->Rotation = trans->GetRotation();

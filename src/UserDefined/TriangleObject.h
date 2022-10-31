@@ -1,5 +1,4 @@
 #pragma once
-#include "../Graphics/Node.h"
 
 class TriangleObject : public Node
 {

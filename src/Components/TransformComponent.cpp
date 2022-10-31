@@ -1,4 +1,4 @@
-#include "TransformComponent.h"
+#include "pch.h"
 
 TransformComponent::TransformComponent(){}
 TransformComponent::~TransformComponent(){}
@@ -47,7 +47,7 @@ glm::mat4 TransformComponent::getLocalModelMatrix()
 
 void TransformComponent::Init()
 {
-	transform = GetOwner()->GetTransform();
+	transform = GetOwner()->transform;
 }
 void TransformComponent::Update() {}
 void TransformComponent::Destroy() {}

@@ -1,4 +1,4 @@
-#include "InputManager.h"
+#include "pch.h"
 
 InputManager* InputManager::instance = nullptr;
 InputManager* InputManager::GetInstance()

@@ -1,9 +1,6 @@
 #pragma once
-#include "Graphics/Node.h"
-#include "Physics/Body.h"
-#include "Logging.h"
 
-class Component; // Forward declaration
+//class Component; // Forward declaration
 class GameObject : public Node
 {
 
@@ -45,7 +42,7 @@ public:
 
 
 	//void Draw();
-	Transform* GetTransform();
+	//Transform* GetTransform();
 	void SetMaterial(Material* m);
 	Material* GetMaterial();
 

@@ -1,4 +1,4 @@
-#include "CollisionAABB.h"
+#include "pch.h"
 
 CollisionAABB::CollisionAABB(): Right(10.0f), Up(10.0f), Left(-10.0f), Down(-10.0f)
 {

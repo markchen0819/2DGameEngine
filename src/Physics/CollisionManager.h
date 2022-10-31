@@ -1,8 +1,4 @@
 #pragma once
-#include "CollisionShape.h"
-#include "../EventSystem/EventType.h"
-#include "../EventSystem/EventSystem.h"
-#include "../GameObject.h"
 
 class CollisionManager
 {

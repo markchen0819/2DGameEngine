@@ -1,7 +1,4 @@
-#include "Body.h"
-#include <glm/gtx/string_cast.hpp>
-#include "CollisionOBB.h"
-#include "../Logging.h"
+#include "pch.h"
 
 Body::Body() 
 {

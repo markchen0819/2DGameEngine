@@ -1,4 +1,4 @@
-#include "TriangleObject.h"
+#include "pch.h"
 
 TriangleObject::TriangleObject()
 {
