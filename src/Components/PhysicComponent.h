@@ -27,10 +27,6 @@ public:
 	void Integrate();
 	Body* GetBody();
 
-	//Debug
-	bool ShowCollisionArea = true;
-	CollisionAreaObject& GetCollisionAreaObject();
-
 private:
 	Body* physicBody = nullptr;
 };

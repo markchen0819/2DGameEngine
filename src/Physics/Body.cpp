@@ -1,12 +1,8 @@
 #include "pch.h"
 
-Body::Body() 
-{
-	collisionAreaObject = new CollisionAreaObject();
-}
+Body::Body() { }
 Body::~Body() 
 {
-	delete collisionAreaObject;
 	if (collisionShape != nullptr)
 	{
 		delete collisionShape;
@@ -44,14 +40,12 @@ void Body::FeedPhysicsCalculationToTransform()
 		transform->SetTranslation(Position.x, Position.y, Position.z);
 		transform->SetRotation(Rotation.x, Rotation.y, Rotation.z);	
 		transform->SetScale(Scale.x, Scale.y, Scale.z);
-
-		// Debug View 
-		collisionAreaObject->UpdateTransform(*transform);
 	}
 	else
 	{
 		TraceMessage("Body has NULL transform");
 	}
+
 	// Feed ColllisionShape Transform
 	if (collisionShape != nullptr) 
 	{
@@ -88,8 +82,4 @@ void Body::PrintInfo()
 	std::cout << "Position: " << glm::to_string(Position) << std::endl;
 	std::cout << "Rotation: " << glm::to_string(Rotation) << std::endl;
 	std::cout << "Scale: " << glm::to_string(Scale) << std::endl;
-}
-CollisionAreaObject& Body::GetCollisionAreaObject()
-{
-	return *collisionAreaObject;
 }

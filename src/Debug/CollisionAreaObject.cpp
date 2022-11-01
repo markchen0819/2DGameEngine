@@ -6,9 +6,30 @@ CollisionAreaObject::CollisionAreaObject()
 }
 CollisionAreaObject::~CollisionAreaObject(){ }
 
+void CollisionAreaObject::Init()
+{
+
+}
+
+void CollisionAreaObject::Update()
+{
+	GameObject* parent = static_cast<GameObject*>(GetParent());
+	UpdateTransform(*((*parent).transform));
+}
+
+void CollisionAreaObject::Destroy()
+{
+}
+void CollisionAreaObject::Draw()
+{
+	Renderer::GetInstance()->Draw(Name, transform, mesh, material);
+}
+
+
 // Create a default 10x10 OBB shape
 void CollisionAreaObject::SetDefaultShape() 
 {
+	delete transform;
 	//Create Transform
 	transform = new Transform(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
@@ -105,11 +126,9 @@ void CollisionAreaObject::SetMesh(std::vector<glm::vec4> v)
 }
 
 
-// Just update transform and simulate transform of AABB Circle OBB
 void CollisionAreaObject::UpdateTransform(const Transform t)
 {
-	delete transform;
-	transform = new Transform(t); // need to new to prevent double delete from node
+	*transform = t;
 
 	if (shapeType == ShapeType::AABB || shapeType == ShapeType::CIRCLE)
 	{
@@ -117,16 +136,9 @@ void CollisionAreaObject::UpdateTransform(const Transform t)
 	}
 }
 
-void CollisionAreaObject::AttachMaterial(Material* m)
+void CollisionAreaObject::SetMaterial(Material* m)
 {
 	material = m;
 }
 
-void CollisionAreaObject::SetName(std::string s)
-{
-	Name = s;
-}
-void CollisionAreaObject::Draw()
-{
-	Renderer::GetInstance()->Draw(Name, transform, mesh, material);
-}
+

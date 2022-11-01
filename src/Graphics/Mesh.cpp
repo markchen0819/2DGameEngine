@@ -2,7 +2,6 @@
 
 Mesh::Mesh()
 {
-    // will it double delete?
     SetDefaultSquareMesh();
 }
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
@@ -13,7 +12,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
 Mesh::Mesh(Mesh& m) // Copy ctor
 {
     DeleteMesh();
-    SetVerticesAndIndicies(vertices, indices);
+    SetVerticesAndIndicies(m.vertices, m.indices);
     CreateMeshFromData(); // when passed as a copy we need a new id
 }
 Mesh::~Mesh()
@@ -76,7 +75,7 @@ void Mesh::DeleteMesh()
 
 void Mesh::SetDefaultSquareMesh()
 {
-    DeleteMesh();
+    DeleteMesh(); // silently ignores 0's and names that do not correspond to existing buffer objects
     
     vertices.clear();
     indices.clear();

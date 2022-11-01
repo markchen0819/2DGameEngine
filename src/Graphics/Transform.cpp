@@ -1,6 +1,6 @@
 #include "pch.h"
 
-Transform::Transform():
+Transform::Transform() :
 	model(glm::mat4(1.0f)), localModel(glm::mat4(1.0f)),
 	modelRot(glm::mat4(1.0f)), modelScale(glm::mat4(1.0f)), modelTrans(glm::mat4(1.0f)),
 	Position(glm::vec3(0.0f, 0.0f, 0.0f)),
@@ -18,9 +18,21 @@ Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 Transform::Transform(const Transform& t) :
 	model(t.model), localModel(t.localModel),
 	modelRot(t.modelRot), modelScale(t.modelScale), modelTrans(t.modelTrans),
-	Position(t.Position), Rotation(t.Rotation), Scale(t.Scale) 
+	Position(t.Position), Rotation(t.Rotation), Scale(t.Scale)
 { }
-Transform::~Transform(){}
+Transform::~Transform() {}
+
+void Transform::operator=(const Transform& t)
+{
+	model = t.model;
+	localModel = t.localModel;
+	modelRot = t.modelRot;
+	modelScale = t.modelScale;
+	modelTrans = t.modelTrans;
+	Position = t.Position;
+	Rotation = t.Rotation;
+	Scale = t.Scale;
+}
 
 void Transform::SetRotation(const float x, const float y, const float z)
 {
@@ -38,7 +50,7 @@ void Transform::SetTranslation(const float x, const float y, const float z)
 	Position = glm::vec3(x, y, z);
 }
 
-glm::vec3 Transform::GetPosition() { return Position;}
+glm::vec3 Transform::GetPosition() { return Position; }
 glm::vec3 Transform::GetScale() { return Scale; }
 glm::vec3 Transform::GetRotation() { return Rotation; }
 glm::mat4 Transform::GetRotationMatrix() { return modelRot; }
@@ -71,10 +83,10 @@ glm::mat4 Transform::createScaleMatrix(const float x, const float y, const float
 }
 glm::mat4 Transform::createTranslateMatrix(const float x, const float y, const float z)
 {
-	return glm::mat4 { 1,0,0,0,
+	return glm::mat4{ 1,0,0,0,
 					   0,1,0,0,
-		               0,0,1,0,
-		               x,y,z,1 };
+					   0,0,1,0,
+					   x,y,z,1 };
 }
 
 

@@ -8,6 +8,7 @@ public:
 	Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 	Transform(const Transform& t);
 	~Transform();
+	void operator=(const Transform& t);
 
 	glm::vec3 Position;
 	glm::vec3 Rotation;

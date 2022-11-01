@@ -40,14 +40,8 @@ public:
 		return nullptr;
 	}
 
-
-	//void Draw();
-	//Transform* GetTransform();
 	void SetMaterial(Material* m);
 	Material* GetMaterial();
-
-	//void SetBodyCollisionShape(CollisionShape* cs);
-
 
 private:
 

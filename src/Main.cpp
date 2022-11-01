@@ -99,7 +99,24 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	child.AddComponent<TransformComponent>();
 	child.AddComponent<RenderComponent>();
 
+	// Create Debug Nodes (For viewing collision area)
+	CollisionAreaObject playerCAO;
+	//playerCAO.SetMesh(obbVerticies); // Use default shape for now
+	playerCAO.Name = "Player Collision Area";
+	playerCAO.SetMaterial(&collisionMaterial);
+	CollisionAreaObject targetObjCAO;
+	targetObjCAO.Name = "targetObj Collision Area";
+	targetObjCAO.SetMaterial(&collisionMaterial);
+	CollisionAreaObject targetObj2CAO;
+	targetObj2CAO.Name = "targetObj2 Collision Area";
+	targetObj2CAO.SetMaterial(&collisionMaterial);
+
+
 	player.AddChild(&child);
+	player.AddChild(&playerCAO);
+	targetObj.AddChild(&targetObjCAO);
+	targetObj2.AddChild(&targetObj2CAO);
+
 	player.Init();
 	targetObj.Init();
 	targetObj2.Init();
@@ -110,14 +127,6 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	child.GetComponent<TransformComponent>()->SetScale(0.5, 0.5, 0.5);
 	TransformComponent* playerTC = player.GetComponent<TransformComponent>();
 	PhysicComponent* playerPC = player.GetComponent<PhysicComponent>();
-	playerPC->GetCollisionAreaObject().SetName("Player Collision Area");
-	playerPC->GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
-	PhysicComponent* targetObjPC = targetObj.GetComponent<PhysicComponent>();
-	targetObjPC->GetCollisionAreaObject().SetName("targetObj Collision Area");
-	targetObjPC->GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
-	PhysicComponent* targetObjPC2 = targetObj2.GetComponent<PhysicComponent>();
-	targetObjPC2->GetCollisionAreaObject().SetName("targetObj Collision Area");
-	targetObjPC2->GetCollisionAreaObject().AttachMaterial(&collisionMaterial);
 
 	// Handle collisions
 	PhysicsManager* physicsManager = PhysicsManager::GetInstance();

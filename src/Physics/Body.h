@@ -25,7 +25,6 @@ public:
 
 	// Debug only
 	void PrintInfo();
-	CollisionAreaObject& GetCollisionAreaObject();
 
 private:
 
@@ -33,7 +32,5 @@ private:
 	Transform* transform = nullptr;
 	void FeedPhysicsCalculationToTransform();
 
-	// Debug only
-	CollisionAreaObject* collisionAreaObject = nullptr;
 };
 

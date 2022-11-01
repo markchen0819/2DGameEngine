@@ -28,7 +28,6 @@ void PhysicComponent::Init()
 	obbVerticies.push_back(glm::vec4(-100.0f, 100.0f, 0.0f, 1.0f));
 	CollisionOBB* obb = new CollisionOBB(obbVerticies);
 	physicBody->SetCollisionShape(obb);
-	physicBody->GetCollisionAreaObject().SetMesh(obbVerticies); // Debug
 
 	// Init transform
 	Transform* trans = GetOwner()->transform;
@@ -37,13 +36,7 @@ void PhysicComponent::Init()
 	physicBody->Rotation = trans->GetRotation();
 	physicBody->Scale = trans->GetScale();
 }
-void PhysicComponent::Update() 
-{
-	if (ShowCollisionArea)
-	{
-		physicBody->GetCollisionAreaObject().Draw();
-	}
-}
+void PhysicComponent::Update() { }
 void PhysicComponent::Destroy() 
 {
 	delete physicBody;
@@ -58,8 +51,4 @@ void PhysicComponent::Integrate()
 Body* PhysicComponent::GetBody()
 {
 	return physicBody;
-}
-CollisionAreaObject& PhysicComponent::GetCollisionAreaObject()
-{
-	return physicBody->GetCollisionAreaObject();
 }

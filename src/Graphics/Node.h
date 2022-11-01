@@ -5,7 +5,7 @@ class Node
 public:
 	Node();
 	Node(Transform t, Mesh m, Material* mat);
-	~Node();
+	virtual ~Node();
 
 	virtual void Init(); 
 	virtual void Update();
