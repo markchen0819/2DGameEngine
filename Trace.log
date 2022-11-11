@@ -1,3 +1,32 @@
 TraceInit()
-GLFWInit() success
+GLFW Init() success
+GameWindow created
+InputManger registers GameWindow: 1stWindow
+---LoadShaders---
+CameraShader
+SampleShader
+---LoadTextures---
+DefaultTexture
+SampleTexture
+---LoadMaterial---
+CollisionMaterial
+SampleMaterial1
+SampleMaterial2
+---CreateGameObjects---
+Player
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+PhysicComponent::Deserialize
+Target1
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+PhysicComponent::Deserialize
+Target2
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+PhysicComponent::Deserialize
+PlayerChild
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+GLFW Terminate success
 TraceShutdown()

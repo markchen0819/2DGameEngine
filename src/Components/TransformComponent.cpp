@@ -52,3 +52,19 @@ void TransformComponent::Init()
 void TransformComponent::Update() {}
 void TransformComponent::Destroy() {}
 // void TransformComponent::HandleEvent(void* eventData) {}
+
+void TransformComponent::Serialize()
+{
+
+}
+void TransformComponent::Deserialize(const rapidjson::Value& componentMembers)
+{
+	TraceMessage("TransformComponent::Deserialize");
+	transform = GetOwner()->transform;
+	auto positionArray = componentMembers.FindMember(JSONConstants::POSITION)->value.GetArray();
+	SetTranslation(positionArray[0].GetFloat(), positionArray[1].GetFloat(), positionArray[2].GetFloat());
+	auto rotationArray = componentMembers.FindMember(JSONConstants::ROTATION)->value.GetArray();
+	SetRotation(rotationArray[0].GetFloat(), rotationArray[1].GetFloat(), rotationArray[2].GetFloat());
+	auto scaleArray = componentMembers.FindMember(JSONConstants::SCALE)->value.GetArray();
+	SetScale(scaleArray[0].GetFloat(), scaleArray[1].GetFloat(), scaleArray[2].GetFloat());
+}

@@ -65,3 +65,12 @@ void Node::AddChild(Node* node)
 	childNodes.push_back(node);
 }
 
+void Node::SetName(std::string name)
+{
+	Name = name;
+}
+
+std::string Node::GetName()
+{
+	return Name;
+}

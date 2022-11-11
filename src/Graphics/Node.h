@@ -16,12 +16,15 @@ public:
 	Node* GetParent();
 	void AddChild(Node* node);
 
-	std::string Name = "";
 	Transform* transform = nullptr;
 	Mesh* mesh = nullptr;
 	Material* material = nullptr;
 
+	void SetName(std::string name);
+	std::string GetName();
+
 protected:
+	std::string Name = "";
 	Node* parent = nullptr;
 	std::vector<Node*> childNodes;
 };

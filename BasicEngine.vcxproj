@@ -159,6 +159,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\DataDriven\ResourceManager.cpp" />
+    <ClCompile Include="src\DataDriven\ObjectFactory.cpp" />
+    <ClCompile Include="src\DataDriven\JSONConstants.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -193,10 +196,12 @@
     <ClCompile Include="src\GameWindow.cpp" />
     <ClCompile Include="src\Graphics\Transform.cpp" />
     <ClCompile Include="src\Graphics\Texture.cpp" />
-    <ClCompile Include="src\UserDefined\TriangleObject.cpp" />
     <ClCompile Include="src\Components\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\DataDriven\ResourceManager.h" />
+    <ClInclude Include="src\DataDriven\ObjectFactory.h" />
+    <ClInclude Include="src\DataDriven\JSONConstants.h" />
     <ClInclude Include="src\Physics\PhysicsManager.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Components\PhysicComponent.h" />
@@ -512,7 +517,6 @@
     <ClInclude Include="src\Graphics\Transform.h" />
     <ClInclude Include="src\Graphics\Texture.h" />
     <ClInclude Include="src\Physics\ShapeType.h" />
-    <ClInclude Include="src\UserDefined\TriangleObject.h" />
     <ClInclude Include="src\Components\TransformComponent.h" />
   </ItemGroup>
   <ItemGroup>
@@ -652,6 +656,11 @@
     <None Include="dependencies\glm\gtx\vector_angle.inl" />
     <None Include="dependencies\glm\gtx\vector_query.inl" />
     <None Include="dependencies\glm\gtx\wrap.inl" />
+    <None Include="src\Assets\Jsons\AllGameObjects.json" />
+    <None Include="src\Assets\Jsons\AllMaterials.json" />
+    <None Include="src\Assets\Jsons\AllShaders.json" />
+    <None Include="src\Assets\Jsons\AllTextures.json" />
+    <None Include="src\Assets\Jsons\Player.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

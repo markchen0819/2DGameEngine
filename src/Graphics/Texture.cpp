@@ -3,6 +3,10 @@
 #define STB_IMAGE_IMPLEMENTATION    
 #include "stb_image.h"
 
+Texture::Texture()
+{
+	// use Deserialize to generate texture
+}
 Texture::Texture(std::string path, std::string type)
 {
 	this->path = path;
@@ -56,4 +60,30 @@ void Texture::activeTextureUnit(unsigned int i)
 void Texture::bindTexture()
 {
 	glBindTexture(GL_TEXTURE_2D, id);
+}
+
+
+void Texture::Serialize()
+{
+}
+
+void Texture::Deserialize(const rapidjson::Value& obj)
+{
+	Name = obj.FindMember(JSONConstants::TEXTURE_NAME)->value.GetString();
+	this->path = obj.FindMember(JSONConstants::TEXTURE_FILE)->value.GetString();
+	this->type = obj.FindMember(JSONConstants::TEXTURETYPE)->value.GetString();
+
+	this->path = path;
+	this->type = type;
+	setupTexture(this->path);
+}
+
+void Texture::SetName(std::string name)
+{
+	Name = name;
+}
+
+std::string Texture::GetName()
+{
+	return Name;
 }

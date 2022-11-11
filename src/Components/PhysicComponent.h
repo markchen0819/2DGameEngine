@@ -24,6 +24,9 @@ public:
 	virtual void Destroy();
 	//virtual void HandleEvent(void* eventData);
 
+	virtual void Serialize();
+	virtual void Deserialize(const rapidjson::Value& obj);
+
 	void Integrate();
 	Body* GetBody();
 

@@ -79,11 +79,6 @@ void GameObject::Draw()
 	Node::Draw();
 }
 
-//Transform* GameObject::GetTransform()
-//{
-//	return transform;
-//}
-
 void GameObject::SetMaterial(Material* m)
 {
 	material = m;
@@ -93,9 +88,3 @@ Material* GameObject::GetMaterial()
 {
 	return material;
 }
-
-
-//void GameObject::SetBodyCollisionShape(CollisionShape * cs)
-//{
-//	body->collisionShape = cs;
-//}

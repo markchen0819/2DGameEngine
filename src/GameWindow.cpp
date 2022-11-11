@@ -2,6 +2,7 @@
 
 GameWindow::GameWindow() : pWindow(nullptr), pMonitor(nullptr), shouldClose(false)
 {
+	TraceMessage("GameWindow created");
 }
 
 GameWindow::~GameWindow()

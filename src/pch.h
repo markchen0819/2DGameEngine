@@ -3,6 +3,7 @@
 #include <glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include "../dependencies/rapidjson/document.h"
 
 #include <iostream>
 #include <fstream>
@@ -10,6 +11,7 @@
 #include <array>
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <cerrno>
 #include <cstdarg>
 #include <stdlib.h>
@@ -22,6 +24,9 @@
 #include <glm/ext/matrix_float4x4.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
+
+#include "DataDriven/JSONConstants.h"
+#include "rapidjson/filereadstream.h"
 
 #include <functional>
 #include "EventSystem/EventType.h"
@@ -61,6 +66,5 @@
 #include "Components/RenderComponent.h"
 #include "Components/PhysicComponent.h"
 
-#include "UserDefined/TriangleObject.h"
-
-
+#include "DataDriven/ResourceManager.h"
+#include "DataDriven/ObjectFactory.h"

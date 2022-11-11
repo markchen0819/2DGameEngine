@@ -16,6 +16,9 @@ public:
 	Mesh* GetMesh();
 	Material* GetMaterial();
 
+	virtual void Serialize();
+	virtual void Deserialize(const rapidjson::Value& obj);
+
 private:
 
 };

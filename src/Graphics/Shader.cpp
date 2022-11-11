@@ -1,6 +1,26 @@
 #include "pch.h"
 
+
+Shader::Shader()
+{
+    // use Deserialize to generate shaderProgram
+}
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
+{
+    compileProgram(vertexPath, fragmentPath);
+}
+
+Shader::~Shader()
+{
+    glDeleteProgram(ID);
+}
+
+void Shader::useProgram()
+{
+    glUseProgram(ID);
+}
+
+void Shader::compileProgram(const char* vertexPath, const char* fragmentPath)
 {
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
@@ -53,16 +73,6 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     // delete the shaders as they're linked into our program now and no longer necessary
     glDeleteShader(vertex);
     glDeleteShader(fragment);
-}
-
-Shader::~Shader()
-{
-    glDeleteProgram(ID);
-}
-
-void Shader::useProgram()
-{
-    glUseProgram(ID);
 }
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type)
@@ -137,4 +147,26 @@ void Shader::setMat3(const std::string& name, const glm::mat3& mat) const
 void Shader::setMat4(const std::string& name, const glm::mat4& mat) const
 {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+}
+
+void Shader::Serialize()
+{
+}
+
+void Shader::Deserialize(const rapidjson::Value& obj)
+{
+    Name = obj.FindMember(JSONConstants::SHADER_NAME)->value.GetString();
+    const char* vertexPath = obj.FindMember(JSONConstants::VERTEX_SHADER_FILE)->value.GetString();
+    const char* fragmentPath = obj.FindMember(JSONConstants::FRAGMENT_SHADER_FILE)->value.GetString();
+    compileProgram(vertexPath, fragmentPath);
+}
+
+void Shader::SetName(std::string name)
+{
+    Name = name;
+}
+
+std::string Shader::GetName()
+{
+    return Name;
 }

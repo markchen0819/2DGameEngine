@@ -4,6 +4,7 @@ class Shader
 {
 public:
 
+    Shader();
     Shader(const char* vertexPath, const char* fragmentPath);
     ~Shader();
 
@@ -22,8 +23,14 @@ public:
     void setMat3(const std::string& name, const glm::mat3& mat) const;
     void setMat4(const std::string& name, const glm::mat4& mat) const;
 
-private:
+    void Serialize();
+    void Deserialize(const rapidjson::Value& obj);
+    void SetName(std::string name);
+    std::string GetName();
 
+private:
     unsigned int ID;
+    std::string Name="";
+    void compileProgram(const char* vertexPath, const char* fragmentPath);
     void checkCompileErrors(unsigned int shader, std::string type);
 };

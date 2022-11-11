@@ -1,0 +1,16 @@
+{
+  "Shaders":
+  {
+    "Shader1": {
+      "ShaderName": "CameraShader",
+      "VertexShaderFile": "src/Graphics/SampleShader.vert",
+      "FragmentShaderFile": "src/Graphics/SampleShader.frag"
+    },
+    "Shader2": {
+      "ShaderName": "SampleShader",
+      "VertexShaderFile": "src/Graphics/SampleShader.vert",
+      "FragmentShaderFile": "src/Graphics/SampleShader.frag"
+    }
+  }
+
+}

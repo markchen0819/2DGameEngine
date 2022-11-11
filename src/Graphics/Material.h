@@ -15,8 +15,11 @@ public:
 	Texture* texture = nullptr;
 	Color color;
 
-private:
+	void SetName(std::string name);
+	std::string GetName();
 
+private:
+	std::string Name = "";
 
 };
 

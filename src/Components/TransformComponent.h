@@ -22,6 +22,9 @@ public:
 	virtual void Destroy();
 	//virtual void HandleEvent(void* eventData);
 
+	virtual void Serialize();
+	virtual void Deserialize(const rapidjson::Value& obj);
+
 private:
 	
 	Transform* transform;  // point to the gameobject's transform

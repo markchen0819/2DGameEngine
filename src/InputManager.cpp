@@ -24,6 +24,8 @@ void InputManager::Init(GameWindow* gameWindow)
 		isPrevPressed[i] = false;
 		isPrevReleased[i] = true;
 	}
+	std::string temp = "InputManger registers GameWindow: " + gameWindow->Props.Title;
+	TraceMessage(temp.c_str());
 }
 
 void InputManager::GLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)

@@ -19,11 +19,12 @@ void Renderer::InitGLFW()
 		std::cout << "GLFWInit() failed" << std::endl;
 		exit(EXIT_FAILURE);
 	}
-	TraceMessage("GLFWInit() success");
+	TraceMessage("GLFW Init() success");
 }
 void Renderer::TerminateGLFW()
 {
 	glfwTerminate();
+	TraceMessage("GLFW Terminate success");
 }
 void Renderer::ClearScreen()
 {

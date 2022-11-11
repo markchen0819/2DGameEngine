@@ -14,6 +14,9 @@ public:
 	GameObject* GetOwner();
 	void SetOwner(GameObject* gobj);
 
+	virtual void Serialize() {};
+	virtual void Deserialize(const rapidjson::Value& obj) {};
+
 private:
 	friend class GameObject;
 	GameObject* owner = nullptr;
