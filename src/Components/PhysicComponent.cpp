@@ -43,6 +43,8 @@ void PhysicComponent::Init()
 void PhysicComponent::Update() { }
 void PhysicComponent::Destroy() 
 {
+	std::string s = "DestroyPhysicComponent";
+	TraceMessage(s.c_str());
 	delete physicBody;
 }
 
@@ -51,7 +53,11 @@ void PhysicComponent::Destroy()
 
 void PhysicComponent::Integrate()
 {
-	physicBody->Integrate();
+	if (GetOwner()->CheckIsAlive())
+	{
+		physicBody->Integrate();
+	}
+
 }
 Body* PhysicComponent::GetBody()
 {

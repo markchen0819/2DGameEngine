@@ -12,6 +12,17 @@ void collisionCallback(void* eventData)
 		std::cout << "TimeStamp: " << glfwGetTime() << std::endl;
 		std::cout << "Collision between " << converted->gobj1->GetName()
 			<< " and " << converted->gobj2->GetName() << std::endl;
+
+		if (converted->gobj1->GetName() != "Player")
+		{
+			converted->gobj1->SetAlive(false);
+			//converted->gobj1->SetToBeDeleted();
+		}
+		if (converted->gobj2->GetName() != "Player")
+		{
+			converted->gobj2->SetAlive(false);
+			//converted->gobj2->SetToBeDeleted();
+		}
 	}
 }
 
@@ -38,11 +49,9 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	//secondWindow->Props.Title = "2ndWindow";
 	//secondWindow->Init();
 
-	// Lock FPS
-	float FPS = 60;
-	float expectedTimePerFrame = 1.0 / FPS;
-	float lastFrameTime = glfwGetTime();
-	float deltaTime = 0;
+
+	FrameRateController* fpsController = FrameRateController::GetInstance();
+	fpsController->SetTargetFrameRate(60.0);
 
 	/////////////// User logic ///////////////////
 	
@@ -60,30 +69,7 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	ObjectFactory* objectFactory = ObjectFactory::GetInstance();
 	objectFactory->CreateAllGameObjects("src/Assets/Jsons/AllGameObjects.json");
 	objectFactory->InitializeGameObjects();
-	//// User defined Object Creation
-	/*
-
-	// Create Debug Nodes (For viewing collision area)
-	CollisionAreaObject playerCAO;
-	//playerCAO.SetMesh(obbVerticies); // Use default shape for now
-	playerCAO.SetName("Player Collision Area");
-	playerCAO.SetMaterial(&collisionMaterial);
-	CollisionAreaObject targetObjCAO;
-	targetObjCAO.SetName("targetObj Collision Area");
-	targetObjCAO.SetMaterial(&collisionMaterial);
-	CollisionAreaObject targetObj2CAO;
-	targetObj2CAO.SetName( "targetObj2 Collision Area");
-	targetObj2CAO.SetMaterial(&collisionMaterial);
-	
-
-	player.AddChild(&child);
-	player.AddChild(&playerCAO);
-	targetObj.AddChild(&targetObjCAO);
-	targetObj2.AddChild(&targetObj2CAO);
-
-
-	*/
-
+	objectFactory->CreateAllDebugCollisionAreas();
 
 	// Assign GameObjects from factory
 	GameObject* player = objectFactory->GetGameObjectByName("Player");
@@ -92,8 +78,8 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	GameObject* playerChild = objectFactory->GetGameObjectByName("PlayerChild");
 	(*player).AddChild(playerChild);
 	GameObject* targetObj1 = objectFactory->GetGameObjectByName("Target1");
-	TransformComponent* targetObj1TC = (*targetObj1).GetComponent<TransformComponent>();
 	GameObject* targetObj2 = objectFactory->GetGameObjectByName("Target2");
+	TransformComponent* targetObj1TC = (*targetObj1).GetComponent<TransformComponent>();
 	TransformComponent* targetObj2TC = (*targetObj2).GetComponent<TransformComponent>();
 
 
@@ -119,77 +105,64 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	EventListener c(collisionCallback, EventType::Collision);
 	eventSystem->AddListener(EventType::Collision, &c);
 
-	// Create Debug Nodes (For viewing collision area)
-	CollisionAreaObject playerCAO;
-	//playerCAO.SetMesh(obbVerticies); // Use default shape for now
-	playerCAO.SetName("Player Collision Area");
-	playerCAO.SetMaterial(resourceManager->GetMaterialByName("CollisionMaterial"));
-	CollisionAreaObject targetObjCAO;
-	targetObjCAO.SetName("targetObj Collision Area");
-	targetObjCAO.SetMaterial(resourceManager->GetMaterialByName("CollisionMaterial"));
-	CollisionAreaObject targetObj2CAO;
-	targetObj2CAO.SetName("targetObj2 Collision Area");
-	targetObj2CAO.SetMaterial(resourceManager->GetMaterialByName("CollisionMaterial"));
-
-
-	(*player).AddChild(&playerCAO);
-	(*targetObj1).AddChild(&targetObjCAO);
-	(*targetObj2).AddChild(&targetObj2CAO);
-
 
 	while (!mainWindow->ShouldClose())// && !secondWindow->ShouldClose()
 	{
-		deltaTime = glfwGetTime() - lastFrameTime;
-		if (deltaTime > expectedTimePerFrame)
+		fpsController->FrameStart();
+		////////////////////////////////
+
+		mainWindow->Update();
+		(*renderer).ClearScreen();
+
+		// Input
+		if (inputmanager->IsKeyDown(RIGHT))
 		{
-			lastFrameTime = glfwGetTime();
-			mainWindow->Update();
-			(*renderer).ClearScreen();
-
-			// Input
-			if (inputmanager->IsKeyDown(RIGHT))
-			{
-				playerPC->SetAngularVelocity(glm::vec3(0.0f, 0.0f, -5.0f));
-			}
-			if (inputmanager->IsKeyDown(LEFT))
-			{
-				playerPC->SetAngularVelocity(glm::vec3(0.0f, 0.0f, 5.0f));
-			}
-			if (inputmanager->IsKeyDown(UP))
-			{
-				playerPC->SetVelocity(glm::vec3(playerTC->GetRotationMatrix() * glm::vec4(0.0f, 5.0f, 0.0f, 1.0f)));
-			}
-			if (inputmanager->IsKeyDown(DOWN))
-			{
-				playerPC->SetVelocity(glm::vec3(playerTC->GetRotationMatrix() * glm::vec4(0.0f, -5.0f, 0.0f, 1.0f)));
-			}
-
-			targetObj1TC->SetRotation(0, 0, targetObj1TC->GetRotation().z + 1);
-			targetObj2TC->SetRotation(0, 0, targetObj2TC->GetRotation().z + 1);
-			//// Render ////
-
-			(*player).Update();
-			(*targetObj1).Update();
-			(*targetObj2).Update();
-
-			(*player).Draw();
-			(*targetObj1).Draw();
-			(*targetObj2).Draw();
-
-			//// Physics ////
-			(*physicsManager).collisionManager.CheckAllCollisions();
-			(*physicsManager).Integrate();
-
-			// Swap buffers and poll IO events
-			mainWindow->SwapBuffers();
-			mainWindow->PollEvents();  // Window events
-			inputmanager->PollEvents();// Input events
-
-			//ExecuteScreenSaverMovement(mainWindow, deltaTime);
-			// Experimenting 2nd window
-			//secondWindow->Update();
+			playerPC->SetAngularVelocity(glm::vec3(0.0f, 0.0f, -5.0f));
 		}
+		if (inputmanager->IsKeyDown(LEFT))
+		{
+			playerPC->SetAngularVelocity(glm::vec3(0.0f, 0.0f, 5.0f));
+		}
+		if (inputmanager->IsKeyDown(UP))
+		{
+			playerPC->SetVelocity(glm::vec3(playerTC->GetRotationMatrix() * glm::vec4(0.0f, 5.0f, 0.0f, 1.0f)));
+		}
+		if (inputmanager->IsKeyDown(DOWN))
+		{
+			playerPC->SetVelocity(glm::vec3(playerTC->GetRotationMatrix() * glm::vec4(0.0f, -5.0f, 0.0f, 1.0f)));
+		}
+
+
+		targetObj1TC->SetRotation(0, 0, targetObj1TC->GetRotation().z + 100 * fpsController->DeltaTime());
+		targetObj2TC->SetRotation(0, 0, targetObj1TC->GetRotation().z - 100 * fpsController->DeltaTime());
+
+		//// Render ////
+
+		(*player).Update();
+		(*targetObj1).Update();
+		(*targetObj2).Update();
+
+		(*player).Draw();
+		(*targetObj1).Draw();
+		(*targetObj2).Draw();
+
+		//// Physics ////
+		(*physicsManager).collisionManager.CheckAllCollisions();
+		(*physicsManager).Integrate();
+
+		// Swap buffers and poll IO events
+		mainWindow->SwapBuffers();
+		mainWindow->PollEvents();  // Window events
+		inputmanager->PollEvents();// Input events
+
+		//ExecuteScreenSaverMovement(mainWindow, deltaTime);
+		// Experimenting 2nd window
+		//secondWindow->Update();
+		objectFactory->DeferredDeleteGameObjects();
+		////////////////////////////////
+		fpsController->FrameEnd();
 	}
+	//objectFactory->DestroyAllGameObjects();
 	(*player).Destroy();
 	(*targetObj1).Destroy();
 	(*targetObj2).Destroy();

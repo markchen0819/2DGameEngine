@@ -50,7 +50,12 @@ void TransformComponent::Init()
 	transform = GetOwner()->transform;
 }
 void TransformComponent::Update() {}
-void TransformComponent::Destroy() {}
+void TransformComponent::Destroy() 
+{
+	std::string s = "DestroyTransformComponent";
+	TraceMessage(s.c_str());
+}
+
 // void TransformComponent::HandleEvent(void* eventData) {}
 
 void TransformComponent::Serialize()

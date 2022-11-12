@@ -11,11 +11,18 @@ public:
 	GameObject* GetGameObjectByName(std::string name);
 	void InitializeGameObjects();
 
+	void CreateAllDebugCollisionAreas();
+
+	void AddForDeletion(GameObject* gobj);
+	void DeferredDeleteGameObjects();
+	void DestroyAllGameObjects();
+
 private:
 	ObjectFactory() {};
 	static ObjectFactory* instance;
 
 	std::unordered_map<std::string, GameObject*> gameobjects;
+	std::vector<GameObject*> gameObjectsToDelete;
 
 	FILE* fp = nullptr;
 	rapidjson::Document doc;

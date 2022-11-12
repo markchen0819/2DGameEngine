@@ -35,6 +35,7 @@
 #include "EventSystem/EventSystem.h"
 
 #include "GameWindow.h"
+#include "FrameRateController.h"
 #include "Experiment/ScreenSaverMovement.h"
 #include "Logging.h"
 #include "InputManager.h"

@@ -30,6 +30,8 @@ public:
 	void Integrate();
 	Body* GetBody();
 
+
+
 private:
 	Body* physicBody = nullptr;
 };

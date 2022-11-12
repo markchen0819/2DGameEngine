@@ -8,7 +8,11 @@ void RenderComponent::Update()
 {
 	Renderer::GetInstance()->UpdateModelMatrix(GetOwner()->GetParent(), GetOwner()->transform);
 }
-void RenderComponent::Destroy() { }
+void RenderComponent::Destroy() 
+{
+	std::string s = "DestroyRenderComponentt";
+	TraceMessage(s.c_str());
+}
 // void RenderComponent::HandleEvent(void* eventData) { }
 
 

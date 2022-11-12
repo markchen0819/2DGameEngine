@@ -32,6 +32,8 @@ void CollisionManager::CheckAllCollisions()
 				if (checked) { continue; }; // Checked before, skip this
 
 				// CheckCollision
+				// Inactive gobj, skip this
+				if (!(*gobjList[i]).CheckIsAlive() || !(*gobjList[j]).CheckIsAlive()) continue;
 				Body* b1 = (*gobjList[i]).GetComponent<PhysicComponent>()->GetBody();
 				Body* b2 = (*gobjList[j]).GetComponent<PhysicComponent>()->GetBody();
 				if (CheckCollision(b1->GetCollisionShape(), b1->Position,b2->GetCollisionShape(),b2->Position))

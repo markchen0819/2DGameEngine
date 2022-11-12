@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\FrameRateController.cpp" />
     <ClCompile Include="src\DataDriven\ResourceManager.cpp" />
     <ClCompile Include="src\DataDriven\ObjectFactory.cpp" />
     <ClCompile Include="src\DataDriven\JSONConstants.cpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="src\Components\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\FrameRateController.h" />
     <ClInclude Include="src\DataDriven\ResourceManager.h" />
     <ClInclude Include="src\DataDriven\ObjectFactory.h" />
     <ClInclude Include="src\DataDriven\JSONConstants.h" />

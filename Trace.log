@@ -28,5 +28,35 @@ PhysicComponent::Deserialize
 PlayerChild
 TransformComponent::Deserialize
 RenderComponent::Deserialize
+---CreateAllDebugCollisionAreas---
+Player
+Player_Collision Area
+Target1
+Target1_Collision Area
+PlayerChild
+Null Component: 
+class PhysicComponent
+No physic component, collision shape not generated
+Target2
+Target2_Collision Area
+Destroy GameObject: Player
+DestroyTransformComponent
+DestroyRenderComponentt
+DestroyPhysicComponent
+Destroy Node: Player
+Destroy GameObject: PlayerChild
+DestroyTransformComponent
+DestroyRenderComponentt
+Destroy Node: PlayerChild
+Destroy GameObject: Target1
+DestroyTransformComponent
+DestroyRenderComponentt
+DestroyPhysicComponent
+Destroy Node: Target1
+Destroy GameObject: Target2
+DestroyTransformComponent
+DestroyRenderComponentt
+DestroyPhysicComponent
+Destroy Node: Target2
 GLFW Terminate success
 TraceShutdown()

@@ -22,6 +22,11 @@ void GameObject::Init()
 }
 void GameObject::Update() 
 {
+	if (setDeleted)
+	{
+		ObjectFactory::GetInstance()->AddForDeletion(this);
+	}
+
 	if (!isAlive) return;
 
 	std::vector<Component*>::iterator it = components.begin();
@@ -38,6 +43,7 @@ void GameObject::Update()
 }
 void GameObject::Destroy() 
 {
+	TraceMessage(("Destroy GameObject: "+ Name).c_str());
 	std::vector<Component*>::iterator it = components.begin();
 	while (it != components.end())
 	{
@@ -70,6 +76,8 @@ void GameObject::Destroy()
 
 void GameObject::Draw()
 {
+	if (!isAlive) return;
+
 	RenderComponent* renderComponent = this->GetComponent<RenderComponent>();
 	if(!renderComponent)
 	{
@@ -87,4 +95,20 @@ void GameObject::SetMaterial(Material* m)
 Material* GameObject::GetMaterial()
 {
 	return material;
+}
+
+
+bool GameObject::CheckIsAlive()
+{
+	return isAlive;
+}
+
+void GameObject::SetAlive(bool b)
+{
+	isAlive = b;
+}
+
+void GameObject::SetToBeDeleted()
+{
+	setDeleted = true;
 }

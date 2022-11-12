@@ -4,7 +4,7 @@ class CollisionShape
 {
 public:
 	CollisionShape();
-	~CollisionShape();
+	virtual ~CollisionShape();
 
 	void SetScale(glm::vec3 s);
 	glm::vec3 GetScale();

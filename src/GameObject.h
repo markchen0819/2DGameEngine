@@ -43,9 +43,14 @@ public:
 	void SetMaterial(Material* m);
 	Material* GetMaterial();
 
+	bool CheckIsAlive();
+	void SetAlive(bool b);
+	void SetToBeDeleted();
+
 private:
 
 	std::vector<Component*> components;
 	bool isAlive = true;
+	bool setDeleted = false;
 };
 

@@ -39,10 +39,15 @@ void Node::Update()
 }
 void Node::Destroy()
 {
+	std::string s = "Destroy Node: " + Name;
+	TraceMessage(s.c_str());
 	for (Node* n : childNodes)
 	{
 		n->Destroy();
+		delete n;
+		n = nullptr;
 	}
+	childNodes.clear();
 }
 //void Node::HandleEvent(void* eventData){ }
 void Node::Draw()
