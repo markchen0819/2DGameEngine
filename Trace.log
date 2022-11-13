@@ -2,73 +2,107 @@ TraceInit()
 GLFW Init() success
 GameWindow created
 InputManger registers GameWindow: 1stWindow
+---------------------
 Scene::LoadResources
----LoadShaders---
+---------------------
+Load Shaders:
 CameraShader
 SampleShader
----LoadTextures---
+
+Load Textures:
 DefaultTexture
 SampleTexture
----LoadMaterial---
+
+Load Materials:
 CollisionMaterial
 SampleMaterial1
 SampleMaterial2
+
+---------------------
 Scene::LoadGameObjects
----CreateGameObjects---
+---------------------
+CreateGameObjects:
+
 Player
 TransformComponent::Deserialize
 RenderComponent::Deserialize
 PhysicComponent::Deserialize
+Player added for collision checking
+
 Target1
 TransformComponent::Deserialize
 RenderComponent::Deserialize
 PhysicComponent::Deserialize
+Target1 added for collision checking
+
 Target2
 TransformComponent::Deserialize
 RenderComponent::Deserialize
 PhysicComponent::Deserialize
+Target2 added for collision checking
+
 PlayerChild
 TransformComponent::Deserialize
 RenderComponent::Deserialize
----CreateAllDebugCollisionAreas---
+
+CreateAllDebugCollisionAreas:
+
 Player
-Player_Collision Area
+Created: Player_Collision Area
+
 Target1
-Target1_Collision Area
+Created: Target1_Collision Area
+
 PlayerChild
 Null Component: 
 class PhysicComponent
 No physic component, collision shape not generated
+
 Target2
-Target2_Collision Area
+Created: Target2_Collision Area
+
+---------------------
+Scene::BuildHiearchy
+---------------------
 Player added to hierachy
 PlayerChild added to hierachy
 Target1 added to hierachy
 Target2 added to hierachy
 All created objects are added to hierachy
+
+---------------------
 Scene::SetupCamara
+---------------------
+Remove child { Target1 } from parent { Root }
+Destroy GameObject: Target1
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Target1 removed from collision checking
+Destroy SelfRotateComponen
+Destroy Node: Target1
+Remove child { Target2 } from parent { Root }
+Destroy GameObject: Target2
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Target2 removed from collision checking
+Destroy SelfRotateComponen
+Destroy Node: Target2
+---------------------
+ Scene::Destroy()
+---------------------
 Destroy Node: Root
 Destroy GameObject: Player
 Destroy TransformComponent
 Destroy RenderComponent
 Destroy PhysicComponent
+Player removed from collision checking
 Destroy Player ControlComponent
 Destroy Node: Player
 Destroy GameObject: PlayerChild
 Destroy TransformComponent
 Destroy RenderComponent
 Destroy Node: PlayerChild
-Destroy GameObject: Target1
-Destroy TransformComponent
-Destroy RenderComponent
-Destroy PhysicComponent
-Destroy SelfRotateComponen
-Destroy Node: Target1
-Destroy GameObject: Target2
-Destroy TransformComponent
-Destroy RenderComponent
-Destroy PhysicComponent
-Destroy SelfRotateComponen
-Destroy Node: Target2
 GLFW Terminate success
 TraceShutdown()

@@ -13,7 +13,7 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::LoadAllShaders(std::string filename)
 {
-	TraceMessage("---LoadShaders---");
+	TraceMessage("Load Shaders:");
 	OpenFileAndGetDoc(filename);
 	rapidjson::Value& shadersInJson = doc.FindMember(JSONConstants::SHADERS)->value;
 	for (rapidjson::Value::ConstMemberIterator itr = shadersInJson.MemberBegin(); itr != shadersInJson.MemberEnd(); ++itr)
@@ -28,7 +28,7 @@ void ResourceManager::LoadAllShaders(std::string filename)
 }
 void ResourceManager::LoadAllTextures(std::string filename)
 {
-	TraceMessage("---LoadTextures---");
+	TraceMessage("Load Textures:");
 	OpenFileAndGetDoc(filename);
 	rapidjson::Value& texturesInJson = doc.FindMember(JSONConstants::TEXTURES)->value;
 	for (rapidjson::Value::ConstMemberIterator itr = texturesInJson.MemberBegin(); itr != texturesInJson.MemberEnd(); ++itr)
@@ -43,7 +43,7 @@ void ResourceManager::LoadAllTextures(std::string filename)
 }
 void ResourceManager::LoadAllMaterials(std::string filename)
 {
-	TraceMessage("---LoadMaterial---");
+	TraceMessage("Load Materials:");
 	OpenFileAndGetDoc(filename);
 	rapidjson::Value& materialsInJson = doc.FindMember(JSONConstants::MATERIALS)->value;
 	for (rapidjson::Value::ConstMemberIterator itr = materialsInJson.MemberBegin(); itr != materialsInJson.MemberEnd(); ++itr)

@@ -8,6 +8,8 @@ public:
 	static PhysicsManager* GetInstance();
 
 	Body* CreateBody();
+	void DeleteBody(Body* newBody);
+
 	void Integrate();
 
 	CollisionManager collisionManager;

@@ -10,6 +10,7 @@ public:
 	void LoadGameObjects(std::string filename);
 	void BuildHiearchy(std::string filename);
 	void SetupCamara(GameWindow* window);
+	void DeferredDeleteGameObject();
 
 	void Update();
 	void LateUpdate();
@@ -26,6 +27,5 @@ private:
 	PhysicsManager* physicsManager; // aggregation
 
 	void recursiveBuildHierachy(rapidjson::Value::ConstMemberIterator nodeIterator, Node* parent);
-
 };
 

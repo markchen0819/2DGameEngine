@@ -18,6 +18,7 @@ public:
 
 	void AddForDeletion(GameObject* gobj);
 	void DeferredDeleteGameObjects();
+	std::vector<GameObject*> GetGameObjectsToDeleteMap();
 
 private:
 	ObjectFactory() {};

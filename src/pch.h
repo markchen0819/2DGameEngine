@@ -34,11 +34,11 @@
 #include "EventSystem/EventListener.h"
 #include "EventSystem/EventSystem.h"
 
-#include "GameWindow.h"
-#include "FrameRateController.h"
+#include "Window/GameWindow.h"
+#include "Window/FrameRateController.h"
 #include "Experiment/ScreenSaverMovement.h"
-#include "Logging.h"
-#include "InputManager.h"
+#include "Logging/Logging.h"
+#include "InputSystem/InputManager.h"
 
 #include "Graphics/Shader.h"
 #include "Graphics/Texture.h"

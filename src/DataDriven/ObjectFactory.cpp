@@ -13,7 +13,7 @@ ObjectFactory::~ObjectFactory()
 
 void ObjectFactory::CreateAllGameObjects(std::string filename)
 {
-	TraceMessage("---CreateGameObjects---");
+	TraceMessage("CreateGameObjects:\n");
 	OpenFileAndGetDoc(filename);
 	rapidjson::Value& gobjsInJson = doc.FindMember(JSONConstants::GAMEOBJECTS)->value;
 	for (rapidjson::Value::ConstMemberIterator itr = gobjsInJson.MemberBegin(); itr != gobjsInJson.MemberEnd(); ++itr)
@@ -22,13 +22,13 @@ void ObjectFactory::CreateAllGameObjects(std::string filename)
 		GameObject* temp = CreateGameObject(thisGobj);
 		gameobjects[temp->GetName()] = temp;
 		gameobjectsInHierachy[temp->GetName()] = false;
+		TraceMessage("");
 	}
 	CloseFile();
 
 }
 GameObject* ObjectFactory::CreateGameObject(const rapidjson::Value& thisGobj)
 {
-
 	GameObject* temp = new GameObject();
 	std::string name_str = thisGobj.FindMember(JSONConstants::GAMEOBJECT_NAME)->value.GetString();
 	std::string mat_str = thisGobj.FindMember(JSONConstants::MATERIAL)->value.GetString();
@@ -84,7 +84,7 @@ void ObjectFactory::InitializeGameObjects()
 
 void ObjectFactory::CreateAllDebugCollisionAreas()
 {
-	TraceMessage("---CreateAllDebugCollisionAreas---");
+	TraceMessage("CreateAllDebugCollisionAreas:\n");
 	for (std::unordered_map<std::string, GameObject*>::iterator itr = gameobjects.begin();
 		itr != gameobjects.end(); itr++)
 	{
@@ -96,8 +96,8 @@ void ObjectFactory::CreateAllDebugCollisionAreas()
 			CollisionAreaObject* cao = new CollisionAreaObject();
 			(*cao).SetName((thisGobj->GetName()+"_Collision Area").c_str());
 			(*cao).SetMaterial(ResourceManager::GetInstance()->GetMaterialByName("CollisionMaterial"));
-			TraceMessage((thisGobj->GetName() + "_Collision Area").c_str());
-
+			TraceMessage(("Created: "+thisGobj->GetName() + "_Collision Area").c_str());
+			TraceMessage("");
 			CollisionShape* cs = pc->GetBody()->GetCollisionShape();
 			ShapeType st = cs->Type;
 			if (st == ShapeType::OBB)
@@ -119,7 +119,7 @@ void ObjectFactory::CreateAllDebugCollisionAreas()
 		}
 		else
 		{
-			TraceMessage("No physic component, collision shape not generated");
+			TraceMessage("No physic component, collision shape not generated\n");
 		}
 	}
 }
@@ -138,7 +138,7 @@ bool ObjectFactory::CheckAllGameObjectsInHierachy()
 			return false;
 		}
 	}
-	TraceMessage("All created objects are added to hierachy");
+	TraceMessage("All created objects are added to hierachy\n");
 	return true;
 }
 
@@ -162,6 +162,11 @@ void ObjectFactory::DeferredDeleteGameObjects()
 		gobj = nullptr;
 	}
 	gameObjectsToDelete.clear();
+}
+
+std::vector<GameObject*> ObjectFactory::GetGameObjectsToDeleteMap()
+{
+	return gameObjectsToDelete;
 }
 
 // helpers

@@ -70,6 +70,20 @@ void Node::AddChild(Node* node)
 	childNodes.push_back(node);
 }
 
+void Node::RemoveChild(Node* node)
+{
+	node->parent = nullptr;
+	for (int i = 0; i < childNodes.size(); ++i)
+	{
+		if (childNodes[i] == node)
+		{
+			TraceMessage(("Remove child { " + node->GetName() + " } from parent { " + this->GetName()+" }").c_str());
+			childNodes.erase(childNodes.begin()+i);
+			break;
+		}
+	}
+}
+
 void Node::SetName(std::string name)
 {
 	Name = name;

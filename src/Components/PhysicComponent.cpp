@@ -1,7 +1,10 @@
 #include "pch.h"
 
 PhysicComponent::PhysicComponent(){}
-PhysicComponent::~PhysicComponent() {}
+PhysicComponent::~PhysicComponent() 
+{
+	PhysicsManager::GetInstance()->collisionManager.RemoveGameObjectForCollisionChecking(GetOwner());
+}
 
 void PhysicComponent::SetTranslation(glm::vec3 p) { physicBody->Position = p; }
 void PhysicComponent::SetRotation(glm::vec3 r) { physicBody->Rotation = r; }
@@ -32,6 +35,7 @@ void PhysicComponent::Init()
 		obbVerticies.push_back(glm::vec4(-100.0f, 100.0f, 0.0f, 1.0f));
 		CollisionOBB* obb = new CollisionOBB(obbVerticies);
 		physicBody->SetCollisionShape(obb);
+		PhysicsManager::GetInstance()->collisionManager.AddGameObjectForCollisionChecking(GetOwner());
 	}
 	// Init transform
 	Transform* trans = GetOwner()->transform;
@@ -45,7 +49,8 @@ void PhysicComponent::Destroy()
 {
 	std::string s = "Destroy PhysicComponent";
 	TraceMessage(s.c_str());
-	delete physicBody;
+	PhysicsManager::GetInstance()->DeleteBody(physicBody);
+	physicBody = nullptr;
 }
 
 //void PhysicComponent::HandleEvent(void* eventData){}

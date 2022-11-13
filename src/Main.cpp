@@ -16,12 +16,12 @@ void collisionCallback(void* eventData)
 		if (converted->gobj1->GetName() != "Player")
 		{
 			converted->gobj1->SetAlive(false);
-			//converted->gobj1->SetToBeDeleted();
+			converted->gobj1->SetToBeDeleted();
 		}
 		if (converted->gobj2->GetName() != "Player")
 		{
 			converted->gobj2->SetAlive(false);
-			//converted->gobj2->SetToBeDeleted();
+			converted->gobj2->SetToBeDeleted();
 		}
 	}
 }
@@ -51,13 +51,9 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	FrameRateController* fpsController = FrameRateController::GetInstance();
 	fpsController->SetTargetFrameRate(60.0);
 
-	/////////////// User logic ///////////////////
-	
-	// Input
 	InputManager* inputmanager = InputManager::GetInstance();
 	inputmanager->Init(mainWindow);
 
-	//Eventsystem
 	EventSystem* eventSystem = EventSystem::GetInstance();
 	EventListener c(collisionCallback, EventType::Collision);
 	eventSystem->AddListener(EventType::Collision, &c);
@@ -71,8 +67,6 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	while (!mainWindow->ShouldClose())// && !secondWindow->ShouldClose()
 	{
 		fpsController->FrameStart();
-		////////////////////////////////
-
 		mainWindow->Update();
 		(*renderer).ClearScreen();
 
@@ -80,21 +74,17 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 		scene.Draw();
 		scene.LateUpdate();
 
-		// Swap buffers and poll IO events
 		mainWindow->SwapBuffers();
-		mainWindow->PollEvents();  // Window events
-		inputmanager->PollEvents();// Input events
-
+		mainWindow->PollEvents(); 
+		inputmanager->PollEvents();
 
 		//ExecuteScreenSaverMovement(mainWindow, deltaTime);
 		// Experimenting 2nd window
 		//secondWindow->Update();
-		////////////////////////////////
+
 		fpsController->FrameEnd();
 	}
 	scene.Destroy();
-
-	/////////////// User logic ///////////////////
 
 	//secondWindow->ShutDown();
     //delete secondWindow;

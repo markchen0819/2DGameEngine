@@ -19,6 +19,11 @@ Body* PhysicsManager::CreateBody()
 	return newBody;
 }
 
+void PhysicsManager::DeleteBody(Body* body)
+{
+	allBodies.erase(std::remove(allBodies.begin(), allBodies.end(), body), allBodies.end());
+}
+
 void PhysicsManager::Integrate()
 {
 	for (Body* b : allBodies)

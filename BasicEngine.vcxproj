@@ -163,7 +163,7 @@
     <ClCompile Include="src\Scene\Root.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\UserDefined\SelfRotateComponent.cpp" />
-    <ClCompile Include="src\FrameRateController.cpp" />
+    <ClCompile Include="src\Window\FrameRateController.cpp" />
     <ClCompile Include="src\DataDriven\ResourceManager.cpp" />
     <ClCompile Include="src\DataDriven\ObjectFactory.cpp" />
     <ClCompile Include="src\DataDriven\JSONConstants.cpp" />
@@ -186,7 +186,7 @@
     <ClCompile Include="src\Physics\CollisionManager.cpp" />
     <ClCompile Include="src\Physics\CollisionCircle.cpp" />
     <ClCompile Include="src\Physics\CollisionShape.cpp" />
-    <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\InputSystem\InputManager.cpp" />
     <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Graphics\Material.cpp" />
     <ClCompile Include="src\Graphics\Node.cpp" />
@@ -196,9 +196,9 @@
     <ClCompile Include="src\Graphics\Mesh.cpp" />
     <ClCompile Include="src\Scene\GameObject.cpp" />
     <ClCompile Include="src\Experiment\ScreenSaverMovement.cpp" />
-    <ClCompile Include="src\Logging.cpp" />
+    <ClCompile Include="src\Logging\Logging.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\GameWindow.cpp" />
+    <ClCompile Include="src\Window\GameWindow.cpp" />
     <ClCompile Include="src\Graphics\Transform.cpp" />
     <ClCompile Include="src\Graphics\Texture.cpp" />
     <ClCompile Include="src\Components\TransformComponent.cpp" />
@@ -208,7 +208,7 @@
     <ClInclude Include="src\Scene\Root.h" />
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\UserDefined\SelfRotateComponent.h" />
-    <ClInclude Include="src\FrameRateController.h" />
+    <ClInclude Include="src\Window\FrameRateController.h" />
     <ClInclude Include="src\DataDriven\ResourceManager.h" />
     <ClInclude Include="src\DataDriven\ObjectFactory.h" />
     <ClInclude Include="src\DataDriven\JSONConstants.h" />
@@ -229,7 +229,7 @@
     <ClInclude Include="src\Physics\CollisionManager.h" />
     <ClInclude Include="src\Physics\CollisionCircle.h" />
     <ClInclude Include="src\Physics\CollisionShape.h" />
-    <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\InputSystem\InputManager.h" />
     <ClInclude Include="src\Graphics\Color.h" />
     <ClInclude Include="src\Graphics\Material.h" />
     <ClInclude Include="src\Graphics\Node.h" />
@@ -521,8 +521,8 @@
     <ClInclude Include="src\Graphics\Shader.h" />
     <ClInclude Include="src\Graphics\Mesh.h" />
     <ClInclude Include="src\Scene\GameObject.h" />
-    <ClInclude Include="src\Logging.h" />
-    <ClInclude Include="src\GameWindow.h" />
+    <ClInclude Include="src\Logging\Logging.h" />
+    <ClInclude Include="src\Window\GameWindow.h" />
     <ClInclude Include="src\Experiment\ScreenSaverMovement.h" />
     <ClInclude Include="src\Graphics\Transform.h" />
     <ClInclude Include="src\Graphics\Texture.h" />

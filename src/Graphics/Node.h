@@ -15,6 +15,7 @@ public:
 
 	Node* GetParent();
 	void AddChild(Node* node);
+	void RemoveChild(Node* node);
 
 	Transform* transform = nullptr;
 	Mesh* mesh = nullptr;

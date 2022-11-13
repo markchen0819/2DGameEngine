@@ -14,8 +14,9 @@ Scene::~Scene()
 
 void Scene::LoadResources(std::string filename) 
 {
+	TraceMessage("---------------------");
 	TraceMessage("Scene::LoadResources");
-
+	TraceMessage("---------------------");
 	FILE* fp;
 	rapidjson::Document doc;
 	fopen_s(&fp, filename.c_str(), "rb");
@@ -31,17 +32,22 @@ void Scene::LoadResources(std::string filename)
 	//
 	std::string shadersStr = doc.FindMember(JSONConstants::SHADERS)->value.GetString();
 	resourceManager->LoadAllShaders(shadersStr);
+	TraceMessage("");
 	std::string texturesStr = doc.FindMember(JSONConstants::TEXTURES)->value.GetString();
 	resourceManager->LoadAllTextures(texturesStr);
+	TraceMessage("");
 	std::string materialsStr = doc.FindMember(JSONConstants::MATERIALS)->value.GetString();
 	resourceManager->LoadAllMaterials(materialsStr);
+	TraceMessage("");
 	//
 	fclose(fp);
 }
 
 void Scene::LoadGameObjects(std::string filename) 
 {
+	TraceMessage("---------------------");
 	TraceMessage("Scene::LoadGameObjects");
+	TraceMessage("---------------------");
 
 	objectFactory->CreateAllGameObjects(filename);
 
@@ -60,6 +66,9 @@ void Scene::LoadGameObjects(std::string filename)
 
 void Scene::BuildHiearchy(std::string filename)
 {
+	TraceMessage("---------------------");
+	TraceMessage("Scene::BuildHiearchy");
+	TraceMessage("---------------------");
 	FILE* fp;
 	rapidjson::Document doc;
 	fopen_s(&fp, filename.c_str(), "rb");
@@ -102,7 +111,9 @@ void Scene::recursiveBuildHierachy(rapidjson::Value::ConstMemberIterator nodeIte
 
 void Scene::SetupCamara(GameWindow* window)
 {
+	TraceMessage("---------------------");
 	TraceMessage("Scene::SetupCamara");
+	TraceMessage("---------------------");
 
 	Renderer* renderer = Renderer::GetInstance();
 	Shader* cameraShader = resourceManager->GetShaderByName("CameraShader");
@@ -116,6 +127,18 @@ void Scene::SetupCamara(GameWindow* window)
 	(*renderer).UnuseShaderProgram();
 }
 
+void Scene::DeferredDeleteGameObject()
+{
+	// Remove from the hierachy (nullptr fixes)
+	const std::vector<GameObject*> gameObjectsToDelete = objectFactory->GetGameObjectsToDeleteMap();
+	for (GameObject* gobj : gameObjectsToDelete)
+	{
+		(*gobj).GetParent()->RemoveChild(gobj);
+	}
+	// Actual Object Deletion
+	objectFactory->DeferredDeleteGameObjects();
+}
+
 void Scene::Update()
 {
 	root.Update();
@@ -125,7 +148,7 @@ void Scene::LateUpdate()
 {
 	(*physicsManager).collisionManager.CheckAllCollisions();
 	(*physicsManager).Integrate();
-	objectFactory->DeferredDeleteGameObjects();
+	DeferredDeleteGameObject();
 }
 
 void Scene::Draw()
@@ -135,6 +158,9 @@ void Scene::Draw()
 
 void Scene::Destroy()
 {
+	TraceMessage("---------------------");
+	TraceMessage(" Scene::Destroy()");
+	TraceMessage("---------------------");
 	root.Destroy();
 	resourceManager->UnloadAllResources();
 }

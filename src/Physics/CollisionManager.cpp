@@ -5,8 +5,15 @@ CollisionManager::~CollisionManager() { }
 
 void CollisionManager::AddGameObjectForCollisionChecking(GameObject* gobj)
 {
+	TraceMessage((gobj->GetName() + " added for collision checking").c_str());
 	gobjList.push_back(gobj);
 }
+void CollisionManager::RemoveGameObjectForCollisionChecking(GameObject* gobj)
+{
+	TraceMessage((gobj->GetName() + " removed from collision checking").c_str());
+	gobjList.erase(std::remove(gobjList.begin(), gobjList.end(), gobj), gobjList.end());
+}
+
 void CollisionManager::CheckAllCollisions()
 {
 	std::vector<int> x;
