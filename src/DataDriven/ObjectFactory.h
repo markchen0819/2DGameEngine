@@ -13,15 +13,18 @@ public:
 
 	void CreateAllDebugCollisionAreas();
 
+	bool CheckAllGameObjectsInHierachy();
+	void SetGameObjectInHierachy(std::string name);
+
 	void AddForDeletion(GameObject* gobj);
 	void DeferredDeleteGameObjects();
-	void DestroyAllGameObjects();
 
 private:
 	ObjectFactory() {};
 	static ObjectFactory* instance;
 
 	std::unordered_map<std::string, GameObject*> gameobjects;
+	std::unordered_map<std::string, bool> gameobjectsInHierachy;
 	std::vector<GameObject*> gameObjectsToDelete;
 
 	FILE* fp = nullptr;

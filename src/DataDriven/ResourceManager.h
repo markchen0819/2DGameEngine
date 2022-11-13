@@ -13,6 +13,7 @@ public:
 	void LoadAllShaders(std::string filename);
 	void LoadAllTextures(std::string filename);
 	void LoadAllMaterials(std::string filename);
+	void UnloadAllResources();
 
 	Shader* GetShaderByName(std::string name);
 	Texture* GetTextureByName(std::string name);

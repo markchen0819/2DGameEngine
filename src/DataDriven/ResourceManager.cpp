@@ -8,21 +8,6 @@ ResourceManager* ResourceManager::GetInstance()
 }
 ResourceManager::~ResourceManager()
 {
-	for (std::unordered_map<std::string, Material*>::iterator itr = materials.begin();
-		itr != materials.end(); itr++)
-	{
-		delete itr->second;
-	}
-	for (std::unordered_map<std::string, Texture*>::iterator itr = textures.begin();
-		itr != textures.end(); itr++)
-	{
-		delete itr->second;
-	}
-	for (std::unordered_map<std::string, Shader*>::iterator itr = shaders.begin();
-		itr != shaders.end(); itr++)
-	{
-		delete itr->second;
-	}
 	delete instance;
 }
 
@@ -77,6 +62,25 @@ void ResourceManager::LoadAllMaterials(std::string filename)
 		TraceMessage(temp->GetName().c_str());
 	}
 	CloseFile();
+}
+
+void ResourceManager::UnloadAllResources()
+{
+	for (std::unordered_map<std::string, Material*>::iterator itr = materials.begin();
+		itr != materials.end(); itr++)
+	{
+		delete itr->second;
+	}
+	for (std::unordered_map<std::string, Texture*>::iterator itr = textures.begin();
+		itr != textures.end(); itr++)
+	{
+		delete itr->second;
+	}
+	for (std::unordered_map<std::string, Shader*>::iterator itr = shaders.begin();
+		itr != shaders.end(); itr++)
+	{
+		delete itr->second;
+	}
 }
 
 Shader* ResourceManager::GetShaderByName(std::string name)

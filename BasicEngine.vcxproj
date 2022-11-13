@@ -159,6 +159,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\UserDefined\PlayerControlComponent.cpp" />
+    <ClCompile Include="src\Scene\Root.cpp" />
+    <ClCompile Include="src\Scene\Scene.cpp" />
+    <ClCompile Include="src\UserDefined\SelfRotateComponent.cpp" />
     <ClCompile Include="src\FrameRateController.cpp" />
     <ClCompile Include="src\DataDriven\ResourceManager.cpp" />
     <ClCompile Include="src\DataDriven\ObjectFactory.cpp" />
@@ -187,10 +191,10 @@
     <ClCompile Include="src\Graphics\Material.cpp" />
     <ClCompile Include="src\Graphics\Node.cpp" />
     <ClCompile Include="src\Graphics\Renderer.cpp" />
-    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Graphics\Camera.cpp" />
     <ClCompile Include="src\Graphics\Shader.cpp" />
     <ClCompile Include="src\Graphics\Mesh.cpp" />
-    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Scene\GameObject.cpp" />
     <ClCompile Include="src\Experiment\ScreenSaverMovement.cpp" />
     <ClCompile Include="src\Logging.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -200,6 +204,10 @@
     <ClCompile Include="src\Components\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\UserDefined\PlayerControlComponent.h" />
+    <ClInclude Include="src\Scene\Root.h" />
+    <ClInclude Include="src\Scene\Scene.h" />
+    <ClInclude Include="src\UserDefined\SelfRotateComponent.h" />
     <ClInclude Include="src\FrameRateController.h" />
     <ClInclude Include="src\DataDriven\ResourceManager.h" />
     <ClInclude Include="src\DataDriven\ObjectFactory.h" />
@@ -226,7 +234,7 @@
     <ClInclude Include="src\Graphics\Material.h" />
     <ClInclude Include="src\Graphics\Node.h" />
     <ClInclude Include="src\Graphics\Renderer.h" />
-    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Graphics\Camera.h" />
     <ClInclude Include="dependencies\glm\common.hpp" />
     <ClInclude Include="dependencies\glm\detail\compute_common.hpp" />
     <ClInclude Include="dependencies\glm\detail\compute_vector_relational.hpp" />
@@ -512,7 +520,7 @@
     <ClInclude Include="dependencies\stb_image.h" />
     <ClInclude Include="src\Graphics\Shader.h" />
     <ClInclude Include="src\Graphics\Mesh.h" />
-    <ClInclude Include="src\GameObject.h" />
+    <ClInclude Include="src\Scene\GameObject.h" />
     <ClInclude Include="src\Logging.h" />
     <ClInclude Include="src\GameWindow.h" />
     <ClInclude Include="src\Experiment\ScreenSaverMovement.h" />
@@ -660,8 +668,10 @@
     <None Include="dependencies\glm\gtx\wrap.inl" />
     <None Include="src\Assets\Jsons\AllGameObjects.json" />
     <None Include="src\Assets\Jsons\AllMaterials.json" />
+    <None Include="src\Assets\Jsons\AllResources.json" />
     <None Include="src\Assets\Jsons\AllShaders.json" />
     <None Include="src\Assets\Jsons\AllTextures.json" />
+    <None Include="src\Assets\Jsons\Hierachy.json" />
     <None Include="src\Assets\Jsons\Player.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

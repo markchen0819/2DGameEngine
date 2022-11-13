@@ -49,7 +49,7 @@
 #include "Graphics/Transform.h"
 #include "Graphics/Node.h"
 #include "Graphics/Renderer.h"
-#include "Camera.h"
+#include "Graphics/Camera.h"
 
 #include "Physics/ShapeType.h"
 #include "Debug/CollisionAreaObject.h"
@@ -62,10 +62,16 @@
 #include "Physics/PhysicsManager.h"
 
 #include "Components/Component.h" 
-#include "GameObject.h"
+#include "Scene/GameObject.h"
 #include "Components/TransformComponent.h"
 #include "Components/RenderComponent.h"
 #include "Components/PhysicComponent.h"
 
 #include "DataDriven/ResourceManager.h"
 #include "DataDriven/ObjectFactory.h"
+#include "Scene/Root.h"
+#include "Scene/Scene.h"
+
+
+#include "UserDefined/SelfRotateComponent.h"
+#include "UserDefined/PlayerControlComponent.h"

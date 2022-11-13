@@ -43,7 +43,7 @@ void PhysicComponent::Init()
 void PhysicComponent::Update() { }
 void PhysicComponent::Destroy() 
 {
-	std::string s = "DestroyPhysicComponent";
+	std::string s = "Destroy PhysicComponent";
 	TraceMessage(s.c_str());
 	delete physicBody;
 }
@@ -108,6 +108,7 @@ void PhysicComponent::Deserialize(const rapidjson::Value& componentMembers)
 		}
 		CollisionOBB* obb = new CollisionOBB(obbVertices);
 		physicBody->SetCollisionShape(obb);
+		PhysicsManager::GetInstance()->collisionManager.AddGameObjectForCollisionChecking(GetOwner());
 	}
 
 }

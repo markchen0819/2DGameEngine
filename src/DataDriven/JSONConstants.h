@@ -47,5 +47,7 @@ public:
 	static const char* const INVERSEMASS;
 	static const char* const COLLISION_SHAPE_TYPE;
 
+	static const char* const ROOT;
+
 };
 

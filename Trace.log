@@ -2,6 +2,7 @@ TraceInit()
 GLFW Init() success
 GameWindow created
 InputManger registers GameWindow: 1stWindow
+Scene::LoadResources
 ---LoadShaders---
 CameraShader
 SampleShader
@@ -12,6 +13,7 @@ SampleTexture
 CollisionMaterial
 SampleMaterial1
 SampleMaterial2
+Scene::LoadGameObjects
 ---CreateGameObjects---
 Player
 TransformComponent::Deserialize
@@ -39,24 +41,34 @@ class PhysicComponent
 No physic component, collision shape not generated
 Target2
 Target2_Collision Area
+Player added to hierachy
+PlayerChild added to hierachy
+Target1 added to hierachy
+Target2 added to hierachy
+All created objects are added to hierachy
+Scene::SetupCamara
+Destroy Node: Root
 Destroy GameObject: Player
-DestroyTransformComponent
-DestroyRenderComponentt
-DestroyPhysicComponent
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Destroy Player ControlComponent
 Destroy Node: Player
 Destroy GameObject: PlayerChild
-DestroyTransformComponent
-DestroyRenderComponentt
+Destroy TransformComponent
+Destroy RenderComponent
 Destroy Node: PlayerChild
 Destroy GameObject: Target1
-DestroyTransformComponent
-DestroyRenderComponentt
-DestroyPhysicComponent
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Destroy SelfRotateComponen
 Destroy Node: Target1
 Destroy GameObject: Target2
-DestroyTransformComponent
-DestroyRenderComponentt
-DestroyPhysicComponent
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Destroy SelfRotateComponen
 Destroy Node: Target2
 GLFW Terminate success
 TraceShutdown()

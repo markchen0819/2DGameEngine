@@ -31,7 +31,6 @@ int main(int argc, char* argv[]) // Entry Point
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	execute();
-	_CrtDumpMemoryLeaks();
 }
 void execute() // All code to excute (for CRT detect memory leak and VS heap snapshot)
 {
@@ -49,7 +48,6 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	//secondWindow->Props.Title = "2ndWindow";
 	//secondWindow->Init();
 
-
 	FrameRateController* fpsController = FrameRateController::GetInstance();
 	fpsController->SetTargetFrameRate(60.0);
 
@@ -59,52 +57,16 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 	InputManager* inputmanager = InputManager::GetInstance();
 	inputmanager->Init(mainWindow);
 
-	// ResourceManager
-	ResourceManager* resourceManager = ResourceManager::GetInstance();
-	resourceManager->LoadAllShaders("src/Assets/Jsons/AllShaders.json");
-	resourceManager->LoadAllTextures("src/Assets/Jsons/AllTextures.json");
-	resourceManager->LoadAllMaterials("src/Assets/Jsons/AllMaterials.json");
-
-	// ObjectFactory
-	ObjectFactory* objectFactory = ObjectFactory::GetInstance();
-	objectFactory->CreateAllGameObjects("src/Assets/Jsons/AllGameObjects.json");
-	objectFactory->InitializeGameObjects();
-	objectFactory->CreateAllDebugCollisionAreas();
-
-	// Assign GameObjects from factory
-	GameObject* player = objectFactory->GetGameObjectByName("Player");
-	TransformComponent* playerTC = (*player).GetComponent<TransformComponent>();
-	PhysicComponent* playerPC = (*player).GetComponent<PhysicComponent>();
-	GameObject* playerChild = objectFactory->GetGameObjectByName("PlayerChild");
-	(*player).AddChild(playerChild);
-	GameObject* targetObj1 = objectFactory->GetGameObjectByName("Target1");
-	GameObject* targetObj2 = objectFactory->GetGameObjectByName("Target2");
-	TransformComponent* targetObj1TC = (*targetObj1).GetComponent<TransformComponent>();
-	TransformComponent* targetObj2TC = (*targetObj2).GetComponent<TransformComponent>();
-
-
-	// Create camera and Set Shader's View Projection uniform
-	Shader* cameraShader = resourceManager->GetShaderByName("CameraShader");
-	Shader* sampleShader = resourceManager->GetShaderByName("SampleShader");
-	(*cameraShader).useProgram();
-	Camera camera(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), mainWindow->Props.Heigth, mainWindow->Props.Width);
-	camera.SetShaderVP(*cameraShader);
-	(*renderer).UnuseShaderProgram();
-	(*sampleShader).useProgram();
-	camera.SetShaderVP(*sampleShader);
-	(*renderer).UnuseShaderProgram();
-
-	// Handle collisions
-	PhysicsManager* physicsManager = PhysicsManager::GetInstance();
-	(*physicsManager).collisionManager.AddGameObjectForCollisionChecking(player);
-	(*physicsManager).collisionManager.AddGameObjectForCollisionChecking(targetObj1);
-	(*physicsManager).collisionManager.AddGameObjectForCollisionChecking(targetObj2);
-
 	//Eventsystem
 	EventSystem* eventSystem = EventSystem::GetInstance();
 	EventListener c(collisionCallback, EventType::Collision);
 	eventSystem->AddListener(EventType::Collision, &c);
 
+	Scene scene;
+	scene.LoadResources("src/Assets/Jsons/AllResources.json");
+	scene.LoadGameObjects("src/Assets/Jsons/AllGameObjects.json");
+	scene.BuildHiearchy("src/Assets/Jsons/Hierachy.json");
+	scene.SetupCamara(mainWindow);
 
 	while (!mainWindow->ShouldClose())// && !secondWindow->ShouldClose()
 	{
@@ -114,58 +76,23 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 		mainWindow->Update();
 		(*renderer).ClearScreen();
 
-		// Input
-		if (inputmanager->IsKeyDown(RIGHT))
-		{
-			playerPC->SetAngularVelocity(glm::vec3(0.0f, 0.0f, -5.0f));
-		}
-		if (inputmanager->IsKeyDown(LEFT))
-		{
-			playerPC->SetAngularVelocity(glm::vec3(0.0f, 0.0f, 5.0f));
-		}
-		if (inputmanager->IsKeyDown(UP))
-		{
-			playerPC->SetVelocity(glm::vec3(playerTC->GetRotationMatrix() * glm::vec4(0.0f, 5.0f, 0.0f, 1.0f)));
-		}
-		if (inputmanager->IsKeyDown(DOWN))
-		{
-			playerPC->SetVelocity(glm::vec3(playerTC->GetRotationMatrix() * glm::vec4(0.0f, -5.0f, 0.0f, 1.0f)));
-		}
-
-
-		targetObj1TC->SetRotation(0, 0, targetObj1TC->GetRotation().z + 100 * fpsController->DeltaTime());
-		targetObj2TC->SetRotation(0, 0, targetObj1TC->GetRotation().z - 100 * fpsController->DeltaTime());
-
-		//// Render ////
-
-		(*player).Update();
-		(*targetObj1).Update();
-		(*targetObj2).Update();
-
-		(*player).Draw();
-		(*targetObj1).Draw();
-		(*targetObj2).Draw();
-
-		//// Physics ////
-		(*physicsManager).collisionManager.CheckAllCollisions();
-		(*physicsManager).Integrate();
+		scene.Update();
+		scene.Draw();
+		scene.LateUpdate();
 
 		// Swap buffers and poll IO events
 		mainWindow->SwapBuffers();
 		mainWindow->PollEvents();  // Window events
 		inputmanager->PollEvents();// Input events
 
+
 		//ExecuteScreenSaverMovement(mainWindow, deltaTime);
 		// Experimenting 2nd window
 		//secondWindow->Update();
-		objectFactory->DeferredDeleteGameObjects();
 		////////////////////////////////
 		fpsController->FrameEnd();
 	}
-	//objectFactory->DestroyAllGameObjects();
-	(*player).Destroy();
-	(*targetObj1).Destroy();
-	(*targetObj2).Destroy();
+	scene.Destroy();
 
 	/////////////// User logic ///////////////////
 
@@ -176,7 +103,6 @@ void execute() // All code to excute (for CRT detect memory leak and VS heap sna
 
 	(*renderer).TerminateGLFW();
 	TraceShutdown();
-
 }
 
 

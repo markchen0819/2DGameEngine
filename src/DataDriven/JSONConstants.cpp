@@ -44,3 +44,5 @@ const char* const JSONConstants:: ANGULARVELOCITY = "AngularVelocity";
 const char* const JSONConstants:: MASS = "Mass";
 const char* const JSONConstants:: INVERSEMASS = "InverseMass";
 const char* const JSONConstants:: COLLISION_SHAPE_TYPE = "CollisionShapeType";
+
+const char* const JSONConstants::ROOT = "Root";

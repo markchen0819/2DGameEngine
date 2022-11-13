@@ -10,7 +10,7 @@ void RenderComponent::Update()
 }
 void RenderComponent::Destroy() 
 {
-	std::string s = "DestroyRenderComponentt";
+	std::string s = "Destroy RenderComponent";
 	TraceMessage(s.c_str());
 }
 // void RenderComponent::HandleEvent(void* eventData) { }

@@ -52,7 +52,7 @@ void TransformComponent::Init()
 void TransformComponent::Update() {}
 void TransformComponent::Destroy() 
 {
-	std::string s = "DestroyTransformComponent";
+	std::string s = "Destroy TransformComponent";
 	TraceMessage(s.c_str());
 }
 

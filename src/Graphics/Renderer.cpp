@@ -37,6 +37,11 @@ void Renderer::UnuseShaderProgram()
 }
 void Renderer::Draw(std::string Name, Transform* transform, Mesh* mesh, Material* material)
 {
+	if (Name == "Root")
+	{
+		// We don't draw the root
+		return;
+	}
 	if (material == nullptr)
 	{
 		std::string s = "Error: Node [" + Name + "] has not attached a material";
