@@ -42,7 +42,6 @@ void Scene::LoadResources(std::string filename)
 	//
 	fclose(fp);
 }
-
 void Scene::LoadGameObjects(std::string filename) 
 {
 	TraceMessage("---------------------");
@@ -63,7 +62,6 @@ void Scene::LoadGameObjects(std::string filename)
 	objectFactory->InitializeGameObjects();
 	objectFactory->CreateAllDebugCollisionAreas();
 }
-
 void Scene::BuildHiearchy(std::string filename)
 {
 	TraceMessage("---------------------");
@@ -108,7 +106,6 @@ void Scene::recursiveBuildHierachy(rapidjson::Value::ConstMemberIterator nodeIte
 		}
 	}
 }
-
 void Scene::SetupCamara(GameWindow* window)
 {
 	TraceMessage("---------------------");
@@ -126,16 +123,15 @@ void Scene::SetupCamara(GameWindow* window)
 	camera.SetShaderVP(*sampleShader);
 	(*renderer).UnuseShaderProgram();
 }
-
 void Scene::DeferredDeleteGameObject()
 {
-	// Remove from the hierachy (nullptr fixes)
-	const std::vector<GameObject*> gameObjectsToDelete = objectFactory->GetGameObjectsToDeleteMap();
+	// Remove from the scene hierachy (nullptr fixes)
+	const std::vector<GameObject*> gameObjectsToDelete = objectFactory->GetGameObjectsToDeleteVector();
 	for (GameObject* gobj : gameObjectsToDelete)
 	{
 		(*gobj).GetParent()->RemoveChild(gobj);
 	}
-	// Actual Object Deletion
+	// Actual Object Deletion (free memory of objects)
 	objectFactory->DeferredDeleteGameObjects();
 }
 
@@ -143,19 +139,16 @@ void Scene::Update()
 {
 	root.Update();
 }
-
 void Scene::LateUpdate()
 {
 	(*physicsManager).collisionManager.CheckAllCollisions();
 	(*physicsManager).Integrate();
 	DeferredDeleteGameObject();
 }
-
 void Scene::Draw()
 {
 	root.Draw();
 }
-
 void Scene::Destroy()
 {
 	TraceMessage("---------------------");
@@ -163,9 +156,4 @@ void Scene::Destroy()
 	TraceMessage("---------------------");
 	root.Destroy();
 	resourceManager->UnloadAllResources();
-}
-
-GameObject* Scene::GetGameObjectByName(std::string name)
-{
-	return objectFactory->GetGameObjectByName(name);
 }

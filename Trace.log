@@ -70,29 +70,13 @@ Target1 added to hierachy
 Target2 added to hierachy
 All created objects are added to hierachy
 
+Clear ObjectFactory
+
 ---------------------
 Scene::SetupCamara
 ---------------------
-Remove child { Target1 } from parent { Root }
-Destroy GameObject: Target1
-Destroy TransformComponent
-Destroy RenderComponent
-Destroy PhysicComponent
-Target1 removed from collision checking
-Destroy SelfRotateComponen
-Destroy Node: Target1
+Remove child { Player } from parent { Root }
 Remove child { Target2 } from parent { Root }
-Destroy GameObject: Target2
-Destroy TransformComponent
-Destroy RenderComponent
-Destroy PhysicComponent
-Target2 removed from collision checking
-Destroy SelfRotateComponen
-Destroy Node: Target2
----------------------
- Scene::Destroy()
----------------------
-Destroy Node: Root
 Destroy GameObject: Player
 Destroy TransformComponent
 Destroy RenderComponent
@@ -104,5 +88,23 @@ Destroy GameObject: PlayerChild
 Destroy TransformComponent
 Destroy RenderComponent
 Destroy Node: PlayerChild
+Destroy GameObject: Target2
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Target2 removed from collision checking
+Destroy SelfRotateComponen
+Destroy Node: Target2
+---------------------
+ Scene::Destroy()
+---------------------
+Destroy Node: Root
+Destroy GameObject: Target1
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Target1 removed from collision checking
+Destroy SelfRotateComponen
+Destroy Node: Target1
 GLFW Terminate success
 TraceShutdown()

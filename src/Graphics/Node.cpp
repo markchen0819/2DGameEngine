@@ -72,16 +72,17 @@ void Node::AddChild(Node* node)
 
 void Node::RemoveChild(Node* node)
 {
-	node->parent = nullptr;
 	for (int i = 0; i < childNodes.size(); ++i)
 	{
 		if (childNodes[i] == node)
 		{
+			node->parent = nullptr;
 			TraceMessage(("Remove child { " + node->GetName() + " } from parent { " + this->GetName()+" }").c_str());
 			childNodes.erase(childNodes.begin()+i);
-			break;
+			return;
 		}
 	}
+	TraceMessage(("Target child { " + node->GetName() + " } is not under { " + this->GetName() + " }").c_str());
 }
 
 void Node::SetName(std::string name)

@@ -17,8 +17,6 @@ public:
 	void Draw();
 	void Destroy();
 
-	GameObject* GetGameObjectByName(std::string name);
-
 private:
 
 	Root root;
