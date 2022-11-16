@@ -672,7 +672,6 @@
     <None Include="src\Assets\Jsons\AllShaders.json" />
     <None Include="src\Assets\Jsons\AllTextures.json" />
     <None Include="src\Assets\Jsons\Hierachy.json" />
-    <None Include="src\Assets\Jsons\Player.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

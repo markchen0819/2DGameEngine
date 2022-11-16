@@ -20,6 +20,8 @@ void Renderer::InitGLFW()
 		exit(EXIT_FAILURE);
 	}
 	TraceMessage("GLFW Init() success");
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 void Renderer::TerminateGLFW()
 {
@@ -37,6 +39,7 @@ void Renderer::UnuseShaderProgram()
 }
 void Renderer::Draw(std::string Name, Transform* transform, Mesh* mesh, Material* material)
 {
+
 	if (Name == "Root")
 	{
 		// We don't draw the root
