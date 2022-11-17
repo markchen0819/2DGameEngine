@@ -159,6 +159,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\UserDefined\Level2.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\ServiceLocator.cpp" />
+    <ClCompile Include="src\GameEngine.cpp" />
     <ClCompile Include="src\UserDefined\PlayerControlComponent.cpp" />
     <ClCompile Include="src\Scene\Root.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
@@ -204,6 +208,10 @@
     <ClCompile Include="src\Components\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\UserDefined\Level2.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\ServiceLocator.h" />
+    <ClInclude Include="src\GameEngine.h" />
     <ClInclude Include="src\UserDefined\PlayerControlComponent.h" />
     <ClInclude Include="src\Scene\Root.h" />
     <ClInclude Include="src\Scene\Scene.h" />

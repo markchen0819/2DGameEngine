@@ -7,7 +7,7 @@ public:
 	~Event() {};
 };
 
-// Test
+
 class GameObject;
 class CollisionEvent : public Event
 {
@@ -19,4 +19,14 @@ public:
 
 	GameObject* gobj1;
 	GameObject* gobj2;
+};
+
+class Scene;
+class SceneChangeEvent : public Event
+{
+public:
+	SceneChangeEvent(Scene* scene): nextScene(scene){};
+	~SceneChangeEvent() {};
+
+	Scene* nextScene;
 };

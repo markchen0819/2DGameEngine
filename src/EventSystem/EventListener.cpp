@@ -17,6 +17,11 @@ void EventListener::SetCallback(std::function<void(void*)> c)
 	callback = c;
 }
 
+void EventListener::SetType(EventType t)
+{
+	Type = t;
+}
+
 std::function<void(void*)> EventListener::GetCallback()
 {
 	return callback;

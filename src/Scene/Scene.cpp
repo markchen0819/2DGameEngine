@@ -1,15 +1,40 @@
 #include "pch.h"
 
-
 Scene::Scene()
 {
+	//TraceMessage("Scene ctor");
 	resourceManager = ResourceManager::GetInstance();
 	objectFactory = ObjectFactory::GetInstance();
 	physicsManager = PhysicsManager::GetInstance();
 }
-
+Scene::Scene(std::string name) : Name(name)
+{
+	//TraceMessage(("Scene ctor "+ Name).c_str());
+	resourceManager = ResourceManager::GetInstance();
+	objectFactory = ObjectFactory::GetInstance();
+	physicsManager = PhysicsManager::GetInstance();
+}
 Scene::~Scene()
 {
+	//TraceMessage(("Scene dtor " + Name).c_str());
+}
+
+void Scene::Init(GameWindow* gw)
+{
+	TraceMessage("---------------------");
+	TraceMessage(" Scene::Init()");
+	TraceMessage("---------------------");
+
+	// Load scene data into memory here
+
+	//LoadResources("src/Assets/Jsons/AllResources.json");
+	//LoadGameObjects("src/Assets/Jsons/AllGameObjects.json");
+	//BuildHiearchy("src/Assets/Jsons/Hierachy.json");
+	//SetupCamara(gw);
+
+	TraceMessage("---------------------");
+	TraceMessage(" Scene::Init() finished");
+	TraceMessage("---------------------");
 }
 
 void Scene::LoadResources(std::string filename) 
@@ -49,17 +74,19 @@ void Scene::LoadGameObjects(std::string filename)
 	TraceMessage("---------------------");
 
 	objectFactory->CreateAllGameObjects(filename);
-
-	// Factor this out in the future
-	GameObject* player = objectFactory->GetGameObjectByName("Player");
-	GameObject* playerChild = objectFactory->GetGameObjectByName("PlayerChild");
-	GameObject* targetObj1 = objectFactory->GetGameObjectByName("Target1");
-	GameObject* targetObj2 = objectFactory->GetGameObjectByName("Target2");
-	player->AddComponent<PlayerControlComponent>();
-	targetObj1->AddComponent<SelfRotateComponent>();
-	targetObj2->AddComponent<SelfRotateComponent>();
-
+}
+void Scene::InitializeGameObjects()
+{
+	TraceMessage("---------------------");
+	TraceMessage("Scene::InitGameObjects()");
+	TraceMessage("---------------------");
 	objectFactory->InitializeGameObjects();
+}
+void Scene::CreateAllDebugCollisionAreas()
+{
+	TraceMessage("---------------------");
+	TraceMessage("Scene::CreateAllDebugCollisionAreas()");
+	TraceMessage("---------------------");
 	objectFactory->CreateAllDebugCollisionAreas();
 }
 void Scene::BuildHiearchy(std::string filename)
@@ -129,6 +156,9 @@ void Scene::DeferredDeleteGameObject()
 	const std::vector<GameObject*> gameObjectsToDelete = objectFactory->GetGameObjectsToDeleteVector();
 	for (GameObject* gobj : gameObjectsToDelete)
 	{
+		TraceMessage("---------------------");
+		TraceMessage("Scene::DeferredDeleteGameObject()");
+		TraceMessage("---------------------");
 		(*gobj).GetParent()->RemoveChild(gobj);
 	}
 	// Actual Object Deletion (free memory of objects)
@@ -137,23 +167,42 @@ void Scene::DeferredDeleteGameObject()
 
 void Scene::Update()
 {
+	if (!isRunning) return;
 	root.Update();
 }
 void Scene::LateUpdate()
 {
+	if (!isRunning) return;
 	(*physicsManager).collisionManager.CheckAllCollisions();
 	(*physicsManager).Integrate();
 	DeferredDeleteGameObject();
 }
 void Scene::Draw()
 {
+	if (!isRunning) return;
 	root.Draw();
 }
 void Scene::Destroy()
 {
 	TraceMessage("---------------------");
-	TraceMessage(" Scene::Destroy()");
+	TraceMessage((" Scene::Destroy() " + Name).c_str());
 	TraceMessage("---------------------");
 	root.Destroy();
 	resourceManager->UnloadAllResources();
+}
+
+void Scene::Pause()
+{
+	TraceMessage("---------------------");
+	TraceMessage((" Scene::Pause() "+Name).c_str());
+	TraceMessage("---------------------");
+	isRunning = false;
+}
+
+void Scene::Resume()
+{
+	TraceMessage("---------------------");
+	TraceMessage((" Scene::Resume() " + Name).c_str());
+	TraceMessage("---------------------");
+	isRunning = true;
 }

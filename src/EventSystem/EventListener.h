@@ -10,6 +10,7 @@ public:
 
 	void HandleEvent(void* eventData);
 	void SetCallback(std::function<void(void*)> c);
+	void SetType(EventType t);
 	std::function<void(void*)> GetCallback();
 
 	EventType Type = EventType::Default;

@@ -13,6 +13,7 @@ GameWindow::~GameWindow()
 
 void GameWindow::Init()
 {
+	TraceMessage("GameWindow Init()");
 	// Error Callbacks
 	glfwSetErrorCallback(this->GLFWErrorCallback);
 
@@ -65,6 +66,7 @@ void GameWindow::Update()
 
 void GameWindow::ShutDown()
 {
+	TraceMessage("GameWindow ShutDown()");
 	if (!pWindow)
 	{
 		TraceMessage("Window can't shutdown because it has not been initialized yet. Closing program...");

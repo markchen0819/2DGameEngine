@@ -3,6 +3,7 @@
 enum class EventType
 {
 	Collision,
+	SceneChange,
 	Default
 };
 

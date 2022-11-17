@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <stack>
 #include <cerrno>
 #include <cstdarg>
 #include <stdlib.h>
@@ -72,6 +73,12 @@
 #include "Scene/Root.h"
 #include "Scene/Scene.h"
 
+#include "ServiceLocator.h"
+#include "GameEngine.h"
 
+#include "Game.h"
+
+// User Codes
 #include "UserDefined/SelfRotateComponent.h"
 #include "UserDefined/PlayerControlComponent.h"
+#include "UserDefined/Level2.h"
