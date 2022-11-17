@@ -16,7 +16,7 @@ public:
 	void BuildHiearchy(std::string filename);
 	void SetupCamara(GameWindow* window);
 
-	void Update();
+	virtual void Update(); // Set virtual for screen movement
 	void Draw();
 	void LateUpdate();
 	void DeferredDeleteGameObject();
@@ -28,7 +28,7 @@ public:
 
 	std::string Name = "";
 
-private:
+protected:
 	Root root;
 	ResourceManager* resourceManager; // aggregation
 	ObjectFactory* objectFactory; // aggregation

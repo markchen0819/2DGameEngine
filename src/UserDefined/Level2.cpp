@@ -19,7 +19,6 @@ void Level2::Init(GameWindow* gw)
 	TraceMessage("---------------------");
 	LoadResources("src/Assets/Jsons/AllResources.json");
 	LoadGameObjects("src/Assets/Jsons/AllGameObjects.json");
-	ObjectFactory* objectFactory = ObjectFactory::GetInstance();
 
 	// Add User Defined Components // 
 	GameObject* player = objectFactory->GetGameObjectByName("Player");
@@ -39,3 +38,11 @@ void Level2::Init(GameWindow* gw)
 	TraceMessage(" Level2::Init finished");
 	TraceMessage("---------------------");
 }
+
+void Level2::Update()
+{
+	if (!isRunning) return;
+	ExecuteScreenSaverMovement(GameEngine::GetInstance()->GetMainWindow(), FrameRateController::GetInstance()->DeltaTime());
+	Scene::Update();
+}
+
