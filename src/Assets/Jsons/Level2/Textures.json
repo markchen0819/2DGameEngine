@@ -1,0 +1,16 @@
+{
+  "Textures":
+  {
+    "Texture1": {
+      "TextureName": "DefaultTexture",
+      "TextureFile": "src/Assets/Textures/DefaultTexture.png",
+      "TextureType": "texture_diffuse"
+    },
+    "Texture2": {
+      "TextureName": "SampleTexture",
+      "TextureFile": "src/Assets/Textures/SampleTexture.png",
+      "TextureType": "texture_diffuse"
+    }
+  }
+
+}

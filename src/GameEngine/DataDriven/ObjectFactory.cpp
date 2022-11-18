@@ -141,10 +141,10 @@ bool ObjectFactory::CheckAllGameObjectsInHierachy()
 			return false;
 		}
 	}
-	TraceMessage("All created objects are added to hierachy\n");
-	TraceMessage("---------------------");
-	TraceMessage("Clear ObjectFactory\n");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
+	TraceMessage("All created objects are added to hierachy");
+	TraceMessage("Clear ObjectFactory");
+	TraceMessage("--------------------------------");
 	gameobjects.clear();
 	gameobjectsInHierachy.clear();
 	return true;

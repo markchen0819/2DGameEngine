@@ -13,20 +13,18 @@ Game::~Game()
 
 void Game::Init()
 {
-	TraceInit();
 	gameEngine = GameEngine::GetInstance();
 	gameEngine->Initialize();
 
-
-	TraceMessage("---------------------");
-	TraceMessage("Create Game Levels");
-	TraceMessage("---------------------");
+	TraceMessage("Create User Levels");
+	Scene* scene1 = new Level1("Level1");
 	Scene* scene2 = new Level2("Level2");
+	Scenes.push_back(scene1);
 	Scenes.push_back(scene2);
 
 
 	gameEngine->SetAllScenes(Scenes);
-	gameEngine->ChangeScene(scene2);
+	gameEngine->ChangeScene(scene1);
 }
 void Game::Run()
 {
@@ -43,16 +41,7 @@ void Game::Reset()
 }
 void Game::Quit()
 {
+	Scenes.clear();
 	gameEngine->Quit();
-
-	TraceMessage("---------------------");
-	TraceMessage("Destroy Game Levels");
-	TraceMessage("---------------------");
-	for (Scene* s : Scenes)
-	{
-		delete s;
-	}
-
-	TraceShutdown();
 }
 

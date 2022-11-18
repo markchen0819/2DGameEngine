@@ -159,6 +159,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\UserDefined\PressEnterToNextScreenComponent.cpp" />
+    <ClCompile Include="src\UserDefined\Level1.cpp" />
     <ClCompile Include="src\UserDefined\Level2.cpp" />
     <ClCompile Include="src\UserDefined\Game.cpp" />
     <ClCompile Include="src\GameEngine\ServiceLocator.cpp" />
@@ -208,6 +210,8 @@
     <ClCompile Include="src\GameEngine\Components\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\UserDefined\PressEnterToNextScreenComponent.h" />
+    <ClInclude Include="src\UserDefined\Level1.h" />
     <ClInclude Include="src\UserDefined\Level2.h" />
     <ClInclude Include="src\UserDefined\Game.h" />
     <ClInclude Include="src\GameEngine\ServiceLocator.h" />

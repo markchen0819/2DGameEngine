@@ -25,8 +25,8 @@ class Scene;
 class SceneChangeEvent : public Event
 {
 public:
-	SceneChangeEvent(Scene* scene): nextScene(scene){};
+	SceneChangeEvent(std::string sceneName) : SceneName(sceneName) {};
 	~SceneChangeEvent() {};
 
-	Scene* nextScene;
+	std::string SceneName;
 };

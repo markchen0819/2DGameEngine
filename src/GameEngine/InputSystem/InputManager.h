@@ -6,6 +6,7 @@ enum Input
 	LEFT,
 	DOWN,
 	UP,
+	ENTER,
 	DEFAULTINPUT
 };
 
@@ -42,11 +43,11 @@ private:
 	void UpdateInputStates();
 	static void GLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-	std::array<bool, 4> currentInputStates = {};
-	std::array<bool, 4> isCurPressed;
-	std::array<bool, 4> isCurReleased;
-	std::array<bool, 4> isPrevPressed;
-	std::array<bool, 4> isPrevReleased;
+	std::array<bool, 5> currentInputStates = {};
+	std::array<bool, 5> isCurPressed;
+	std::array<bool, 5> isCurReleased;
+	std::array<bool, 5> isPrevPressed;
+	std::array<bool, 5> isPrevReleased;
 
 };
 

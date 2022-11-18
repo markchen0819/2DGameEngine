@@ -44,6 +44,7 @@ void InputManager::UpdateInputStates()
 	currentInputStates[Input::LEFT] = glfwGetKey(pWindow, GLFW_KEY_LEFT);
 	currentInputStates[Input::DOWN] = glfwGetKey(pWindow, GLFW_KEY_DOWN);
 	currentInputStates[Input::UP] = glfwGetKey(pWindow, GLFW_KEY_UP);
+	currentInputStates[Input::ENTER] = glfwGetKey(pWindow, GLFW_KEY_ENTER);
 
 	// iterate if the key is pressed or release
 	for (int i = 0; i < currentInputStates.size(); ++i)

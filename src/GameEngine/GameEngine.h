@@ -11,9 +11,15 @@ public:
 	void Quit();
 
 	void SetAllScenes(std::vector<Scene*>& scenes);
+	void DeleteAllScenes();
 	void ChangeScene(Scene* scene);
 	void PushScene(Scene* scene);
 	void PopScene();
+
+	// Change scene at the end of frame for safety
+	Scene* GetSceneByName(std::string sceneName);
+	void AddSceneToChange(std::string sceneName);
+	void DeferredChangeScene();
 
 	void Update();
 	void Draw();
@@ -35,5 +41,8 @@ private:
 
 	EventListener collisionEventLister;
 	EventListener sceneChangeEventLister;
+
+	std::vector<std::string> sceneToChange;
+
 };
 

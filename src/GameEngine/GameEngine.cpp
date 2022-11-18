@@ -16,9 +16,10 @@ void SceneChangeCallback(void* eventData);
 
 void GameEngine::Initialize()
 {
-	TraceMessage("---------------------");
-	TraceMessage(" GameEngine::Initialize()");
-	TraceMessage("---------------------");
+	TraceInit();
+	TraceMessage("--------------------------------");
+	TraceMessage("GameEngine::Initialize()");
+	TraceMessage("--------------------------------");
 
 	serviceLocator = ServiceLocator::GetInstance();
 	serviceLocator->EngineServices.GetRenderer()->InitGLFW();
@@ -49,26 +50,33 @@ void GameEngine::Initialize()
 
 void GameEngine::Quit()  // Destroy everything (engine itself, stack of scenes, windows)
 {
-	TraceMessage("---------------------");
-	TraceMessage(" GameEngine::Quit() ");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
+	TraceMessage("GameEngine::Quit() ");
+	TraceMessage("--------------------------------");
+
 	serviceLocator->EngineServices.GetEventSystem()->RemoveAllListeners();
+
+	// Clear loaded memory by the scenes on the stack
 	while (!scenesStack.empty())
 	{ 
 		scenesStack.top()->Destroy();
 		scenesStack.pop(); 
 	}
+	// Clear memory of the scenes themselves
+	DeleteAllScenes();
+
 	mainWindow->ShutDown();
 	delete mainWindow;
 	serviceLocator->EngineServices.GetRenderer()->TerminateGLFW();
+	TraceShutdown();
 }
 
 
 void GameEngine::SetAllScenes(std::vector<Scene*>& scenes)
 {
-	TraceMessage("---------------------");
-	TraceMessage("GameEngine::SetAllScenes (Game Levels) ");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
+	TraceMessage("GameEngine::SetAllScenes (Load in all user generated levels)");
+	TraceMessage("--------------------------------");
 
 	for (Scene* s : scenes)
 	{
@@ -77,11 +85,22 @@ void GameEngine::SetAllScenes(std::vector<Scene*>& scenes)
 	AllScenes = scenes;
 }
 
+void GameEngine::DeleteAllScenes()
+{
+	TraceMessage("--------------------------------");
+	TraceMessage("GameEngine::DeleteAllScenes (Delete all user generated levels) ");
+	TraceMessage("--------------------------------");
+	for (Scene* s : AllScenes)
+	{
+		delete s;
+	}
+}
+
 void GameEngine::ChangeScene(Scene* scene)
 {
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	TraceMessage(("GameEngine::ChangeScene: "+ (*scene).Name).c_str());
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	if (!scenesStack.empty())
 	{
 		// Clears memory of current scene
@@ -95,9 +114,9 @@ void GameEngine::ChangeScene(Scene* scene)
 
 void GameEngine::PushScene(Scene* scene)
 {
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	TraceMessage(("GameEngine::PushScene: " + (*scene).Name).c_str());
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	if (!scenesStack.empty())
 	{
 		scenesStack.top()->Pause();
@@ -107,9 +126,9 @@ void GameEngine::PushScene(Scene* scene)
 
 void GameEngine::PopScene()
 {
-	TraceMessage("---------------------");
-	TraceMessage(" GameEngine::PopScene()");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
+	TraceMessage("GameEngine::PopScene()");
+	TraceMessage("--------------------------------");
 	if (!scenesStack.empty())
 	{
 		scenesStack.top()->Destroy();
@@ -117,6 +136,38 @@ void GameEngine::PopScene()
 		scenesStack.top()->Resume();
 	}
 }
+
+Scene* GameEngine::GetSceneByName(std::string sceneName)
+{
+	for (Scene* s : AllScenes)
+	{
+		if ((*s).Name == sceneName)
+		{
+			return s;
+		}
+	}
+	TraceMessage(("Target Scene Not found: " + sceneName).c_str());
+	return nullptr;
+}
+
+void GameEngine::AddSceneToChange(std::string sceneName)
+{
+	sceneToChange.push_back(sceneName);
+}
+
+void GameEngine::DeferredChangeScene() 
+{
+	for (std::string s : sceneToChange)
+	{
+		Scene* scene = GetSceneByName(s);
+		if (scene != nullptr)
+		{
+			ChangeScene(scene);
+		}
+	}
+	sceneToChange.clear();
+}
+
 
 void GameEngine::Update()
 {
@@ -138,6 +189,7 @@ void GameEngine::PostUpdate()
 	mainWindow->PollEvents();
 	serviceLocator->EngineServices.GetInputManager()->PollEvents();
 	serviceLocator->EngineServices.GetFrameRateController()->FrameEnd();
+	DeferredChangeScene();
 }
 
 bool GameEngine::IsRunning()
@@ -157,26 +209,20 @@ GameWindow* GameEngine::GetMainWindow()
 }
 
 
+
+
 // Event Callbacks for engine
 void CollisionCallback(void* eventData)
 {
 	CollisionEvent* converted = static_cast<CollisionEvent*>(eventData);
 	if (converted)
 	{
-		std::cout << "TimeStamp: " << glfwGetTime() << std::endl;
-		std::cout << "Collision between " << converted->gobj1->GetName()
-			<< " and " << converted->gobj2->GetName() << std::endl;
-
-		if (converted->gobj1->GetName() != "Player")
-		{
-			converted->gobj1->SetAlive(false);
-			converted->gobj1->SetToBeDeleted();
-		}
-		if (converted->gobj2->GetName() != "Player")
-		{
-			converted->gobj2->SetAlive(false);
-			converted->gobj2->SetToBeDeleted();
-		}
+		TraceMessage("CollisionEvent: ");
+		std::string timeStr = std::to_string(glfwGetTime());
+		TraceMessage(("TimeStamp: " + timeStr).c_str());
+		std::string str = "Collision between " + converted->gobj1->GetName()
+			+ " and " + converted->gobj2->GetName();
+		TraceMessage(str.c_str());
 	}
 
 }
@@ -186,5 +232,7 @@ void SceneChangeCallback(void* eventData)
 	SceneChangeEvent* converted = static_cast<SceneChangeEvent*>(eventData);
 	if (converted)
 	{
+		TraceMessage(("SceneChangeEvent: "+ converted->SceneName).c_str());
+		GameEngine::GetInstance()->AddSceneToChange(converted->SceneName);
 	}
 }

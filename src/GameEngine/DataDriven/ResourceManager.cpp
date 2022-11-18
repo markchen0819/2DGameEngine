@@ -66,6 +66,8 @@ void ResourceManager::LoadAllMaterials(std::string filename)
 
 void ResourceManager::UnloadAllResources()
 {
+	TraceMessage("UnloadAllResources");
+
 	for (std::unordered_map<std::string, Material*>::iterator itr = materials.begin();
 		itr != materials.end(); itr++)
 	{

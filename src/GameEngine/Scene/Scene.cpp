@@ -21,9 +21,9 @@ Scene::~Scene()
 
 void Scene::Init(GameWindow* gw)
 {
-	TraceMessage("---------------------");
-	TraceMessage(" Scene::Init()");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
+	TraceMessage("Scene::Init()");
+	TraceMessage("--------------------------------");
 
 	// Load scene data into memory here
 
@@ -32,16 +32,16 @@ void Scene::Init(GameWindow* gw)
 	//BuildHiearchy("src/Assets/Jsons/Hierachy.json");
 	//SetupCamara(gw);
 
-	TraceMessage("---------------------");
-	TraceMessage(" Scene::Init() finished");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
+	TraceMessage("Scene::Init() finished");
+	TraceMessage("--------------------------------");
 }
 
 void Scene::LoadResources(std::string filename) 
 {
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	TraceMessage("Scene::LoadResources");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	FILE* fp;
 	rapidjson::Document doc;
 	fopen_s(&fp, filename.c_str(), "rb");
@@ -69,31 +69,31 @@ void Scene::LoadResources(std::string filename)
 }
 void Scene::LoadGameObjects(std::string filename) 
 {
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	TraceMessage("Scene::LoadGameObjects");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 
 	objectFactory->CreateAllGameObjects(filename);
 }
 void Scene::InitializeGameObjects()
 {
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	TraceMessage("Scene::InitGameObjects()");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	objectFactory->InitializeGameObjects();
 }
 void Scene::CreateAllDebugCollisionAreas()
 {
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	TraceMessage("Scene::CreateAllDebugCollisionAreas()");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	objectFactory->CreateAllDebugCollisionAreas();
 }
 void Scene::BuildHiearchy(std::string filename)
 {
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	TraceMessage("Scene::BuildHiearchy");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	FILE* fp;
 	rapidjson::Document doc;
 	fopen_s(&fp, filename.c_str(), "rb");
@@ -135,9 +135,9 @@ void Scene::recursiveBuildHierachy(rapidjson::Value::ConstMemberIterator nodeIte
 }
 void Scene::SetupCamara(GameWindow* window)
 {
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 	TraceMessage("Scene::SetupCamara");
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
 
 	Renderer* renderer = Renderer::GetInstance();
 	Shader* cameraShader = resourceManager->GetShaderByName("CameraShader");
@@ -156,9 +156,9 @@ void Scene::DeferredDeleteGameObject()
 	const std::vector<GameObject*> gameObjectsToDelete = objectFactory->GetGameObjectsToDeleteVector();
 	for (GameObject* gobj : gameObjectsToDelete)
 	{
-		TraceMessage("---------------------");
+		TraceMessage("--------------------------------");
 		TraceMessage("Scene::DeferredDeleteGameObject()");
-		TraceMessage("---------------------");
+		TraceMessage("--------------------------------");
 		(*gobj).GetParent()->RemoveChild(gobj);
 	}
 	// Actual Object Deletion (free memory of objects)
@@ -184,25 +184,25 @@ void Scene::Draw()
 }
 void Scene::Destroy()
 {
-	TraceMessage("---------------------");
-	TraceMessage((" Scene::Destroy() " + Name).c_str());
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
+	TraceMessage(("Scene::Destroy() " + Name).c_str());
+	TraceMessage("--------------------------------");
 	root.Destroy();
 	resourceManager->UnloadAllResources();
 }
 
 void Scene::Pause()
 {
-	TraceMessage("---------------------");
-	TraceMessage((" Scene::Pause() "+Name).c_str());
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
+	TraceMessage(("Scene::Pause() "+Name).c_str());
+	TraceMessage("--------------------------------");
 	isRunning = false;
 }
 
 void Scene::Resume()
 {
-	TraceMessage("---------------------");
-	TraceMessage((" Scene::Resume() " + Name).c_str());
-	TraceMessage("---------------------");
+	TraceMessage("--------------------------------");
+	TraceMessage(("Scene::Resume() " + Name).c_str());
+	TraceMessage("--------------------------------");
 	isRunning = true;
 }

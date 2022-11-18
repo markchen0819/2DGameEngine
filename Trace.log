@@ -1,28 +1,96 @@
 TraceInit()
----------------------
- GameEngine::Initialize()
----------------------
+--------------------------------
+GameEngine::Initialize()
+--------------------------------
 GLFW Init() success
 GameWindow created
 GameWindow Init()
 InputManger registers GameWindow: 1stWindow
----------------------
-Create Game Levels
----------------------
+Create User Levels
+Level1 ctor 
 Level2 ctor 
----------------------
-GameEngine::SetAllScenes (Game Levels) 
----------------------
+--------------------------------
+GameEngine::SetAllScenes (Load in all user generated levels)
+--------------------------------
+Level1
 Level2
+--------------------------------
+GameEngine::ChangeScene: Level1
+--------------------------------
 ---------------------
-GameEngine::ChangeScene: Level2
+Level1::Init
 ---------------------
----------------------
- Level2::Init
----------------------
----------------------
+--------------------------------
 Scene::LoadResources
+--------------------------------
+Load Shaders:
+CameraShader
+SampleShader
+
+Load Textures:
+DefaultTexture
+SampleTexture
+
+Load Materials:
+CollisionMaterial
+SampleMaterial1
+
+--------------------------------
+Scene::LoadGameObjects
+--------------------------------
+CreateGameObjects:
+
+Picture
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+--------------------------------
+Scene::InitGameObjects()
+--------------------------------
+--------------------------------
+Scene::CreateAllDebugCollisionAreas()
+--------------------------------
+CreateAllDebugCollisionAreas:
+
+Picture
+Null Component: 
+class PhysicComponent
+No physic component, collision shape not generated
+
+--------------------------------
+Scene::BuildHiearchy
+--------------------------------
+Picture added to hierachy
+--------------------------------
+All created objects are added to hierachy
+Clear ObjectFactory
+--------------------------------
+--------------------------------
+Scene::SetupCamara
+--------------------------------
 ---------------------
+Level1::Init finished
+---------------------
+SceneChangeEvent: Level2
+--------------------------------
+GameEngine::ChangeScene: Level2
+--------------------------------
+--------------------------------
+Scene::Destroy() Level1
+--------------------------------
+Destroy Node: Root
+Destroy GameObject: Picture
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PressEnterToNextScreenComponent
+Destroy Node: Picture
+UnloadAllResources
+---------------------
+Level2::Init
+---------------------
+--------------------------------
+Scene::LoadResources
+--------------------------------
 Load Shaders:
 CameraShader
 SampleShader
@@ -36,9 +104,9 @@ CollisionMaterial
 SampleMaterial1
 SampleMaterial2
 
----------------------
+--------------------------------
 Scene::LoadGameObjects
----------------------
+--------------------------------
 CreateGameObjects:
 
 Player
@@ -63,12 +131,12 @@ PlayerChild
 TransformComponent::Deserialize
 RenderComponent::Deserialize
 
----------------------
+--------------------------------
 Scene::InitGameObjects()
----------------------
----------------------
+--------------------------------
+--------------------------------
 Scene::CreateAllDebugCollisionAreas()
----------------------
+--------------------------------
 CreateAllDebugCollisionAreas:
 
 Player
@@ -85,39 +153,29 @@ No physic component, collision shape not generated
 Target2
 Created: Target2_Collision Area
 
----------------------
+--------------------------------
 Scene::BuildHiearchy
----------------------
+--------------------------------
 Player added to hierachy
 PlayerChild added to hierachy
 Target1 added to hierachy
 Target2 added to hierachy
+--------------------------------
 All created objects are added to hierachy
-
----------------------
 Clear ObjectFactory
-
----------------------
----------------------
+--------------------------------
+--------------------------------
 Scene::SetupCamara
+--------------------------------
 ---------------------
+Level2::Init finished
 ---------------------
- Level2::Init finished
----------------------
----------------------
+CollisionEvent: 
+TimeStamp: 31.912583
+Collision between Player and Target2
+--------------------------------
 Scene::DeferredDeleteGameObject()
----------------------
-Remove child { Target1 } from parent { Root }
-Destroy GameObject: Target1
-Destroy TransformComponent
-Destroy RenderComponent
-Destroy PhysicComponent
-Target1 removed from collision checking
-Destroy SelfRotateComponen
-Destroy Node: Target1
----------------------
-Scene::DeferredDeleteGameObject()
----------------------
+--------------------------------
 Remove child { Target2 } from parent { Root }
 Destroy GameObject: Target2
 Destroy TransformComponent
@@ -126,12 +184,26 @@ Destroy PhysicComponent
 Target2 removed from collision checking
 Destroy SelfRotateComponen
 Destroy Node: Target2
----------------------
- GameEngine::Quit() 
----------------------
----------------------
- Scene::Destroy() Level2
----------------------
+CollisionEvent: 
+TimeStamp: 34.228023
+Collision between Player and Target1
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Target1 } from parent { Root }
+Destroy GameObject: Target1
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Target1 removed from collision checking
+Destroy SelfRotateComponen
+Destroy Node: Target1
+--------------------------------
+GameEngine::Quit() 
+--------------------------------
+--------------------------------
+Scene::Destroy() Level2
+--------------------------------
 Destroy Node: Root
 Destroy GameObject: Player
 Destroy TransformComponent
@@ -144,10 +216,12 @@ Destroy GameObject: PlayerChild
 Destroy TransformComponent
 Destroy RenderComponent
 Destroy Node: PlayerChild
+UnloadAllResources
+--------------------------------
+GameEngine::DeleteAllScenes (Delete all user generated levels) 
+--------------------------------
+Level1 dtor Level1
+Level2 dtor Level2
 GameWindow ShutDown()
 GLFW Terminate success
----------------------
-Destroy Game Levels
----------------------
-Level2 dtor Level2
 TraceShutdown()

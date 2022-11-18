@@ -1,0 +1,24 @@
+{
+  "GameObjects": {
+    "GameObject1": {
+      "GameObjectName": "Picture",
+      "Material": "SampleMaterial1",
+      "Components": {
+        "TransformComponent": {
+          "Position": [ 0.0, 0.0, 0.0 ],
+          "Rotation": [ 0.0, 0.0, 0.0 ],
+          "Scale": [ 2, 2, 2 ]
+        },
+        "RenderComponent": {
+          "Vertices": [
+            [ 100.0, 100.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0 ],
+            [ 100.0, -100.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0 ],
+            [ -100.0, -100.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0 ],
+            [ -100.0, 100.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0 ]
+          ],
+          "Indices": [ 0, 1, 3, 1, 2, 3 ]
+        }
+      }
+    }
+  }
+}

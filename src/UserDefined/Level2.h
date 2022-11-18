@@ -7,5 +7,7 @@ public:
 	~Level2();
 	virtual void Init(GameWindow* gw);
 	virtual void Update();
+private:
+	EventListener e;
 };
 
