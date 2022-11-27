@@ -168,7 +168,7 @@
     <ClCompile Include="src\UserDefined\PlayerControlComponent.cpp" />
     <ClCompile Include="src\GameEngine\Scene\Root.cpp" />
     <ClCompile Include="src\GameEngine\Scene\Scene.cpp" />
-    <ClCompile Include="src\UserDefined\SelfRotateComponent.cpp" />
+    <ClCompile Include="src\UserDefined\EnemyComponent.cpp" />
     <ClCompile Include="src\GameEngine\Window\FrameRateController.cpp" />
     <ClCompile Include="src\GameEngine\DataDriven\ResourceManager.cpp" />
     <ClCompile Include="src\GameEngine\DataDriven\ObjectFactory.cpp" />
@@ -219,7 +219,7 @@
     <ClInclude Include="src\UserDefined\PlayerControlComponent.h" />
     <ClInclude Include="src\GameEngine\Scene\Root.h" />
     <ClInclude Include="src\GameEngine\Scene\Scene.h" />
-    <ClInclude Include="src\UserDefined\SelfRotateComponent.h" />
+    <ClInclude Include="src\UserDefined\EnemyComponent.h" />
     <ClInclude Include="src\GameEngine\Window\FrameRateController.h" />
     <ClInclude Include="src\GameEngine\DataDriven\ResourceManager.h" />
     <ClInclude Include="src\GameEngine\DataDriven\ObjectFactory.h" />

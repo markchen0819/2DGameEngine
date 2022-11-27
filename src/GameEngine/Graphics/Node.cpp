@@ -1,8 +1,12 @@
 #include "pch.h"
 
-Node::Node():transform(new Transform()), mesh(new Mesh()) {}
+Node::Node():transform(new Transform()), mesh(new Mesh()) 
+{
+	//TraceMessage("Node ctor");
+}
 Node::Node(Transform t, Mesh m, Material* mat)
 {
+	//TraceMessage("Node ctor with Transform, Mesh, Material");
 	transform = new Transform(t);
 	mesh = new Mesh(m);
 	material = mat;

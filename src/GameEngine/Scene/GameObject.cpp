@@ -1,6 +1,19 @@
 #include "pch.h"
 
-GameObject::GameObject() { }
+GameObject::GameObject() 
+{
+	//TraceMessage("GameObject ctor");
+}
+GameObject::GameObject(Transform t, Mesh m, Material* mat)
+{
+	//TraceMessage("GameObject ctor with Transform, Mesh, Material");
+	// delete data created from parent Node
+	delete transform;
+	delete mesh;
+	transform = new Transform(t);
+	mesh = new Mesh(m);
+	material = mat;
+}
 GameObject::~GameObject() {}
 
 void GameObject::Init() 
@@ -90,6 +103,12 @@ void GameObject::Draw()
 void GameObject::SetMaterial(Material* m)
 {
 	material = m;
+}
+
+void GameObject::SetMesh(Mesh* m)
+{
+	delete mesh;
+	mesh = m;
 }
 
 Material* GameObject::GetMaterial()

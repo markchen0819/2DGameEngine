@@ -9,10 +9,10 @@
       "Texture": "DefaultTexture"
     },
     "Material2": {
-      "MaterialName": "SampleMaterial1",
+      "MaterialName": "TitleMaterial",
       "Color": [ 1.0, 1.0, 1.0, 1.0 ],
       "Shader": "SampleShader",
-      "Texture": "SampleTexture"
+      "Texture": "TitleTexture"
     }
   }
 

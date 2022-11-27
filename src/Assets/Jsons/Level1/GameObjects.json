@@ -1,13 +1,13 @@
 {
   "GameObjects": {
     "GameObject1": {
-      "GameObjectName": "Picture",
-      "Material": "SampleMaterial1",
+      "GameObjectName": "Title",
+      "Material": "TitleMaterial",
       "Components": {
         "TransformComponent": {
           "Position": [ 0.0, 0.0, 0.0 ],
-          "Rotation": [ 0.0, 0.0, 0.0 ],
-          "Scale": [ 2, 2, 2 ]
+          "Rotation": [ 0, 180, 180 ],
+          "Scale": [ 3, 3, 3 ]
         },
         "RenderComponent": {
           "Vertices": [

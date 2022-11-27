@@ -9,7 +9,9 @@ public:
 	virtual void Update();
 	virtual void Destroy();
 
-private:
 
+	void SetSceneName(std::string name);
+private:
+	std::string sceneName;
 };
 

@@ -1,14 +1,38 @@
 {
-  "Textures":
-  {
+  "Textures": {
     "Texture1": {
       "TextureName": "DefaultTexture",
       "TextureFile": "src/Assets/Textures/DefaultTexture.png",
       "TextureType": "texture_diffuse"
     },
     "Texture2": {
-      "TextureName": "SampleTexture",
-      "TextureFile": "src/Assets/Textures/SampleTexture.png",
+      "TextureName": "BackgroundTexture",
+      "TextureFile": "src/Assets/Textures/Background.png",
+      "TextureType": "texture_diffuse"
+    },
+    "Texture3": {
+      "TextureName": "PlayerTexture",
+      "TextureFile": "src/Assets/Textures/player.png",
+      "TextureType": "texture_diffuse"
+    },
+    "Texture4": {
+      "TextureName": "EmitterTexture",
+      "TextureFile": "src/Assets/Textures/emitter.png",
+      "TextureType": "texture_diffuse"
+    },
+    "Texture5": {
+      "TextureName": "EnemyTexture",
+      "TextureFile": "src/Assets/Textures/enemy.png",
+      "TextureType": "texture_diffuse"
+    },
+    "Texture6": {
+      "TextureName": "StarTexture",
+      "TextureFile": "src/Assets/Textures/star.png",
+      "TextureType": "texture_diffuse"
+    },
+    "Texture7": {
+      "TextureName": "WaveTexture",
+      "TextureFile": "src/Assets/Textures/waveU.png",
       "TextureType": "texture_diffuse"
     }
   }

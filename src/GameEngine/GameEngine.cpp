@@ -24,14 +24,16 @@ void GameEngine::Initialize()
 	serviceLocator = ServiceLocator::GetInstance();
 	serviceLocator->EngineServices.GetRenderer()->InitGLFW();
 
+	//
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	int xpos, ypos, width, height;
+	glfwGetMonitorWorkarea(monitor, &xpos, &ypos, &width, &height); // 1920 1008
+
+
 	mainWindow = new GameWindow();
 	mainWindow->Props.Title = "1stWindow";
 	mainWindow->Init();
-	mainWindow->SetWindowPosition(0, 50);
-	// Experimenting 2nd window
-	//GameWindow* secondWindow = new GameWindow();
-	//secondWindow->Props.Title = "2ndWindow";
-	//secondWindow->Init();
+	mainWindow->SetWindowPosition(width/2 - mainWindow->Props.Width/2, height/2 - mainWindow->Props.Heigth / 2);
 
 	serviceLocator->EngineServices.GetFrameRateController()->SetTargetFrameRate(60.0);
 	serviceLocator->EngineServices.GetInputManager()->Init(mainWindow);

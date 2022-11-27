@@ -78,7 +78,7 @@
 
 
 // User Codes
-#include "UserDefined/SelfRotateComponent.h"
+#include "UserDefined/EnemyComponent.h"
 #include "UserDefined/PlayerControlComponent.h"
 #include "UserDefined/PressEnterToNextScreenComponent.h"
 

@@ -20,9 +20,12 @@ void Level1::Init(GameWindow* gw)
 	LoadGameObjects("src/Assets/Jsons/Level1/GameObjects.json");
 
 	// Add User Defined Components // 
-	GameObject* picture = objectFactory->GetGameObjectByName("Picture");
-	picture->AddComponent<PressEnterToNextScreenComponent>();
 
+	GameObject* picture = objectFactory->GetGameObjectByName("Title");
+	picture->AddComponent<PressEnterToNextScreenComponent>();
+	picture->GetComponent<PressEnterToNextScreenComponent>()->SetSceneName("Level2");
+	
+	////////////////////////////////// 
 	InitializeGameObjects();
 	CreateAllDebugCollisionAreas();
 	BuildHiearchy("src/Assets/Jsons/Level1/Hierachy.json");

@@ -7,6 +7,7 @@ class GameObject : public Node
 public:
 
 	GameObject();
+	GameObject(Transform t, Mesh m, Material* mat);
 	~GameObject();
 
 	virtual void Init();
@@ -41,6 +42,7 @@ public:
 	}
 
 	void SetMaterial(Material* m);
+	void SetMesh(Mesh* m);
 	Material* GetMaterial();
 
 	bool CheckIsAlive();

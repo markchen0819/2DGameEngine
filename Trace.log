@@ -29,18 +29,18 @@ SampleShader
 
 Load Textures:
 DefaultTexture
-SampleTexture
+TitleTexture
 
 Load Materials:
 CollisionMaterial
-SampleMaterial1
+TitleMaterial
 
 --------------------------------
 Scene::LoadGameObjects
 --------------------------------
 CreateGameObjects:
 
-Picture
+Title
 TransformComponent::Deserialize
 RenderComponent::Deserialize
 
@@ -52,7 +52,7 @@ Scene::CreateAllDebugCollisionAreas()
 --------------------------------
 CreateAllDebugCollisionAreas:
 
-Picture
+Title
 Null Component: 
 class PhysicComponent
 No physic component, collision shape not generated
@@ -60,7 +60,7 @@ No physic component, collision shape not generated
 --------------------------------
 Scene::BuildHiearchy
 --------------------------------
-Picture added to hierachy
+Title added to hierachy
 --------------------------------
 All created objects are added to hierachy
 Clear ObjectFactory
@@ -79,12 +79,18 @@ GameEngine::ChangeScene: Level2
 Scene::Destroy() Level1
 --------------------------------
 Destroy Node: Root
-Destroy GameObject: Picture
+Destroy GameObject: Title
 Destroy TransformComponent
 Destroy RenderComponent
 Destroy PressEnterToNextScreenComponent
-Destroy Node: Picture
+Destroy Node: Title
 UnloadAllResources
+Unload CollisionMaterial
+Unload TitleMaterial
+Unload DefaultTexture
+Unload TitleTexture
+Unload CameraShader
+Unload SampleShader
 ---------------------
 Level2::Init
 ---------------------
@@ -97,12 +103,21 @@ SampleShader
 
 Load Textures:
 DefaultTexture
-SampleTexture
+BackgroundTexture
+PlayerTexture
+EmitterTexture
+EnemyTexture
+StarTexture
+WaveTexture
 
 Load Materials:
 CollisionMaterial
-SampleMaterial1
-SampleMaterial2
+BackgroundMaterial
+PlayerMaterial
+EmitterMaterial
+EnemyMaterial
+StarMaterial
+WaveMaterial
 
 --------------------------------
 Scene::LoadGameObjects
@@ -115,22 +130,15 @@ RenderComponent::Deserialize
 PhysicComponent::Deserialize
 Player added for collision checking
 
-Target1
-TransformComponent::Deserialize
-RenderComponent::Deserialize
-PhysicComponent::Deserialize
-Target1 added for collision checking
-
-Target2
-TransformComponent::Deserialize
-RenderComponent::Deserialize
-PhysicComponent::Deserialize
-Target2 added for collision checking
-
-PlayerChild
+Background
 TransformComponent::Deserialize
 RenderComponent::Deserialize
 
+Emitter
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+Enemy added for collision checking
 --------------------------------
 Scene::InitGameObjects()
 --------------------------------
@@ -142,24 +150,22 @@ CreateAllDebugCollisionAreas:
 Player
 Created: Player_Collision Area
 
-Target1
-Created: Target1_Collision Area
-
-PlayerChild
+Emitter
 Null Component: 
 class PhysicComponent
 No physic component, collision shape not generated
 
-Target2
-Created: Target2_Collision Area
+Background
+Null Component: 
+class PhysicComponent
+No physic component, collision shape not generated
 
 --------------------------------
 Scene::BuildHiearchy
 --------------------------------
+Background added to hierachy
+Emitter added to hierachy
 Player added to hierachy
-PlayerChild added to hierachy
-Target1 added to hierachy
-Target2 added to hierachy
 --------------------------------
 All created objects are added to hierachy
 Clear ObjectFactory
@@ -171,33 +177,152 @@ Scene::SetupCamara
 Level2::Init finished
 ---------------------
 CollisionEvent: 
-TimeStamp: 31.912583
-Collision between Player and Target2
---------------------------------
-Scene::DeferredDeleteGameObject()
---------------------------------
-Remove child { Target2 } from parent { Root }
-Destroy GameObject: Target2
-Destroy TransformComponent
-Destroy RenderComponent
-Destroy PhysicComponent
-Target2 removed from collision checking
-Destroy SelfRotateComponen
-Destroy Node: Target2
+TimeStamp: 24.462340
+Collision between Player and Enemy
 CollisionEvent: 
-TimeStamp: 34.228023
-Collision between Player and Target1
---------------------------------
-Scene::DeferredDeleteGameObject()
---------------------------------
-Remove child { Target1 } from parent { Root }
-Destroy GameObject: Target1
-Destroy TransformComponent
-Destroy RenderComponent
-Destroy PhysicComponent
-Target1 removed from collision checking
-Destroy SelfRotateComponen
-Destroy Node: Target1
+TimeStamp: 44.114462
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 44.131287
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 44.147761
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 44.164590
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 44.181118
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 44.197786
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 44.214766
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 44.231155
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 44.247747
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.716067
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.732781
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.749417
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.766252
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.782816
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.799379
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.816176
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.832855
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.849366
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.866077
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.882760
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.899493
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.916216
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.932871
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 56.949503
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.216628
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.233267
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.249985
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.267123
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.283529
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.300039
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.316623
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.333261
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.349960
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.366579
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.383303
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.399866
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.416559
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.433773
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.450104
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.466522
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.483271
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.499966
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.516591
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.533267
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.550254
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.566579
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.583304
+Collision between Player and Enemy
+CollisionEvent: 
+TimeStamp: 60.599894
+Collision between Player and Enemy
 --------------------------------
 GameEngine::Quit() 
 --------------------------------
@@ -205,6 +330,14 @@ GameEngine::Quit()
 Scene::Destroy() Level2
 --------------------------------
 Destroy Node: Root
+Destroy GameObject: Background
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy Node: Background
+Destroy GameObject: Emitter
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy Node: Emitter
 Destroy GameObject: Player
 Destroy TransformComponent
 Destroy RenderComponent
@@ -212,11 +345,30 @@ Destroy PhysicComponent
 Player removed from collision checking
 Destroy Player ControlComponent
 Destroy Node: Player
-Destroy GameObject: PlayerChild
+Destroy GameObject: Enemy
 Destroy TransformComponent
 Destroy RenderComponent
-Destroy Node: PlayerChild
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy SelfRotateComponen
+Destroy Node: Enemy
 UnloadAllResources
+Unload CollisionMaterial
+Unload EmitterMaterial
+Unload BackgroundMaterial
+Unload PlayerMaterial
+Unload EnemyMaterial
+Unload StarMaterial
+Unload WaveMaterial
+Unload DefaultTexture
+Unload EmitterTexture
+Unload BackgroundTexture
+Unload PlayerTexture
+Unload EnemyTexture
+Unload StarTexture
+Unload WaveTexture
+Unload CameraShader
+Unload SampleShader
 --------------------------------
 GameEngine::DeleteAllScenes (Delete all user generated levels) 
 --------------------------------

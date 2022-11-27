@@ -71,18 +71,24 @@ void ResourceManager::UnloadAllResources()
 	for (std::unordered_map<std::string, Material*>::iterator itr = materials.begin();
 		itr != materials.end(); itr++)
 	{
+		TraceMessage(("Unload " + itr->second->GetName()).c_str());
 		delete itr->second;
 	}
+	materials.clear();
 	for (std::unordered_map<std::string, Texture*>::iterator itr = textures.begin();
 		itr != textures.end(); itr++)
 	{
+		TraceMessage(("Unload " + itr->second->GetName()).c_str());
 		delete itr->second;
 	}
+	textures.clear();
 	for (std::unordered_map<std::string, Shader*>::iterator itr = shaders.begin();
 		itr != shaders.end(); itr++)
 	{
+		TraceMessage(("Unload " + itr->second->GetName()).c_str());
 		delete itr->second;
 	}
+	shaders.clear();
 }
 
 Shader* ResourceManager::GetShaderByName(std::string name)

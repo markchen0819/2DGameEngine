@@ -7,8 +7,8 @@
       "TextureType": "texture_diffuse"
     },
     "Texture2": {
-      "TextureName": "SampleTexture",
-      "TextureFile": "src/Assets/Textures/SampleTexture.png",
+      "TextureName": "TitleTexture",
+      "TextureFile": "src/Assets/Textures/Title.png",
       "TextureType": "texture_diffuse"
     }
   }

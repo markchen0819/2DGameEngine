@@ -9,5 +9,8 @@ public:
 	virtual void Update();
 private:
 	EventListener e;
+
+	GameObject* CreateEnemy();
+	GameObject* CreateStar();
 };
 
