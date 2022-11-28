@@ -56,8 +56,6 @@ void GameEngine::Quit()  // Destroy everything (engine itself, stack of scenes, 
 	TraceMessage("GameEngine::Quit() ");
 	TraceMessage("--------------------------------");
 
-	serviceLocator->EngineServices.GetEventSystem()->RemoveAllListeners();
-
 	// Clear loaded memory by the scenes on the stack
 	while (!scenesStack.empty())
 	{ 
@@ -69,6 +67,8 @@ void GameEngine::Quit()  // Destroy everything (engine itself, stack of scenes, 
 
 	mainWindow->ShutDown();
 	delete mainWindow;
+
+	serviceLocator->EngineServices.GetEventSystem()->RemoveAllListeners();
 	serviceLocator->EngineServices.GetRenderer()->TerminateGLFW();
 	TraceShutdown();
 }
@@ -217,6 +217,8 @@ GameWindow* GameEngine::GetMainWindow()
 void CollisionCallback(void* eventData)
 {
 	CollisionEvent* converted = static_cast<CollisionEvent*>(eventData);
+
+	return; // Disable to filter out this info for now
 	if (converted)
 	{
 		TraceMessage("CollisionEvent: ");

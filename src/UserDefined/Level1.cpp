@@ -41,3 +41,8 @@ void Level1::Update()
 {
 	Scene::Update();
 }
+
+void Level1::Destroy()
+{
+	Scene::Destroy();
+}

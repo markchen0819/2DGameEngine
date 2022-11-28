@@ -3,7 +3,7 @@
 
 static int xDir = 1;
 static int yDir = 1;
-static int speed = 200; // tweak this for slower, faster movement
+static int speed = 100; // tweak this for slower, faster movement
 
 
 

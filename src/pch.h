@@ -78,7 +78,11 @@
 
 
 // User Codes
+
+#include "UserDefined/WaveEvent.h"
+#include "UserDefined/WaveComponent.h"
 #include "UserDefined/EnemyComponent.h"
+#include "UserDefined/StarComponent.h"
 #include "UserDefined/PlayerControlComponent.h"
 #include "UserDefined/PressEnterToNextScreenComponent.h"
 

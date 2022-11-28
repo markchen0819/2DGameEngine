@@ -21,7 +21,7 @@ public:
 	void LateUpdate();
 	void DeferredDeleteGameObject();
 
-	void Destroy();
+	virtual void Destroy();
 
 	void Pause();
 	void Resume();

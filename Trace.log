@@ -138,32 +138,36 @@ Emitter
 TransformComponent::Deserialize
 RenderComponent::Deserialize
 
+WaveU
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+WaveR
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+WaveD
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+WaveL
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
 Enemy added for collision checking
+Star added for collision checking
+Star generated at (-49.585033,-52.665577)
 --------------------------------
 Scene::InitGameObjects()
 --------------------------------
 --------------------------------
-Scene::CreateAllDebugCollisionAreas()
---------------------------------
-CreateAllDebugCollisionAreas:
-
-Player
-Created: Player_Collision Area
-
-Emitter
-Null Component: 
-class PhysicComponent
-No physic component, collision shape not generated
-
-Background
-Null Component: 
-class PhysicComponent
-No physic component, collision shape not generated
-
---------------------------------
 Scene::BuildHiearchy
 --------------------------------
 Background added to hierachy
+WaveU added to hierachy
+WaveR added to hierachy
+WaveD added to hierachy
+WaveL added to hierachy
 Emitter added to hierachy
 Player added to hierachy
 --------------------------------
@@ -176,153 +180,242 @@ Scene::SetupCamara
 ---------------------
 Level2::Init finished
 ---------------------
-CollisionEvent: 
-TimeStamp: 24.462340
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 44.114462
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 44.131287
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 44.147761
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 44.164590
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 44.181118
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 44.197786
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 44.214766
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 44.231155
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 44.247747
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.716067
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.732781
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.749417
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.766252
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.782816
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.799379
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.816176
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.832855
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.849366
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.866077
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.882760
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.899493
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.916216
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.932871
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 56.949503
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.216628
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.233267
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.249985
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.267123
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.283529
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.300039
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.316623
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.333261
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.349960
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.366579
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.383303
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.399866
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.416559
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.433773
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.450104
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.466522
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.483271
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.499966
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.516591
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.533267
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.550254
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.566579
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.583304
-Collision between Player and Enemy
-CollisionEvent: 
-TimeStamp: 60.599894
-Collision between Player and Enemy
+Score: 1
+Star added for collision checking
+Star generated at (192.780731,152.724716)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 2
+Star added for collision checking
+Star generated at (5.316937,-77.272766)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 3
+Star added for collision checking
+Star generated at (94.840393,59.357780)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 4
+Star added for collision checking
+Star generated at (-118.794907,70.844986)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 5
+Star added for collision checking
+Star generated at (-245.411636,184.809799)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 6
+Star added for collision checking
+Star generated at (220.172623,14.027836)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 7
+Star added for collision checking
+Star generated at (-136.234116,117.669327)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 8
+Star added for collision checking
+Star generated at (-170.905121,-152.140930)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 9
+Star added for collision checking
+Star generated at (-168.893280,-57.059933)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 10
+Star added for collision checking
+Star generated at (-209.964722,-30.627958)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 11
+Star added for collision checking
+Star generated at (-64.943436,-265.436615)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 12
+Star added for collision checking
+Star generated at (269.400482,-97.411537)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 13
+Star added for collision checking
+Star generated at (-10.929011,-244.908646)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 14
+Star added for collision checking
+Star generated at (-201.947449,140.005814)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 15
+Star added for collision checking
+Star generated at (224.601196,-246.455795)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Player } from parent { Root }
+Destroy GameObject: Player
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Player removed from collision checking
+Destroy Player ControlComponent
+Destroy Node: Player
 --------------------------------
 GameEngine::Quit() 
 --------------------------------
@@ -334,23 +427,148 @@ Destroy GameObject: Background
 Destroy TransformComponent
 Destroy RenderComponent
 Destroy Node: Background
+Destroy GameObject: WaveU
+Destroy TransformComponent
+Destroy RenderComponent
+Wave StarComponent
+Destroy Node: WaveU
+Destroy GameObject: WaveR
+Destroy TransformComponent
+Destroy RenderComponent
+Wave StarComponent
+Destroy Node: WaveR
+Destroy GameObject: WaveD
+Destroy TransformComponent
+Destroy RenderComponent
+Wave StarComponent
+Destroy Node: WaveD
+Destroy GameObject: WaveL
+Destroy TransformComponent
+Destroy RenderComponent
+Wave StarComponent
+Destroy Node: WaveL
 Destroy GameObject: Emitter
 Destroy TransformComponent
 Destroy RenderComponent
 Destroy Node: Emitter
-Destroy GameObject: Player
-Destroy TransformComponent
-Destroy RenderComponent
-Destroy PhysicComponent
-Player removed from collision checking
-Destroy Player ControlComponent
-Destroy Node: Player
 Destroy GameObject: Enemy
 Destroy TransformComponent
 Destroy RenderComponent
 Destroy PhysicComponent
 Enemy removed from collision checking
-Destroy SelfRotateComponen
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
 Destroy Node: Enemy
 UnloadAllResources
 Unload CollisionMaterial

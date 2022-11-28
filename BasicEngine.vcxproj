@@ -208,6 +208,8 @@
     <ClCompile Include="src\GameEngine\Graphics\Transform.cpp" />
     <ClCompile Include="src\GameEngine\Graphics\Texture.cpp" />
     <ClCompile Include="src\GameEngine\Components\TransformComponent.cpp" />
+    <ClCompile Include="src\UserDefined\StarComponent.cpp" />
+    <ClCompile Include="src\UserDefined\WaveComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\UserDefined\PressEnterToNextScreenComponent.h" />
@@ -540,6 +542,9 @@
     <ClInclude Include="src\GameEngine\Graphics\Texture.h" />
     <ClInclude Include="src\GameEngine\Physics\ShapeType.h" />
     <ClInclude Include="src\GameEngine\Components\TransformComponent.h" />
+    <ClInclude Include="src\UserDefined\StarComponent.h" />
+    <ClInclude Include="src\UserDefined\WaveComponent.h" />
+    <ClInclude Include="src\UserDefined\WaveEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dependencies\glm\detail\func_common.inl" />

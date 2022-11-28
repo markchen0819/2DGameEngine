@@ -52,6 +52,7 @@ void EventSystem::RemoveAllListeners()
 void EventSystem::RemoveListener(EventType Type, EventListener* eventlistener)
 {
 	int index = static_cast<int>(Type);
+
 	std::vector<EventListener*>* list = &(listOfEventListenerLists.at(index));
 	// Search that list
 	for (int i = 0; i < list->size(); i++)

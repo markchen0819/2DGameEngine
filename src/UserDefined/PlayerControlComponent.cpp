@@ -10,7 +10,7 @@ void PlayerControlComponent::Update()
 	// Input
 	InputManager* inputmanager = InputManager::GetInstance();
 
-	float amount = 400 * FrameRateController::GetInstance()->DeltaTime();
+	float amount = 500 * FrameRateController::GetInstance()->DeltaTime();
 	float diagonalAmount = amount / 1.414;
 
 

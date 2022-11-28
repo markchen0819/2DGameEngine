@@ -7,4 +7,5 @@ public:
 	~Level1();
 	virtual void Init(GameWindow* gw);
 	virtual void Update();
+	virtual void Destroy();
 };
