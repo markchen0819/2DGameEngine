@@ -7,9 +7,9 @@
 void execute();
 int main(int argc, char* argv[]) // Entry Point
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	execute();
-	std::cout << "";
+	//std::cout << "";
 }
 void execute() // All code to excute (for CRT detect memory leak and VS heap snapshot)
 {

@@ -24,6 +24,7 @@ void Level2::Init(GameWindow* gw)
 	// Add User Defined Components and objects// 
 	GameObject* player = objectFactory->GetGameObjectByName("Player");
 	player->AddComponent<PlayerControlComponent>();
+	player->AddComponent<ScreenMoveComponent>();
 	GameObject* firstEnemy = CreateEnemy();
 	GameObject* fisrtStar = CreateStar();
 
@@ -72,8 +73,6 @@ void Level2::Init(GameWindow* gw)
 
 void Level2::Update()
 {
-	if (!isRunning) return;
-	ExecuteScreenSaverMovement(GameEngine::GetInstance()->GetMainWindow(), FrameRateController::GetInstance()->DeltaTime());
 	Scene::Update();
 }
 
@@ -82,7 +81,7 @@ void Level2::Destroy()
 	// Remove UserDefined Events
 	EventSystem* eventSystem = EventSystem::GetInstance();
 	eventSystem->RemoveListener(EventType::Wave, &waveEventListener);
-	//eventSystem->RemoveListener(EventType::Collision, &collisionEventListener);
+	eventSystem->RemoveListener(EventType::Collision, &collisionEventListener);
 
 	Scene::Destroy();
 }
@@ -201,12 +200,15 @@ void Level2::Level2CollisionCallback(void* eventData)
 		{
 			converted->gobj1->SetAlive(false);
 			converted->gobj1->SetToBeDeleted();
-
+			SceneChangeEvent sce("Level3");
+			EventSystem::GetInstance()->BroadcastEvent(EventType::SceneChange, &sce);
 		}
 		if (converted->gobj1->GetName() == "Enemy" && converted->gobj2->GetName() == "Player")
 		{
 			converted->gobj2->SetAlive(false);
 			converted->gobj2->SetToBeDeleted();
+			SceneChangeEvent sce("Level3");
+			EventSystem::GetInstance()->BroadcastEvent(EventType::SceneChange, &sce);
 		}
 	}
 

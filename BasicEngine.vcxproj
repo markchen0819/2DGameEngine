@@ -159,6 +159,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\UserDefined\Level3.cpp" />
+    <ClCompile Include="src\UserDefined\ScreenMoveComponent.cpp" />
     <ClCompile Include="src\UserDefined\PressEnterToNextScreenComponent.cpp" />
     <ClCompile Include="src\UserDefined\Level1.cpp" />
     <ClCompile Include="src\UserDefined\Level2.cpp" />
@@ -201,7 +203,6 @@
     <ClCompile Include="src\GameEngine\Graphics\Shader.cpp" />
     <ClCompile Include="src\GameEngine\Graphics\Mesh.cpp" />
     <ClCompile Include="src\GameEngine\Scene\GameObject.cpp" />
-    <ClCompile Include="src\Experiment\ScreenSaverMovement.cpp" />
     <ClCompile Include="src\GameEngine\Logging\Logging.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\GameEngine\Window\GameWindow.cpp" />
@@ -212,6 +213,8 @@
     <ClCompile Include="src\UserDefined\WaveComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\UserDefined\Level3.h" />
+    <ClInclude Include="src\UserDefined\ScreenMoveComponent.h" />
     <ClInclude Include="src\UserDefined\PressEnterToNextScreenComponent.h" />
     <ClInclude Include="src\UserDefined\Level1.h" />
     <ClInclude Include="src\UserDefined\Level2.h" />
@@ -537,7 +540,6 @@
     <ClInclude Include="src\GameEngine\Scene\GameObject.h" />
     <ClInclude Include="src\GameEngine\Logging\Logging.h" />
     <ClInclude Include="src\GameEngine\Window\GameWindow.h" />
-    <ClInclude Include="src\Experiment\ScreenSaverMovement.h" />
     <ClInclude Include="src\GameEngine\Graphics\Transform.h" />
     <ClInclude Include="src\GameEngine\Graphics\Texture.h" />
     <ClInclude Include="src\GameEngine\Physics\ShapeType.h" />

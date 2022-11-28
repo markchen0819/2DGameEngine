@@ -19,9 +19,10 @@ void Game::Init()
 	TraceMessage("Create User Levels");
 	Scene* scene1 = new Level1("Level1");
 	Scene* scene2 = new Level2("Level2");
+	Scene* scene3 = new Level3("Level3");
 	Scenes.push_back(scene1);
 	Scenes.push_back(scene2);
-
+	Scenes.push_back(scene3);
 
 	gameEngine->SetAllScenes(Scenes);
 	gameEngine->ChangeScene(scene1);

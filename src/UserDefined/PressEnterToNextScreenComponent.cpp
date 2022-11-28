@@ -10,7 +10,7 @@ void PressEnterToNextScreenComponent::Update()
 	// Input
 	InputManager* inputmanager = InputManager::GetInstance();
 
-	if (inputmanager->IsKeyDown(ENTER))
+	if (inputmanager->IsKeyPressed(ENTER))
 	{
 		SceneChangeEvent sce(sceneName);
 		EventSystem::GetInstance()->BroadcastEvent(EventType::SceneChange, &sce);

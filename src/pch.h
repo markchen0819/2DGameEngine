@@ -37,7 +37,6 @@
 
 #include "GameEngine/Window/GameWindow.h"
 #include "GameEngine/Window/FrameRateController.h"
-#include "Experiment/ScreenSaverMovement.h"
 #include "GameEngine/Logging/Logging.h"
 #include "GameEngine/InputSystem/InputManager.h"
 
@@ -78,14 +77,15 @@
 
 
 // User Codes
-
 #include "UserDefined/WaveEvent.h"
 #include "UserDefined/WaveComponent.h"
 #include "UserDefined/EnemyComponent.h"
 #include "UserDefined/StarComponent.h"
+#include "UserDefined/ScreenMoveComponent.h"
 #include "UserDefined/PlayerControlComponent.h"
 #include "UserDefined/PressEnterToNextScreenComponent.h"
 
 #include "UserDefined/Level1.h"
 #include "UserDefined/Level2.h"
+#include "UserDefined/Level3.h"
 #include "UserDefined/Game.h"
