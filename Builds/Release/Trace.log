@@ -1,0 +1,398 @@
+TraceInit()
+--------------------------------
+GameEngine::Initialize()
+--------------------------------
+GLFW Init() success
+GameWindow created
+GameWindow Init()
+InputManger registers GameWindow: 1stWindow
+Create User Levels
+Level1 ctor 
+Level2 ctor 
+Level3 ctor 
+--------------------------------
+GameEngine::SetAllScenes (Load in all user generated levels)
+--------------------------------
+Level1
+Level2
+Level3
+--------------------------------
+GameEngine::ChangeScene: Level1
+--------------------------------
+---------------------
+Level1::Init
+---------------------
+--------------------------------
+Scene::LoadResources
+--------------------------------
+Load Shaders:
+CameraShader
+SampleShader
+
+Load Textures:
+DefaultTexture
+TitleTexture
+
+Load Materials:
+CollisionMaterial
+TitleMaterial
+
+--------------------------------
+Scene::LoadGameObjects
+--------------------------------
+CreateGameObjects:
+
+Title
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+--------------------------------
+Scene::InitGameObjects()
+--------------------------------
+--------------------------------
+Scene::CreateAllDebugCollisionAreas()
+--------------------------------
+CreateAllDebugCollisionAreas:
+
+Title
+Null Component: 
+class PhysicComponent
+No physic component, collision shape not generated
+
+--------------------------------
+Scene::BuildHiearchy
+--------------------------------
+Title added to hierachy
+--------------------------------
+All created objects are added to hierachy
+Clear ObjectFactory
+--------------------------------
+--------------------------------
+Scene::SetupCamara
+--------------------------------
+---------------------
+Level1::Init finished
+---------------------
+SceneChangeEvent: Level2
+--------------------------------
+GameEngine::ChangeScene: Level2
+--------------------------------
+--------------------------------
+Scene::Destroy() Level1
+--------------------------------
+Destroy Node: Root
+Destroy GameObject: Title
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PressEnterToNextScreenComponent
+Destroy Node: Title
+UnloadAllResources
+Unload CollisionMaterial
+Unload TitleMaterial
+Unload DefaultTexture
+Unload TitleTexture
+Unload CameraShader
+Unload SampleShader
+---------------------
+Level2::Init
+---------------------
+--------------------------------
+Scene::LoadResources
+--------------------------------
+Load Shaders:
+CameraShader
+SampleShader
+
+Load Textures:
+DefaultTexture
+BackgroundTexture
+PlayerTexture
+EmitterTexture
+EnemyTexture
+StarTexture
+WaveTexture
+
+Load Materials:
+CollisionMaterial
+BackgroundMaterial
+PlayerMaterial
+EmitterMaterial
+EnemyMaterial
+StarMaterial
+WaveMaterial
+
+--------------------------------
+Scene::LoadGameObjects
+--------------------------------
+CreateGameObjects:
+
+Player
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+PhysicComponent::Deserialize
+Player added for collision checking
+
+Background
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+Emitter
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+WaveU
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+WaveR
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+WaveD
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+WaveL
+TransformComponent::Deserialize
+RenderComponent::Deserialize
+
+Enemy added for collision checking
+Star added for collision checking
+Star generated at (-203.245941,-64.734581)
+--------------------------------
+Scene::InitGameObjects()
+--------------------------------
+--------------------------------
+Scene::BuildHiearchy
+--------------------------------
+Background added to hierachy
+WaveU added to hierachy
+WaveR added to hierachy
+WaveD added to hierachy
+WaveL added to hierachy
+Emitter added to hierachy
+Player added to hierachy
+--------------------------------
+All created objects are added to hierachy
+Clear ObjectFactory
+--------------------------------
+--------------------------------
+Scene::SetupCamara
+--------------------------------
+---------------------
+Level2::Init finished
+---------------------
+Score: 1
+Star added for collision checking
+Star generated at (145.355927,164.805481)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 2
+Star added for collision checking
+Star generated at (-162.034103,101.483627)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 3
+Star added for collision checking
+Star generated at (187.510361,-213.673706)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 4
+Star added for collision checking
+Star generated at (173.522751,13.532154)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 5
+Star added for collision checking
+Star generated at (52.537060,-270.247467)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Score: 6
+Star added for collision checking
+Star generated at (-247.487808,-176.385330)
+Enemy added for collision checking
+--------------------------------
+Scene::DeferredDeleteGameObject()
+--------------------------------
+Remove child { Star } from parent { Root }
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+--------------------------------
+GameEngine::Quit() 
+--------------------------------
+--------------------------------
+Scene::Destroy() Level2
+--------------------------------
+Destroy Node: Root
+Destroy GameObject: Background
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy Node: Background
+Destroy GameObject: WaveU
+Destroy TransformComponent
+Destroy RenderComponent
+Wave StarComponent
+Destroy Node: WaveU
+Destroy GameObject: WaveR
+Destroy TransformComponent
+Destroy RenderComponent
+Wave StarComponent
+Destroy Node: WaveR
+Destroy GameObject: WaveD
+Destroy TransformComponent
+Destroy RenderComponent
+Wave StarComponent
+Destroy Node: WaveD
+Destroy GameObject: WaveL
+Destroy TransformComponent
+Destroy RenderComponent
+Wave StarComponent
+Destroy Node: WaveL
+Destroy GameObject: Emitter
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy Node: Emitter
+Destroy GameObject: Player
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Player removed from collision checking
+Destroy Player ControlComponent
+Destroy Node: Player
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+Destroy GameObject: Star
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Star removed from collision checking
+Destroy StarComponent
+Destroy Node: Star
+Destroy GameObject: Enemy
+Destroy TransformComponent
+Destroy RenderComponent
+Destroy PhysicComponent
+Enemy removed from collision checking
+Destroy EnemyComponent
+Destroy Node: Enemy
+UnloadAllResources
+Unload CollisionMaterial
+Unload EmitterMaterial
+Unload BackgroundMaterial
+Unload PlayerMaterial
+Unload EnemyMaterial
+Unload StarMaterial
+Unload WaveMaterial
+Unload DefaultTexture
+Unload EmitterTexture
+Unload BackgroundTexture
+Unload PlayerTexture
+Unload EnemyTexture
+Unload StarTexture
+Unload WaveTexture
+Unload CameraShader
+Unload SampleShader
+--------------------------------
+GameEngine::DeleteAllScenes (Delete all user generated levels) 
+--------------------------------
+Level1 dtor Level1
+Level2 dtor Level2
+Level3 dtor Level3
+GameWindow ShutDown()
+GLFW Terminate success
+TraceShutdown()

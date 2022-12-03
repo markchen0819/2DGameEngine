@@ -1,0 +1,5 @@
+{
+  "Shaders": "src/Assets/Jsons/Level1/Shaders.json",
+  "Materials": "src/Assets/Jsons/Level1/Materials.json",
+  "Textures": "src/Assets/Jsons/Level1/Textures.json"
+}

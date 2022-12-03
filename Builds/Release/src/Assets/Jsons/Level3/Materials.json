@@ -1,0 +1,19 @@
+{
+  "Materials": 
+  {
+    "Material1":
+    {
+      "MaterialName": "CollisionMaterial",
+      "Color": [0.0, 1.0, 0.0, 1.0],
+      "Shader": "SampleShader",
+      "Texture": "DefaultTexture"
+    },
+    "Material2": {
+      "MaterialName": "ResultMaterial",
+      "Color": [ 1.0, 1.0, 1.0, 1.0 ],
+      "Shader": "SampleShader",
+      "Texture": "ResultTexture"
+    }
+  }
+
+}
