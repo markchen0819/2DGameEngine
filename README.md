@@ -1,6 +1,8 @@
 
 A basic 2D game engine created by I Hsuan Chen.
+
 ====================================================
+
 Supported functionalities:
 
 -- Graphics --
@@ -31,8 +33,11 @@ Logging
 Game, Self-defined components, Self-defined scenes (Levels)
 
 ====================================================
+
 Dependencies:
 GLEW/ GLFW/ GLM/ RapidJson/ stb_image
 
 ====================================================
+
 Demo game created with this game engine:
+https://youtu.be/RMyTjTp50xk
