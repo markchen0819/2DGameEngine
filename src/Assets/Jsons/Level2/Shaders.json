@@ -1,0 +1,16 @@
+{
+  "Shaders":
+  {
+    "Shader1": {
+      "ShaderName": "CameraShader",
+      "VertexShaderFile": "src/GameEngine/Graphics/SampleShader.vert",
+      "FragmentShaderFile": "src/GameEngine/Graphics/SampleShader.frag"
+    },
+    "Shader2": {
+      "ShaderName": "SampleShader",
+      "VertexShaderFile": "src/GameEngine/Graphics/SampleShader.vert",
+      "FragmentShaderFile": "src/GameEngine/Graphics/SampleShader.frag"
+    }
+  }
+
+}

@@ -1,0 +1,47 @@
+{
+  "Materials": {
+    "Material1": {
+      "MaterialName": "CollisionMaterial",
+      "Color": [ 0.0, 1.0, 0.0, 1.0 ],
+      "Shader": "SampleShader",
+      "Texture": "DefaultTexture"
+    },
+    "Material2": {
+      "MaterialName": "BackgroundMaterial",
+      "Color": [ 1.0, 1.0, 1.0, 1.0 ],
+      "Shader": "SampleShader",
+      "Texture": "BackgroundTexture"
+    },
+    "Material3": {
+      "MaterialName": "PlayerMaterial",
+      "Color": [ 1.0, 1.0, 1.0, 1.0 ],
+      "Shader": "SampleShader",
+      "Texture": "PlayerTexture"
+    },
+    "Material4": {
+      "MaterialName": "EmitterMaterial",
+      "Color": [ 1.0, 1.0, 1.0, 1.0 ],
+      "Shader": "SampleShader",
+      "Texture": "EmitterTexture"
+    },
+    "Material5": {
+      "MaterialName": "EnemyMaterial",
+      "Color": [ 1.0, 1.0, 1.0, 1.0 ],
+      "Shader": "SampleShader",
+      "Texture": "EnemyTexture"
+    },
+    "Material6": {
+      "MaterialName": "StarMaterial",
+      "Color": [ 1.0, 1.0, 1.0, 1.0 ],
+      "Shader": "SampleShader",
+      "Texture": "StarTexture"
+    },
+    "Material7": {
+      "MaterialName": "WaveMaterial",
+      "Color": [ 1.0, 1.0, 1.0, 1.0 ],
+      "Shader": "SampleShader",
+      "Texture": "WaveTexture"
+    }
+  }
+
+}
