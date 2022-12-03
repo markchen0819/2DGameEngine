@@ -83,6 +83,7 @@ void Node::RemoveChild(Node* node)
 			node->parent = nullptr;
 			TraceMessage(("Remove child { " + node->GetName() + " } from parent { " + this->GetName()+" }").c_str());
 			childNodes.erase(childNodes.begin()+i);
+			//TO:DO Fix transform of child detaching from parent 
 			return;
 		}
 	}

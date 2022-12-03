@@ -56,7 +56,7 @@ void PlayerControlComponent::Update()
 	 }
 
 	 // Boundaries
-	 float boundaries = 250;
+	 float boundaries = 280;
 
 	 if (pc->GetPosition().x > boundaries)
 	 {
